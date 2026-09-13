@@ -1,0 +1,30 @@
+# LaTeX build artifacts
+build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ilg
+*.ind
+*.loa
+*.brf
+
+# macOS
+.DS_Store
+
+# mise
+.mise/

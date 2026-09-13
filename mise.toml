@@ -1,0 +1,42 @@
+[tools]
+# Rust-based LaTeX source formatter. Installed via mise's github backend
+# (GitHub releases), so no conda/homebrew dependency is required.
+"github:WGUNDERWOOD/tex-fmt" = "0.5.7"
+
+[tasks.build]
+description = "Compile main.tex with xelatex + biber via latexmk"
+run = "latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex"
+
+[tasks.watch]
+description = "Continuously rebuild on file changes (for live preview)"
+run = "latexmk -pvc -xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex"
+
+[tasks.lint]
+description = "Check .tex files for typographic/LaTeX issues with chktex"
+run = "find . -name '*.tex' -not -path './build/*' -print0 | xargs -0 chktex"
+
+[tasks.fmt]
+description = "Format all .tex files with tex-fmt"
+run = "tex-fmt --recursive ."
+
+[tasks.clean]
+description = "Remove build artifacts"
+run = "latexmk -C main.tex"
+
+[tasks.rebuild]
+description = "Clean and rebuild from scratch"
+depends = ["clean", "build"]
+
+[tasks.doctor]
+description = "Verify the LaTeX toolchain (from MacTeX) is on PATH"
+run = """
+set -e
+for bin in xelatex latexmk biber chktex; do
+  if command -v "$bin" >/dev/null 2>&1; then
+    echo "OK   $bin -> $(command -v "$bin")"
+  else
+    echo "MISSING $bin (install/reload MacTeX and restart your shell)"
+    exit 1
+  fi
+done
+"""
