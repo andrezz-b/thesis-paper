@@ -39,27 +39,26 @@ Run with `mise run <task>`:
 
 Output PDF and intermediate files go to `build/` (gitignored).
 
-## Editing
-
-Open this folder in VS Code with the
-[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-extension (recommended in `.vscode/extensions.json`). `.vscode/settings.json`
-configures it to build with the same `latexmk -xelatex` recipe used by the
-`mise run build` task, output to `build/`, build on save, and preview the PDF
-in an editor tab.
-
 ## Structure
 
-- `main.tex` — document entry point, `\input`s everything else.
-- `Setup/` — preamble, packages, and document-wide settings
-  (`Statics.tex` has thesis metadata: title, author, department, etc. — edit
-  this first).
-- `Frontmatter/` — title page, copyright, approval, abstract, acknowledgements.
-- `Chapters/` — main content chapters.
-- `Backmatter/` — appendix and back page.
-- `Pictures/` — images and DTU logos used by the front/back pages.
-- `bibliography.bib` — references, compiled with biber/biblatex.
-- `TEMPLATE_README.md` — original template readme from DTU, kept for reference.
+- `main.tex` — document entry point (kept at repo root), `\input`s everything
+  else from `thesis/`.
+- `thesis/` — all LaTeX source for the thesis document itself:
+  - `Setup/` — preamble, packages, and document-wide settings
+    (`Statics.tex` has thesis metadata: title, author, department, etc. —
+    edit this first).
+  - `Frontmatter/` — title page, copyright, approval, abstract,
+    acknowledgements.
+  - `Chapters/` — main content chapters.
+  - `Backmatter/` — appendix and back page.
+  - `Pictures/` — images and DTU logos used by the front/back pages.
+  - `bibliography.bib` — references, compiled with biber/biblatex.
+  - `TEMPLATE_README.md` — original template readme from DTU, kept for
+    reference.
+
+Keeping all thesis LaTeX content under `thesis/` (rather than scattered at
+the repo root) leaves room for other top-level project areas, e.g. a future
+agentic literature-review workflow, without mixing concerns.
 
 ## Agent conventions
 
