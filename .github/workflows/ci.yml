@@ -25,6 +25,8 @@ jobs:
         run: mise run lint
       - name: Spell check
         run: mise run spell
+      - name: Questions index check
+        run: mise run questions:check
       - name: Build documents
         run: mise run build
       - name: Upload PDFs

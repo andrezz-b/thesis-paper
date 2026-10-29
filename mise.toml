@@ -6,6 +6,14 @@
 lefthook = "2.2.2"
 # Source code spell checker (see _typos.toml).
 typos = "1.51.1"
+# Python + uv for helper scripts in scripts/ (dependencies in pyproject.toml,
+# venv in .venv/ managed by `uv run`).
+python = "3.14.10"
+uv = "0.13.6"
+
+[env]
+# Use the mise-managed Python instead of letting uv download its own.
+UV_PYTHON_DOWNLOADS = "never"
 
 [tasks.build]
 description = "Build both documents (thesis and project plan)"
@@ -44,6 +52,18 @@ run = "tex-fmt --check --recursive ."
 [tasks.spell]
 description = "Spell-check the repository with typos"
 run = "typos"
+
+[tasks.questions]
+description = "Link question/decision IDs in docs/ and regenerate docs/questions/README.md (index + dependency graph)"
+run = "uv run scripts/questions.py generate"
+
+[tasks."questions:check"]
+description = "Validate docs/ (question metadata, ID links, relative links) and check the generated files are up to date"
+run = "uv run scripts/questions.py check"
+
+[tasks."questions:next"]
+description = "List open questions that are ready to work on (all hard dependencies resolved)"
+run = "uv run scripts/questions.py next"
 
 [tasks.wordcount]
 description = "Count words in the thesis with texcount"
@@ -88,7 +108,7 @@ run = "lefthook install"
 description = "Verify the LaTeX toolchain (TeX Live) is on PATH"
 run = """
 set -e
-for bin in xelatex latexmk biber chktex latexdiff-vc texcount tex-fmt typos lefthook; do
+for bin in xelatex latexmk biber chktex latexdiff-vc texcount tex-fmt typos lefthook python uv; do
   if command -v "$bin" >/dev/null 2>&1; then
     echo "OK   $bin -> $(command -v "$bin")"
   else

@@ -5,6 +5,11 @@ This repository contains the LaTeX source for a master thesis, based on the
 Writing is augmented with AI/agentic tooling, so this document exists to
 orient an agent (or a human) quickly.
 
+**What the thesis is about:** read [`docs/THESIS.md`](docs/THESIS.md) first.
+It is the source of truth for topic, scope, decisions and open questions.
+Update it only via the `thesis-description` skill
+(`.opencode/skills/thesis-description/SKILL.md`).
+
 ## Toolchain
 
 - **TeX distribution:** [TeX Live](https://tug.org/texlive/) (full scheme),
@@ -30,9 +35,12 @@ orient an agent (or a human) quickly.
 - **Formatting:** [`tex-fmt`](https://github.com/WGUNDERWOOD/tex-fmt).
 - **Hooks:** `lefthook` (`lefthook.yml`): pre-commit runs tex-fmt check,
   chktex (advisory) and typos on staged files.
-- **mise** pins `tex-fmt`, `lefthook` and `typos` (`mise install`).
-  `latexmk`, `xelatex`, `biber`, `chktex`, `latexdiff-vc`, `texcount` come
-  from TeX Live.
+- **mise** pins `tex-fmt`, `lefthook`, `typos`, `python` and `uv`
+  (`mise install`). `latexmk`, `xelatex`, `biber`, `chktex`, `latexdiff-vc`,
+  `texcount` come from TeX Live.
+- **Python helper scripts** (`scripts/`) run via `uv run`; dependencies are in
+  `pyproject.toml`/`uv.lock`, the venv is `.venv/` (gitignored). mise sets
+  `UV_PYTHON_DOWNLOADS=never` so uv uses the mise-managed Python.
 
 ## mise tasks
 
@@ -48,6 +56,9 @@ Run with `mise run <task>`:
 | `fmt` / `fmt:check`               | Format in place / check formatting with `tex-fmt`.                    |
 | `spell`                           | Spell-check with `typos`.                                             |
 | `wordcount`                       | `texcount` word count of the thesis.                                  |
+| `questions`                       | Link bare question/decision IDs in `docs/` and regenerate `docs/questions/README.md`. |
+| `questions:check`                 | Validate `docs/` (metadata, links); fail if anything is stale.        |
+| `questions:next`                  | List open questions that are ready to work on.                        |
 | `diff <git-ref> [thesis\|plan]`   | latexdiff against a git ref -> `<doc>/build/diff.pdf` (default thesis). The ref must contain `<doc>/main.tex`. |
 | `clean` / `rebuild`               | Remove build artifacts of both documents / clean then build.          |
 | `hooks`                           | Install git hooks (`lefthook install`).                               |
@@ -64,6 +75,15 @@ Run with `mise run <task>`:
     `bibliography.bib`, `TEMPLATE_README.md` (original DTU readme).
 - `plan/` — project plan (`article` class): `main.tex` and `gantt.tex`
   (pgfgantt chart, `\input` from the Timeline section).
+- `docs/` — thesis description (source of truth, Markdown):
+  - `THESIS.md` — overview with [Decided]/[Tentative]/[Open: ID] markers.
+  - `decisions.md` — append-only decision log (`D-NNN`).
+  - `related-work.md` — papers with full titles, links, verification status.
+  - `questions/` — one file per open question (YAML front matter: status,
+    phase, priority, `depends_on`, `informs`); `README.md` there is generated
+    by `scripts/questions.py`.
+- `scripts/` — Python helpers (`questions.py`), run with `uv run`.
+- `.opencode/skills/` — project skills (`thesis-description`).
 - `site/` — static GitHub Pages landing page (`index.html`, `style.css`).
 - `.github/` — workflows: `ci.yml` (PRs/branches: fmt, lint, spell, build,
   PDF artifacts), `pages.yml` (push to main: build changed docs, reuse
@@ -72,17 +92,23 @@ Run with `mise run <task>`:
   `release.yml` (tags `v*`: GitHub Release with both PDFs). Shared setup in
   `.github/actions/setup-tex` (runs in the `texlive/texlive` container).
 - Root config: `.latexmkrc`, `mise.toml`, `lefthook.yml`, `_typos.toml`,
-  `.editorconfig`, `.vscode/` (LaTeX Workshop + LTeX+).
+  `.editorconfig`, `pyproject.toml` + `uv.lock`, `.vscode/` (LaTeX Workshop + LTeX+).
 
 ## Agent conventions
 
+- For thesis context, read `docs/THESIS.md`; never contradict it silently.
+  When the user shares new thesis information or decisions, use the
+  `thesis-description` skill. Never hand-edit `docs/questions/README.md`
+  or the decision anchors; write question/decision IDs bare (`DS-02`,
+  `D-007`) and run `mise run questions` to turn them into links.
 - After drafting or editing any `.tex` file, format it: `mise run fmt`.
   (tex-fmt prints pre-existing "negative indent" warnings for
   `thesis/Setup/Settings.tex`; ignore them.)
 - Quick compile check: `mise run build` (or `build:thesis` / `build:plan`).
   latexmk re-runs biber automatically when citations change.
 - Before finishing: `mise run fmt:check`, `mise run spell`; optionally
-  `mise run lint` (pre-existing template warnings are expected).
+  `mise run lint` (pre-existing template warnings are expected). If `docs/`
+  changed: `mise run questions:check`.
 - If a task fails, read the `latexmk`/`chktex`/`typos` output, fix the file
   that was modified, and re-run the task.
 - Do not commit build output (`*/build/`); it is gitignored.

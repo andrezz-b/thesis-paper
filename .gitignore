@@ -34,6 +34,10 @@ Thumbs.db
 # mise
 .mise/
 
+# Python (uv-managed venv for scripts/)
+.venv/
+__pycache__/
+
 # latexdiff output
 diff.tex
 *-diff*.tex

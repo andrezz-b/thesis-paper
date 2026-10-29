@@ -9,3 +9,5 @@ pre-commit:
       run: mise x -- chktex -q {staged_files} || true
     - name: spell
       run: mise x -- typos --force-exclude {staged_files}
+    - name: docs
+      run: mise run questions:check

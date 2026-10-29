@@ -1,0 +1,489 @@
+"""Validate the thesis docs, link their cross-references and generate the question index.
+
+Each question lives in docs/questions/<ID>-<slug>.md and starts with YAML
+front matter (see docs/questions/_template.md). Decisions are `## D-NNN`
+entries in docs/decisions.md.
+
+`generate`:
+  - adds an `<a id="d-NNN"></a>` anchor before every decision heading,
+  - turns bare references (`DS-02`, `D-007`) in all docs/**/*.md into links to
+    the question file or decision anchor (front matter, headings and code are
+    left alone),
+  - writes docs/questions/README.md (tables + mermaid dependency graph).
+
+`check` fails if any of that would change something, if a reference points to
+an unknown ID, or if a relative link in docs/ is broken.
+
+Usage:
+    uv run scripts/questions.py generate   # link references + rewrite the index
+    uv run scripts/questions.py check      # validate; fail if anything is stale
+    uv run scripts/questions.py next       # print questions that are ready now
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import sys
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import yaml
+
+ROOT = Path(__file__).resolve().parent.parent
+DOCS_DIR = ROOT / "docs"
+QUESTIONS_DIR = DOCS_DIR / "questions"
+INDEX_FILE = QUESTIONS_DIR / "README.md"
+DECISIONS_FILE = DOCS_DIR / "decisions.md"
+
+AREAS = {
+    "framing": ("FR", "Framing"),
+    "literature": ("LIT", "Literature"),
+    "dataset": ("DS", "Dataset"),
+    "index": ("IX", "Image index"),
+    "agent": ("AG", "Agent"),
+    "evaluation": ("EV", "Evaluation"),
+    "repo": ("RP", "Repository / implementation"),
+}
+STATUSES = ["open", "researching", "decided", "dropped"]
+RESOLVED = {"decided", "dropped"}
+PHASES = ["dataset", "agent", "writing"]
+PRIORITIES = ["high", "medium", "low"]
+REQUIRED = ["id", "title", "area", "status", "phase", "priority", "depends_on", "informs"]
+ID_RE = re.compile(r"^[A-Z]{2,3}-\d{2}$")
+UNRESOLVED_PLACEHOLDER = "_Not resolved yet._"
+
+
+@dataclass
+class Question:
+    id: str
+    title: str
+    area: str
+    status: str
+    phase: str
+    priority: str
+    depends_on: list[str]
+    informs: list[str]
+    path: Path
+    resolution: str
+    dependents: list[str] = field(default_factory=list)
+
+    @property
+    def link(self) -> str:
+        return f"[{self.id}]({self.path.name})"
+
+
+def parse_file(path: Path, errors: list[str]) -> Question | None:
+    text = path.read_text(encoding="utf-8")
+    match = re.match(r"^---\n(.*?)\n---\n(.*)$", text, re.DOTALL)
+    if not match:
+        errors.append(f"{path.name}: missing YAML front matter")
+        return None
+    try:
+        meta = yaml.safe_load(match.group(1)) or {}
+    except yaml.YAMLError as exc:
+        errors.append(f"{path.name}: invalid YAML front matter: {exc}")
+        return None
+    missing = [key for key in REQUIRED if key not in meta]
+    if missing:
+        errors.append(f"{path.name}: missing keys {missing}")
+        return None
+
+    body = match.group(2)
+    res = re.search(r"^## Resolution\s*\n(.*?)(?=^## |\Z)", body, re.DOTALL | re.MULTILINE)
+    resolution = res.group(1).strip() if res else ""
+
+    q = Question(
+        id=str(meta["id"]),
+        title=str(meta["title"]),
+        area=str(meta["area"]),
+        status=str(meta["status"]),
+        phase=str(meta["phase"]),
+        priority=str(meta["priority"]),
+        depends_on=list(meta["depends_on"] or []),
+        informs=list(meta["informs"] or []),
+        path=path,
+        resolution=resolution,
+    )
+
+    if not ID_RE.match(q.id):
+        errors.append(f"{path.name}: id '{q.id}' must look like DS-01")
+    if not path.name.startswith(f"{q.id}-"):
+        errors.append(f"{path.name}: file name must start with '{q.id}-'")
+    if q.area not in AREAS:
+        errors.append(f"{path.name}: area '{q.area}' not in {list(AREAS)}")
+    elif not q.id.startswith(AREAS[q.area][0] + "-"):
+        errors.append(f"{path.name}: id prefix must be {AREAS[q.area][0]} for area '{q.area}'")
+    if q.status not in STATUSES:
+        errors.append(f"{path.name}: status '{q.status}' not in {STATUSES}")
+    if q.phase not in PHASES:
+        errors.append(f"{path.name}: phase '{q.phase}' not in {PHASES}")
+    if q.priority not in PRIORITIES:
+        errors.append(f"{path.name}: priority '{q.priority}' not in {PRIORITIES}")
+    if res is None:
+        errors.append(f"{path.name}: missing '## Resolution' section")
+    elif q.status in RESOLVED and resolution in ("", UNRESOLVED_PLACEHOLDER):
+        errors.append(f"{path.name}: status is '{q.status}' but the Resolution section is empty")
+    return q
+
+
+def load(errors: list[str]) -> dict[str, Question]:
+    questions: dict[str, Question] = {}
+    for path in sorted(QUESTIONS_DIR.glob("*.md")):
+        if path.name == INDEX_FILE.name or path.name.startswith("_"):
+            continue
+        q = parse_file(path, errors)
+        if q is None:
+            continue
+        if q.id in questions:
+            errors.append(f"{path.name}: duplicate id {q.id} (also {questions[q.id].path.name})")
+            continue
+        questions[q.id] = q
+
+    for q in questions.values():
+        for kind in ("depends_on", "informs"):
+            for ref in getattr(q, kind):
+                if ref == q.id:
+                    errors.append(f"{q.id}: {kind} references itself")
+                elif ref not in questions:
+                    errors.append(f"{q.id}: {kind} references unknown id {ref}")
+        for dep in q.depends_on:
+            if dep in questions:
+                questions[dep].dependents.append(q.id)
+
+    # Cycle detection on hard dependencies.
+    state: dict[str, int] = {}
+
+    def visit(qid: str, stack: list[str]) -> None:
+        state[qid] = 1
+        for dep in questions[qid].depends_on:
+            if dep not in questions:
+                continue
+            if state.get(dep) == 1:
+                cycle = stack[stack.index(dep):] + [dep] if dep in stack else [qid, dep]
+                errors.append(f"dependency cycle: {' -> '.join(cycle)}")
+            elif dep not in state:
+                visit(dep, stack + [dep])
+        state[qid] = 2
+
+    for qid in sorted(questions):
+        if qid not in state:
+            visit(qid, [qid])
+    return questions
+
+
+def is_ready(q: Question, questions: dict[str, Question]) -> bool:
+    return q.status not in RESOLVED and all(
+        questions[d].status in RESOLVED for d in q.depends_on if d in questions
+    )
+
+
+def downstream(q: Question, questions: dict[str, Question]) -> set[str]:
+    """All questions that transitively depend on q (hard dependencies only)."""
+    seen: set[str] = set()
+    stack = list(q.dependents)
+    while stack:
+        qid = stack.pop()
+        if qid not in seen:
+            seen.add(qid)
+            stack.extend(questions[qid].dependents)
+    return seen
+
+
+def sort_key(questions: dict[str, Question]):
+    def key(q: Question) -> tuple:
+        return (
+            PHASES.index(q.phase),
+            PRIORITIES.index(q.priority),
+            -len(downstream(q, questions)),
+            q.id,
+        )
+
+    return key
+
+
+def links(ids: list[str], questions: dict[str, Question]) -> str:
+    return ", ".join(questions[i].link for i in ids if i in questions) or "–"
+
+
+def cell(text: str) -> str:
+    return text.replace("|", "\\|")
+
+
+def node(qid: str) -> str:
+    return qid.replace("-", "_")
+
+
+def render(questions: dict[str, Question]) -> str:
+    qs = sorted(questions.values(), key=lambda q: q.id)
+    counts = {s: sum(q.status == s for q in qs) for s in STATUSES}
+    ready = sorted((q for q in qs if is_ready(q, questions)), key=sort_key(questions))
+    blocked = sorted(
+        (q for q in qs if q.status not in RESOLVED and not is_ready(q, questions)), key=sort_key(questions)
+    )
+    resolved = [q for q in qs if q.status in RESOLVED]
+
+    out: list[str] = []
+    w = out.append
+    w("<!-- Generated by scripts/questions.py. Do not edit by hand; run `mise run questions`. -->")
+    w("")
+    w("# Open questions")
+    w("")
+    w("Index of the open questions and gaps of the thesis. Each question is a file in this")
+    w("directory; its front matter (status, phase, priority, dependencies) drives this page.")
+    w("See [`../THESIS.md`](../THESIS.md) for the overall description and")
+    w("[`../decisions.md`](../decisions.md) for resolved decisions.")
+    w("")
+    w("- **depends on**: hard dependency; the question cannot be settled before these are.")
+    w("- **informs**: soft link; the answer shapes the other question.")
+    w("- **ready**: not resolved and every hard dependency is `decided` or `dropped`.")
+    w("- Order: phase (`dataset` first, it has a deadline), then priority, then how many")
+    w("  questions it unblocks transitively. The *Unblocks* column lists direct dependents.")
+    w("")
+    w(
+        f"**{len(qs)} questions:** {counts['open']} open, {counts['researching']} researching, "
+        f"{counts['decided']} decided, {counts['dropped']} dropped."
+    )
+    w("")
+
+    w("## Ready now")
+    w("")
+    if ready:
+        w("| ID | Question | Phase | Priority | Status | Unblocks |")
+        w("| --- | --- | --- | --- | --- | --- |")
+        for q in ready:
+            w(
+                f"| {q.link} | {cell(q.title)} | {q.phase} | {q.priority} | {q.status} | "
+                f"{links(sorted(q.dependents), questions)} |"
+            )
+    else:
+        w("_Nothing is ready._")
+    w("")
+
+    w("## Blocked")
+    w("")
+    if blocked:
+        w("| ID | Question | Phase | Priority | Waiting on |")
+        w("| --- | --- | --- | --- | --- |")
+        for q in blocked:
+            waiting = [d for d in q.depends_on if d in questions and questions[d].status not in RESOLVED]
+            w(f"| {q.link} | {cell(q.title)} | {q.phase} | {q.priority} | {links(waiting, questions)} |")
+    else:
+        w("_Nothing is blocked._")
+    w("")
+
+    w("## Resolved")
+    w("")
+    if resolved:
+        w("| ID | Question | Status |")
+        w("| --- | --- | --- |")
+        for q in resolved:
+            w(f"| {q.link} | {cell(q.title)} | {q.status} |")
+    else:
+        w("_Nothing resolved yet._")
+    w("")
+
+    w("## By area")
+    w("")
+    for area, (prefix, label) in AREAS.items():
+        items = [q for q in qs if q.area == area]
+        if not items:
+            continue
+        w(f"### {label} ({prefix})")
+        w("")
+        w("| ID | Question | Status | Phase | Priority | Depends on | Informs |")
+        w("| --- | --- | --- | --- | --- | --- | --- |")
+        for q in items:
+            w(
+                f"| {q.link} | {cell(q.title)} | {q.status} | {q.phase} | {q.priority} | "
+                f"{links(q.depends_on, questions)} | {links(q.informs, questions)} |"
+            )
+        w("")
+
+    w("## Dependency graph")
+    w("")
+    w("Solid arrow: hard dependency (`A --> B`: B depends on A). Dotted arrow: informs.")
+    w("Green: resolved, yellow: ready, grey: blocked.")
+    w("")
+    w("```mermaid")
+    w("flowchart LR")
+    for area, (prefix, label) in AREAS.items():
+        items = [q for q in qs if q.area == area]
+        if not items:
+            continue
+        w(f'  subgraph {prefix}["{label}"]')
+        for q in items:
+            title = q.title.replace('"', "#quot;")
+            w(f'    {node(q.id)}["{q.id}: {title}"]')
+        w("  end")
+    for q in qs:
+        for dep in q.depends_on:
+            if dep in questions:
+                w(f"  {node(dep)} --> {node(q.id)}")
+    for q in qs:
+        for target in q.informs:
+            if target in questions:
+                w(f"  {node(q.id)} -.-> {node(target)}")
+    w("  classDef resolved fill:#c8e6c9,stroke:#2e7d32,color:#000")
+    w("  classDef ready fill:#fff59d,stroke:#f9a825,color:#000")
+    w("  classDef blocked fill:#e0e0e0,stroke:#757575,color:#000")
+    for cls, group in (("resolved", resolved), ("ready", ready), ("blocked", blocked)):
+        if group:
+            w(f"  class {','.join(node(q.id) for q in group)} {cls}")
+    w("```")
+    w("")
+    return "\n".join(out)
+
+
+DECISION_HEADING_RE = re.compile(r'^## (?:<a id="d-\d{3}"></a>)?(D-\d{3})\b', re.MULTILINE)
+REF_PATTERN = (
+    r"(?<![\w/#.-])(D-\d{3}|(?:"
+    + "|".join(prefix for prefix, _ in AREAS.values())
+    + r")-\d{2})(?![\w-])"
+)
+# Group 1: spans that must not be touched (inline code, links, HTML tags, URLs).
+# Group 2: a bare reference to link.
+TOKEN_RE = re.compile(r"(`[^`]*`|\[[^\]]*\]\([^)]*\)|<[^>]+>|https?://[^\s)]+)|" + REF_PATTERN)
+LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
+
+
+def add_decision_anchors(text: str) -> str:
+    def repl(match: re.Match) -> str:
+        return f'## <a id="{match.group(1).lower()}"></a>{match.group(1)}'
+
+    return re.sub(r"^## (D-\d{3})\b", repl, text, flags=re.MULTILINE)
+
+
+def split_front_matter(text: str) -> tuple[str, str]:
+    match = re.match(r"^---\n.*?\n---\n", text, re.DOTALL)
+    return (match.group(0), text[match.end():]) if match else ("", text)
+
+
+def link_refs(
+    path: Path,
+    text: str,
+    targets: dict[str, tuple[Path, str | None]],
+    unknown: list[str],
+) -> str:
+    """Turn bare question/decision IDs into relative Markdown links."""
+
+    def repl(match: re.Match) -> str:
+        if match.group(1):
+            return match.group(0)
+        ref = match.group(2)
+        if ref not in targets:
+            unknown.append(f"{path.relative_to(ROOT)}: unknown reference {ref}")
+            return ref
+        dest, anchor = targets[ref]
+        if dest == path:
+            href = f"#{anchor}" if anchor else "#"
+        else:
+            href = Path(os.path.relpath(dest, path.parent)).as_posix()
+            if anchor:
+                href += f"#{anchor}"
+        return f"[{ref}]({href})"
+
+    head, body = split_front_matter(text)
+    lines: list[str] = []
+    in_fence = False
+    for line in body.split("\n"):
+        stripped = line.lstrip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            lines.append(line)
+        elif in_fence or stripped.startswith("#"):
+            lines.append(line)
+        else:
+            lines.append(TOKEN_RE.sub(repl, line))
+    return head + "\n".join(lines)
+
+
+def check_links(path: Path, text: str, anchors: set[str], errors: list[str]) -> None:
+    """Report relative links in a docs file whose target file or decision anchor is missing."""
+    _, body = split_front_matter(text)
+    body = re.sub(r"^```.*?^```", "", body, flags=re.DOTALL | re.MULTILINE)
+    body = re.sub(r"`[^`]*`", "", body)
+    for target in LINK_RE.findall(body):
+        if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", target):
+            continue
+        file_part, _, anchor = target.partition("#")
+        dest = (path.parent / file_part).resolve() if file_part else path
+        if not dest.exists():
+            errors.append(f"{path.relative_to(ROOT)}: broken link {target}")
+        elif anchor and dest == DECISIONS_FILE and anchor not in anchors:
+            errors.append(f"{path.relative_to(ROOT)}: unknown decision anchor {target}")
+
+
+def process_docs(questions: dict[str, Question], errors: list[str]) -> dict[Path, str]:
+    """Return {path: new content} for every docs file, with anchors and links applied."""
+    decisions_text = add_decision_anchors(DECISIONS_FILE.read_text(encoding="utf-8"))
+    decision_ids = DECISION_HEADING_RE.findall(decisions_text)
+    for dup in sorted({d for d in decision_ids if decision_ids.count(d) > 1}):
+        errors.append(f"decisions.md: duplicate decision {dup}")
+    anchors = {d.lower() for d in decision_ids}
+
+    targets: dict[str, tuple[Path, str | None]] = {
+        q.id: (q.path, None) for q in questions.values()
+    }
+    targets.update({d: (DECISIONS_FILE, d.lower()) for d in decision_ids})
+
+    result: dict[Path, str] = {}
+    for path in sorted(DOCS_DIR.rglob("*.md")):
+        if path == INDEX_FILE or path.name.startswith("_"):
+            continue
+        text = decisions_text if path == DECISIONS_FILE else path.read_text(encoding="utf-8")
+        new = link_refs(path, text, targets, errors)
+        check_links(path, new, anchors, errors)
+        result[path] = new
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("command", choices=["generate", "check", "next"])
+    args = parser.parse_args()
+
+    errors: list[str] = []
+    questions = load(errors)
+    docs = process_docs(questions, errors) if not errors else {}
+    if errors:
+        print("Docs have errors:", file=sys.stderr)
+        for err in errors:
+            print(f"  - {err}", file=sys.stderr)
+        return 1
+
+    if args.command == "next":
+        ready = sorted((q for q in questions.values() if is_ready(q, questions)), key=sort_key(questions))
+        for q in ready:
+            unblocks = f"  (unblocks {', '.join(sorted(q.dependents))})" if q.dependents else ""
+            print(f"{q.id:7} [{q.phase}/{q.priority}/{q.status}] {q.title}{unblocks}")
+        if not ready:
+            print("Nothing is ready.")
+        return 0
+
+    docs[INDEX_FILE] = render(questions)
+    stale = [
+        path
+        for path, content in docs.items()
+        if not path.exists() or path.read_text(encoding="utf-8") != content
+    ]
+
+    if args.command == "generate":
+        for path in stale:
+            path.write_text(docs[path], encoding="utf-8")
+            print(f"Updated {path.relative_to(ROOT)}")
+        print(f"OK: {len(questions)} questions, {len(docs)} docs files up to date")
+        return 0
+
+    if stale:
+        print("Out of date (run `mise run questions`):", file=sys.stderr)
+        for path in stale:
+            print(f"  - {path.relative_to(ROOT)}", file=sys.stderr)
+        return 1
+    print(f"OK: {len(questions)} questions, docs linked, index up to date")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
