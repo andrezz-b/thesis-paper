@@ -23,8 +23,17 @@ build/
 *.loa
 *.brf
 
-# macOS
+# OS / editor junk
 .DS_Store
+Thumbs.db
+.directory
+*~
+*.swp
+*.swo
 
 # mise
 .mise/
+
+# latexdiff output
+diff.tex
+*-diff*.tex

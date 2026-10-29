@@ -1,0 +1,58 @@
+:root {
+  --accent: #990000;
+  --bg: #fafafa;
+  --fg: #222;
+  --card: #fff;
+  --border: #e2e2e2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+header, main, footer {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+h1 { margin: 0 0 0.25rem; color: var(--accent); }
+.subtitle { margin: 0; color: #666; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.card h2 { margin-top: 0; }
+
+.actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+.button {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.button.primary { background: var(--accent); color: #fff; }
+.button:hover { opacity: 0.85; }
+
+footer { color: #666; font-size: 0.9rem; }
+footer a { color: inherit; }

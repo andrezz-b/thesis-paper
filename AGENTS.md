@@ -7,65 +7,82 @@ orient an agent (or a human) quickly.
 
 ## Toolchain
 
-- **LaTeX engine:** XeLaTeX, via a full [MacTeX](https://tug.org/mactex/)
-  installation (installed manually, not managed by mise). The template
-  requires `fontspec`/`\setmainfont{Arial}`, which needs XeLaTeX rather than
-  pdfLaTeX.
-- **Build orchestration:** `latexmk`, configured via `.latexmkrc`
-  (`$pdf_mode = 5` for XeLaTeX, biber as the bibliography backend, output to
-  `build/`).
+- **TeX distribution:** [TeX Live](https://tug.org/texlive/) (full scheme),
+  not managed by mise. The upstream installer is recommended over distro
+  packages (distro TeX Live is often outdated):
+  download `install-tl-unx.tar.gz` from `mirror.ctan.org/systems/texlive/tlnet/`,
+  unpack, then run
+  `perl ./install-tl --no-interaction --texdir ~/.local/texlive/2026`
+  and add `~/.local/texlive/2026/bin/<arch>` (e.g. `x86_64-linux`) to `PATH`.
+  Any other full TeX distribution (MacTeX, MiKTeX) works too.
+- **LaTeX engine:** XeLaTeX (both documents use `fontspec`).
+- **Fonts:** the DTU template specifies Arial; we use **Liberation Sans**
+  (metric-compatible, so layout is identical; installable as
+  `fonts-liberation`). Switch back in `thesis/Setup/Settings.tex` if desired.
+- **Build orchestration:** `latexmk` with one shared root `.latexmkrc`
+  (XeLaTeX, biber, output to `build/`). Documents are built with
+  `latexmk -cd <doc>/main.tex`. latexmk only reads the rc file in the
+  current directory, so each document folder has a tiny `.latexmkrc` that
+  does `do '../.latexmkrc';` to load the shared one (this also makes VS Code
+  LaTeX Workshop work).
 - **Bibliography:** `biblatex` + `biber` (not classic bibtex).
-- **Linting:** `chktex`, bundled with MacTeX.
-- **Formatting:** [`tex-fmt`](https://github.com/WGUNDERWOOD/tex-fmt),
-  pinned and installed via [mise](https://mise.jdx.dev/).
-
-`xelatex`, `latexmk`, `biber`, and `chktex` all come from MacTeX and are
-expected to already be on `PATH`. mise only manages `tex-fmt`, since it's the
-one tool without a MacTeX equivalent.
+- **Linting:** `chktex`; spelling with `typos` (`_typos.toml`).
+- **Formatting:** [`tex-fmt`](https://github.com/WGUNDERWOOD/tex-fmt).
+- **Hooks:** `lefthook` (`lefthook.yml`): pre-commit runs tex-fmt check,
+  chktex (advisory) and typos on staged files.
+- **mise** pins `tex-fmt`, `lefthook` and `typos` (`mise install`).
+  `latexmk`, `xelatex`, `biber`, `chktex`, `latexdiff-vc`, `texcount` come
+  from TeX Live.
 
 ## mise tasks
 
 Run with `mise run <task>`:
 
-| Task      | What it does                                                      |
-| --------- | ------------------------------------------------------------------ |
-| `doctor`  | Verifies `xelatex`, `latexmk`, `biber`, `chktex` are on `PATH`.     |
-| `build`   | Compiles `main.tex` with XeLaTeX + biber via `latexmk` (one shot).  |
-| `watch`   | Continuous rebuild on file changes (`latexmk -pvc`), for live preview. |
-| `lint`    | Runs `chktex` over all `.tex` files (typography / LaTeX warnings).  |
-| `fmt`     | Formats all `.tex` files in place with `tex-fmt`.                   |
-| `clean`   | Removes build artifacts (`latexmk -C`).                             |
-| `rebuild` | `clean` then `build`.                                               |
-
-Output PDF and intermediate files go to `build/` (gitignored).
+| Task                              | What it does                                                         |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `doctor`                          | Verifies all required tools are on `PATH`.                            |
+| `build`                           | Builds both documents.                                                |
+| `build:thesis` / `build:plan`     | Build one document (`<doc>/build/main.pdf`).                          |
+| `watch:thesis` / `watch:plan`     | Continuous rebuild (`latexmk -pvc`) for live preview.                 |
+| `lint`                            | `chktex` over all `.tex` files (advisory; template has warnings).     |
+| `fmt` / `fmt:check`               | Format in place / check formatting with `tex-fmt`.                    |
+| `spell`                           | Spell-check with `typos`.                                             |
+| `wordcount`                       | `texcount` word count of the thesis.                                  |
+| `diff <git-ref> [thesis\|plan]`   | latexdiff against a git ref -> `<doc>/build/diff.pdf` (default thesis). The ref must contain `<doc>/main.tex`. |
+| `clean` / `rebuild`               | Remove build artifacts of both documents / clean then build.          |
+| `hooks`                           | Install git hooks (`lefthook install`).                               |
 
 ## Structure
 
-- `main.tex` — document entry point (kept at repo root), `\input`s everything
-  else from `thesis/`.
-- `thesis/` — all LaTeX source for the thesis document itself:
-  - `Setup/` — preamble, packages, and document-wide settings
-    (`Statics.tex` has thesis metadata: title, author, department, etc. —
-    edit this first).
-  - `Frontmatter/` — title page, copyright, approval, abstract,
-    acknowledgements.
-  - `Chapters/` — main content chapters.
-  - `Backmatter/` — appendix and back page.
-  - `Pictures/` — images and DTU logos used by the front/back pages.
-  - `bibliography.bib` — references, compiled with biber/biblatex.
-  - `TEMPLATE_README.md` — original template readme from DTU, kept for
-    reference.
-
-Keeping all thesis LaTeX content under `thesis/` (rather than scattered at
-the repo root) leaves room for other top-level project areas, e.g. a future
-agentic literature-review workflow, without mixing concerns.
+- `thesis/` — self-contained thesis document (build with
+  `mise run build:thesis`):
+  - `main.tex` — entry point, `\input`s everything else (paths are relative
+    to `thesis/`).
+  - `Setup/` — preamble, packages, settings (`Statics.tex` has thesis
+    metadata: title, author, department, etc. — edit this first).
+  - `Frontmatter/`, `Chapters/`, `Backmatter/`, `Pictures/`,
+    `bibliography.bib`, `TEMPLATE_README.md` (original DTU readme).
+- `plan/` — project plan (`article` class): `main.tex` and `gantt.tex`
+  (pgfgantt chart, `\input` from the Timeline section).
+- `site/` — static GitHub Pages landing page (`index.html`, `style.css`).
+- `.github/` — workflows: `ci.yml` (PRs/branches: fmt, lint, spell, build,
+  PDF artifacts), `pages.yml` (push to main: build changed docs, reuse
+  deployed PDFs for unchanged ones, deploy to Pages at
+  `andrezz-b.github.io/thesis-paper/{thesis,project-plan}.pdf`),
+  `release.yml` (tags `v*`: GitHub Release with both PDFs). Shared setup in
+  `.github/actions/setup-tex` (runs in the `texlive/texlive` container).
+- Root config: `.latexmkrc`, `mise.toml`, `lefthook.yml`, `_typos.toml`,
+  `.editorconfig`, `.vscode/` (LaTeX Workshop + LTeX+).
 
 ## Agent conventions
 
 - After drafting or editing any `.tex` file, format it: `mise run fmt`.
-- For a quick compile check: `mise run build`.
-- If citations or the bibliography changed, still just use `mise run build`
-  — `latexmk` re-runs biber automatically as needed.
-- To check for typographic/LaTeX issues: `mise run lint`.
-- If a task fails, read the `latexmk`/`chktex` output, fix the LaTeX in the
-  file that was modified, and re-run the task.
+  (tex-fmt prints pre-existing "negative indent" warnings for
+  `thesis/Setup/Settings.tex`; ignore them.)
+- Quick compile check: `mise run build` (or `build:thesis` / `build:plan`).
+  latexmk re-runs biber automatically when citations change.
+- Before finishing: `mise run fmt:check`, `mise run spell`; optionally
+  `mise run lint` (pre-existing template warnings are expected).
+- If a task fails, read the `latexmk`/`chktex`/`typos` output, fix the file
+  that was modified, and re-run the task.
+- Do not commit build output (`*/build/`); it is gitignored.

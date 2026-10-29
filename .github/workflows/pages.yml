@@ -1,0 +1,97 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - thesis/**
+      - plan/**
+      - site/**
+      - .latexmkrc
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://andrezz-b.github.io/thesis-paper
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-tex
+
+      - name: Detect changes
+        id: changes
+        if: github.event_name == 'push'
+        uses: dorny/paths-filter@v4
+        with:
+          base: ${{ github.event.before }}
+          filters: |
+            thesis:
+              - 'thesis/**'
+              - '.latexmkrc'
+            plan:
+              - 'plan/**'
+              - '.latexmkrc'
+
+      - name: Decide what to build
+        id: decide
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "thesis=true" >> "$GITHUB_OUTPUT"
+            echo "plan=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "thesis=${{ steps.changes.outputs.thesis }}" >> "$GITHUB_OUTPUT"
+            echo "plan=${{ steps.changes.outputs.plan }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r site/. _site/
+
+      - name: Thesis PDF
+        run: |
+          if [ "${{ steps.decide.outputs.thesis }}" != "true" ] \
+             && curl -fsSL -o _site/thesis.pdf "$SITE_URL/thesis.pdf"; then
+            echo "Reused previously deployed thesis.pdf"
+          else
+            mise run build:thesis
+            cp thesis/build/main.pdf _site/thesis.pdf
+          fi
+
+      - name: Project plan PDF
+        run: |
+          if [ "${{ steps.decide.outputs.plan }}" != "true" ] \
+             && curl -fsSL -o _site/project-plan.pdf "$SITE_URL/project-plan.pdf"; then
+            echo "Reused previously deployed project-plan.pdf"
+          else
+            mise run build:plan
+            cp plan/build/main.pdf _site/project-plan.pdf
+          fi
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

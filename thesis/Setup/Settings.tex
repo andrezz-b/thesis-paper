@@ -46,7 +46,10 @@
 % for the body text.
 % To change heading font to NeoSans Pro please upload both
 % NeoSansPro-Regular.otf and NeoSansPro-Medium.otf to the root directory.
-\setmainfont{Arial}
+% Liberation Sans is metric-compatible with Arial (the DTU-specified body
+% font), so the layout is identical. Switch back if Arial is installed.
+\setmainfont{Liberation Sans}
+% \setmainfont{Arial}
 \renewcommand\thepart{Part \Roman{part}}
 \IfFontExistsTF{NeoSansPro-Medium.otf}
 { %If True set headings to NeoSans Pro

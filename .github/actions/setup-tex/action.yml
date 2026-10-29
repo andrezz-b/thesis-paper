@@ -1,0 +1,16 @@
+name: Setup TeX toolchain
+description: Install fonts and the mise-managed tools (tex-fmt, typos, lefthook) inside the texlive container.
+
+runs:
+  using: composite
+  steps:
+    - name: Install system packages
+      shell: bash
+      run: |
+        apt-get update
+        apt-get install -y --no-install-recommends fonts-liberation git curl ca-certificates
+    - name: Install mise tools
+      uses: jdx/mise-action@v5
+      with:
+        install: true
+        cache: true

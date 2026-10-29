@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-tex
+      - name: Build documents
+        run: mise run build
+      - name: Collect PDFs
+        run: |
+          mkdir -p dist
+          cp thesis/build/main.pdf dist/thesis.pdf
+          cp plan/build/main.pdf dist/project-plan.pdf
+      - name: Create release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            dist/thesis.pdf
+            dist/project-plan.pdf
+          generate_release_notes: true

@@ -1,0 +1,36 @@
+% chktex-file 8
+\begin{ganttchart}[
+    time slot format=isodate,
+    x unit=0.094cm,
+    y unit chart=0.6cm,
+    title height=1,
+    bar height=0.5,
+    milestone height=0.6,
+    milestone/.append style={fill=red!70!black},
+    group height=0.3,
+    group peaks tip position=0,
+    group label font=\bfseries\footnotesize,
+    bar label font=\footnotesize,
+    title label font=\scriptsize,
+    milestone label font=\footnotesize,
+    hgrid,
+  ]{2027-02-01}{2027-06-18}
+  \gantttitlecalendar[calendar week text={\currentweek}]{year,
+  month=shortname, week=1} \\
+  \ganttgroup{Literature review}{2027-02-01}{2027-03-05} \\
+  \ganttbar{Survey}{2027-02-01}{2027-02-19} \\
+  \ganttbar{Gap analysis}{2027-02-22}{2027-03-05} \\
+  \ganttgroup{Design}{2027-03-01}{2027-03-26} \\
+  \ganttbar{Requirements}{2027-03-01}{2027-03-12} \\
+  \ganttbar{Architecture}{2027-03-15}{2027-03-26} \\
+  \ganttgroup{Implementation}{2027-03-29}{2027-05-07} \\
+  \ganttbar{Prototype}{2027-03-29}{2027-04-16} \\
+  \ganttbar{Refinement}{2027-04-19}{2027-05-07} \\
+  \ganttmilestone{Mid-term check}{2027-04-16} \\
+  \ganttgroup{Evaluation}{2027-05-10}{2027-05-28} \\
+  \ganttbar{Experiments}{2027-05-10}{2027-05-28} \\
+  \ganttgroup{Writing}{2027-02-15}{2027-06-18} \\
+  \ganttbar{Drafting}{2027-02-15}{2027-06-04} \\
+  \ganttbar{Revision}{2027-06-07}{2027-06-18} \\
+  \ganttmilestone{Submission}{2027-06-18}
+\end{ganttchart}

@@ -1,0 +1,42 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[english]{babel}
+\usepackage{pgfgantt}
+\usepackage[hidelinks]{hyperref}
+
+\title{Project Plan\\[0.5em]\large Thesis title}
+\author{Author}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Background}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+
+\section{Objectives}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris.
+
+\section{Approach}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure
+dolor in reprehenderit in voluptate velit esse.
+
+\section{Timeline}
+Figure~\ref{fig:gantt} shows the planned schedule.
+
+\begin{figure}[htbp]
+  \centering
+  \input{gantt.tex}
+  \caption{Planned schedule (placeholder dates).}
+  \label{fig:gantt} % chktex 24
+\end{figure}
+
+\section{Risks}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint
+occaecat cupidatat non proident.
+
+\end{document}

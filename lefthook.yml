@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: fmt
+      glob: "*.tex"
+      run: mise x -- tex-fmt --check {staged_files}
+    - name: lint
+      glob: "*.tex"
+      run: mise x -- chktex -q {staged_files} || true
+    - name: spell
+      run: mise x -- typos --force-exclude {staged_files}

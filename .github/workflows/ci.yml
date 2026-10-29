@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-tex
+      - name: Format check
+        run: mise run fmt:check
+      - name: Lint
+        run: mise run lint
+      - name: Spell check
+        run: mise run spell
+      - name: Build documents
+        run: mise run build
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v7
+        with:
+          name: pdfs
+          path: |
+            thesis/build/main.pdf
+            plan/build/main.pdf

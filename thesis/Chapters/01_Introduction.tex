@@ -6,11 +6,11 @@ two-sided printing. The \textbackslash \texttt{cleardoublepage}
 command can be used to ensure that new sections and the table of
 contents begins on a right hand page. The back page always ends as an odd page.
 
-All document settings have been gathered in thesis/Setup/Settings.tex. These
+All document settings have been gathered in Setup/Settings.tex. These
 are global settings meaning the settings will affect the whole
 document. Defining the title for example will change the title on the
 front page, the copyright page and the footer. A watermark can be
-enabled or disabled in thesis/Setup/Preamble.tex. You can edit the
+enabled or disabled in Setup/Preamble.tex. You can edit the
 watermark to display draft, review, approved, confidential or
 anything else. By default the watermark is printed on top of the
 contents of the document and has a transparent grey colour.
@@ -18,7 +18,7 @@ contents of the document and has a transparent grey colour.
 \section{This is a section}
 Every chapter is numbered and the sections inherit the chapter number
 followed by a dot and a section number. Figures, equations, tables,
-ect. also inherit the chapter numbering.
+etc. also inherit the chapter numbering.
 
 \subsection{This is a sub section}
 Sub sections are also numbered. In general try not to use a deep
@@ -28,7 +28,7 @@ document appear less coherent.
 
 \subsubsection{This is a sub sub section}
 And those are not numbered. It is possible to adjust how deep
-hierarchy of numbering sections goes in thesis/Setup/Settings.tex.
+hierarchy of numbering sections goes in Setup/Settings.tex.
 
 The front and back cover have been made to replicate the examples in
 the design guide
@@ -39,7 +39,7 @@ corner (no need to write it twice). Take a look at
 if you want to make your cover separately.
 
 Citing is done with the \texttt{biblatex} package \cite{biblatex}.
-Cross referencing (figures, tables, ect.) is taken care by the
+Cross referencing (figures, tables, etc.) is taken care by the
 \texttt{cleveref} package. Just insert the name of the label in
 \textbackslash \texttt{cref\{\}} and it will automatically format the
 cross reference. For example writing the \texttt{cleveref} command

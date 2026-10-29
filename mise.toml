@@ -2,41 +2,103 @@
 # Rust-based LaTeX source formatter. Installed via mise's github backend
 # (GitHub releases), so no conda/homebrew dependency is required.
 "github:WGUNDERWOOD/tex-fmt" = "0.5.7"
+# Git hooks manager (see lefthook.yml).
+lefthook = "2.2.2"
+# Source code spell checker (see _typos.toml).
+typos = "1.51.1"
 
 [tasks.build]
-description = "Compile main.tex with xelatex + biber via latexmk"
-run = "latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex"
+description = "Build both documents (thesis and project plan)"
+depends = ["build:thesis", "build:plan"]
 
-[tasks.watch]
-description = "Continuously rebuild on file changes (for live preview)"
-run = "latexmk -pvc -xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex"
+[tasks."build:thesis"]
+description = "Compile thesis/main.tex with xelatex + biber via latexmk"
+run = "latexmk -cd -xelatex -synctex=1 -interaction=nonstopmode -file-line-error thesis/main.tex"
+
+[tasks."build:plan"]
+description = "Compile plan/main.tex with xelatex via latexmk"
+run = "latexmk -cd -xelatex -synctex=1 -interaction=nonstopmode -file-line-error plan/main.tex"
+
+[tasks."watch:thesis"]
+description = "Continuously rebuild the thesis on file changes (live preview)"
+run = "latexmk -cd -pvc -xelatex -synctex=1 -interaction=nonstopmode -file-line-error thesis/main.tex"
+
+[tasks."watch:plan"]
+description = "Continuously rebuild the project plan on file changes (live preview)"
+run = "latexmk -cd -pvc -xelatex -synctex=1 -interaction=nonstopmode -file-line-error plan/main.tex"
 
 [tasks.lint]
-description = "Check .tex files for typographic/LaTeX issues with chktex"
-run = "find . -name '*.tex' -not -path './build/*' -print0 | xargs -0 chktex"
+description = "Check .tex files for typographic/LaTeX issues with chktex (advisory: always exits 0)"
+# chktex exits non-zero on any warning; the DTU template has many, so this
+# task only reports. Remove `|| true` to make it a hard gate.
+run = "find . -name '*.tex' -not -path '*/build/*' -print0 | xargs -0 chktex -q || true"
 
 [tasks.fmt]
 description = "Format all .tex files with tex-fmt"
 run = "tex-fmt --recursive ."
 
-[tasks.clean]
-description = "Remove build artifacts"
-run = "latexmk -C main.tex"
+[tasks."fmt:check"]
+description = "Check that all .tex files are formatted (no changes written)"
+run = "tex-fmt --check --recursive ."
 
-[tasks.rebuild]
-description = "Clean and rebuild from scratch"
-depends = ["clean", "build"]
+[tasks.spell]
+description = "Spell-check the repository with typos"
+run = "typos"
 
-[tasks.doctor]
-description = "Verify the LaTeX toolchain (from MacTeX) is on PATH"
+[tasks.wordcount]
+description = "Count words in the thesis with texcount"
+dir = "thesis"
+run = "texcount -inc -total -sum main.tex"
+
+[tasks.diff]
+description = "Build a latexdiff PDF against a git ref: mise run diff <git-ref> [thesis|plan]"
+usage = '''
+arg "<ref>" help="Git ref (commit, tag, branch) to diff against"
+arg "[doc]" help="Document to diff" default="thesis"
+'''
 run = """
 set -e
-for bin in xelatex latexmk biber chktex; do
+root="$PWD"
+cd "$root/${usage_doc}"
+latexdiff-vc --git --flatten -r "${usage_ref}" main.tex
+mkdir -p build
+mv main-diff*.tex diff.tex
+latexmk -xelatex -interaction=nonstopmode -file-line-error diff.tex
+echo "Diff PDF: ${usage_doc}/build/diff.pdf"
+"""
+
+[tasks.clean]
+description = "Remove build artifacts of both documents"
+run = """
+latexmk -cd -C thesis/main.tex
+latexmk -cd -C plan/main.tex
+rm -rf thesis/build plan/build
+rm -f thesis/diff.tex plan/diff.tex
+"""
+
+[tasks.rebuild]
+description = "Clean and rebuild everything from scratch"
+run = "mise run clean && mise run build"
+
+[tasks.hooks]
+description = "Install the git hooks (lefthook)"
+run = "lefthook install"
+
+[tasks.doctor]
+description = "Verify the LaTeX toolchain (TeX Live) is on PATH"
+run = """
+set -e
+for bin in xelatex latexmk biber chktex latexdiff-vc texcount tex-fmt typos lefthook; do
   if command -v "$bin" >/dev/null 2>&1; then
     echo "OK   $bin -> $(command -v "$bin")"
   else
-    echo "MISSING $bin (install/reload MacTeX and restart your shell)"
+    echo "MISSING $bin (install TeX Live and add its bin directory to PATH, or run 'mise install')"
     exit 1
   fi
 done
+if fc-list 2>/dev/null | grep -qi "Liberation Sans"; then
+  echo "OK   font Liberation Sans"
+else
+  echo "WARN font Liberation Sans not found (install fonts-liberation)"
+fi
 """

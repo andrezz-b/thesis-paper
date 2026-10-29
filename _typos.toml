@@ -1,0 +1,12 @@
+[files]
+extend-exclude = [
+  "build/",
+  "*.pdf",
+  "*.png",
+  "*.jpg",
+  "*.bib",
+  "*.svg",
+]
+
+[default.extend-words]
+unx = "unx"

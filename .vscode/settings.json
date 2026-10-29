@@ -37,6 +37,11 @@
     "*.toc"
   ],
   "latex-workshop.view.pdf.viewer": "tab",
+  "ltex.language": "en-US",
+  "ltex.latex.commands": {
+    "\\input{}": "ignore",
+    "\\includegraphics[]{}": "ignore"
+  },
   "[tex]": {
     "editor.wordWrap": "on"
   }
