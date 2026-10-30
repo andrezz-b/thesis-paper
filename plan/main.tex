@@ -3,40 +3,294 @@
 \setmainfont{Liberation Sans}
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage[english]{babel}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{pdflscape}
 \usepackage{pgfgantt}
+\usepackage[most]{tcolorbox}
 \usepackage[hidelinks]{hyperref}
 
-\title{Project Plan\\[0.5em]\large Thesis title}
-\author{Author}
-\date{\today}
+\setlist{itemsep=0.2em,topsep=0.3em}
+\setlength{\emergencystretch}{1.5em}
+\hyphenation{ReasonVQA InfoSeek KGVoyager SPINACH}
+
+% Placeholder for information that is still to be filled in.
+\newcommand{\placeholder}[1]{\textcolor{red!70!black}{[#1]}}
+
+% Question meant for the supervisor. Set \showsupervisorqfalse to hide all of
+% them in later revisions of the plan.
+\newif\ifshowsupervisorq
+\showsupervisorqtrue
+\newtcolorbox{supervisorqbox}{
+  enhanced,
+  breakable,
+  colback=orange!8,
+  colframe=orange!70!black,
+  fonttitle=\bfseries\small,
+  title={Question for supervisor},
+  left=4pt,
+  right=4pt,
+  top=3pt,
+  bottom=3pt,
+}
+\newcommand{\supervisorq}[1]{%
+  \ifshowsupervisorq
+  \begin{supervisorqbox}#1
+  \end{supervisorqbox}%
+  \fi
+}
+
+\title{Project Plan\\[0.5em]\large \placeholder{Working title: to be decided}}
+\author{\placeholder{Author name, study number}}
+\date{Draft, version 1 --- \today}
 
 \begin{document}
 \maketitle
 
-\section{Background}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+\begin{itemize}
+  \item \textbf{Supervisor:} \placeholder{Supervisor (and co-supervisor)}
+  \item \textbf{Study line:} \placeholder{Study line}
+  \item \textbf{ECTS:} \placeholder{30}
+  \item \textbf{Period:} 2 November 2026 -- 2 April 2027
+\end{itemize}
 
-\section{Objectives}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris.
+\supervisorq{Is there a required format or length for the project plan? Is a
+  bullet-point first version acceptable, with later revisions moving towards
+the introduction chapter of the thesis?}
 
-\section{Approach}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure
-dolor in reprehenderit in voluptate velit esse.
+\section{Problem statement}
+
+\begin{itemize}
+  \item Agents built on large language models (LLMs) can answer
+    questions in natural language over knowledge graphs by iteratively writing
+    and executing SPARQL queries (e.g.\ SPINACH, GRASP, KGVoyager). These
+    systems only take text as input.
+  \item Many real questions refer to something the user can show but not
+    name, e.g.\ a photo of a phone together with \emph{``In which year was
+    this phone's manufacturer founded?''}. Answering them requires first
+    identifying the depicted entity and then querying the knowledge graph
+    about it.
+  \item Benchmarks for knowledge-based visual question answering, such as
+    KVQA, InfoSeek, ReasonVQA and M\textsuperscript{3}-VQA, connect images to
+    Wikidata. To our knowledge, none of them provides executable gold SPARQL
+    queries for evaluating query-generating agents; this is to be confirmed
+    in the literature review.
+  \item This thesis therefore:
+    \begin{enumerate}
+      \item builds an evaluation dataset of (image, question, gold SPARQL)
+        items over Wikidata, where the question never names the depicted
+        entity, together with a shared vector index of entity images that
+        also contains distractor images;
+      \item builds a ReAct-style agent that identifies the entity in the
+        image (with its own vision and/or the image index) and generates
+        SPARQL over Wikidata, running an open-weight model on the DTU HPC
+        cluster;
+      \item evaluates the agent on the dataset by executing the predicted
+        and the gold queries and comparing their results.
+    \end{enumerate}
+  \item \textbf{In scope:} Wikidata as the only knowledge graph, with
+    Wikidata-specific agent tools; questions with a single image;
+    evaluation-only data (dev and test splits).
+  \item \textbf{Out of scope:} tools that work across knowledge graphs;
+    training or fine-tuning models; paid model APIs.
+  \item \textbf{Stretch goal:} questions with several images, only if time
+    allows.
+\end{itemize}
+
+\section{Research questions}
+
+The research questions and hypotheses below are a first draft and will be
+refined after the literature review.
+
+\begin{description}[style=nextline,leftmargin=1.5em]
+  \item[RQ1 (dataset)] How can an evaluation dataset of items consisting of
+    an image, a question and a gold SPARQL query be built
+    semi-automatically from Wikidata and Wikimedia Commons, such
+    that the depicted entity is only reachable through the image and the gold
+    answers are verifiable?
+    \begin{itemize}
+      \item \emph{H1:} Generating questions from sampled Wikidata paths with
+        an LLM, followed by human review, yields valid items at a manageable
+        review cost. Most rejected items are ambiguous or reveal the entity in
+        the question text.
+    \end{itemize}
+  \item[RQ2 (agent)] How accurately can a ReAct-style agent based on an
+    open-weight LLM answer such questions by generating SPARQL, and how large
+    is the gap to an oracle setting in which the entity is named in the text?
+    \begin{itemize}
+      \item \emph{H2:} The agent performs clearly below the oracle setting,
+        and most of the gap comes from failing to identify the entity in the
+        image rather than from writing wrong SPARQL\@.
+    \end{itemize}
+  \item[RQ3 (grounding)] How do the model's own vision, retrieval from an
+    image index, and the combination of both compare in grounding accuracy
+    and in final answer quality?
+    \begin{itemize}
+      \item \emph{H3:} The image index works better than the model's own
+        vision for less well-known or fine-grained entities, while vision
+        works better for well-known ones. Combining both works best.
+    \end{itemize}
+  \item[RQ4 (difficulty)] How does performance change with question
+    complexity (number of hops, question type) and with the number and visual
+    similarity of distractors in the image index?
+    \begin{itemize}
+      \item \emph{H4:} Accuracy drops as the number of hops grows and as more
+        visually similar distractors are added. Comparison, count and list
+        questions are harder than single-hop lookups.
+    \end{itemize}
+\end{description}
+
+\supervisorq{Are the number and scope of these research questions
+  appropriate? Is the dataset itself a valid research question and
+contribution (RQ1), or should the research questions focus on the agent?}
+
+\section{Learning objectives}
+
+\subsection{General learning objectives}
+
+The general learning objectives for the MSc thesis at DTU, each followed by
+how this project addresses it. A student who has met the objectives:
+
+\begin{enumerate}
+  \item \emph{can identify and reflect on technical scientific issues and
+      understand the interaction between the various components that make up
+    an issue.}
+    \begin{itemize}
+      \item The task combines visual entity recognition, image retrieval,
+        knowledge graph exploration and SPARQL generation. Errors in one step
+        carry over to the next; the evaluation separates grounding errors
+        from query errors.
+    \end{itemize}
+  \item \emph{can, based on a clear academic profile, apply elements of
+      current research at an international level to develop ideas and solve
+    problems.}
+    \begin{itemize}
+      \item The agent builds on recent work on agentic text-to-SPARQL
+        (SPINACH, GRASP, KGVoyager), and the dataset on knowledge-based
+        visual question answering benchmarks (InfoSeek, ReasonVQA,
+        M\textsuperscript{3}-VQA).
+    \end{itemize}
+  \item \emph{masters technical scientific methodologies, theories, and
+      tools, and can take a holistic view of and delimit a complex, open
+      issue, put it into a broader academic and societal perspective, and, on
+      this basis, propose a variety of possible actions while considering
+    sustainability.}
+    \begin{itemize}
+      \item The open problem of multimodal question answering over knowledge
+        graphs is delimited to Wikidata, single images and no fine-tuning.
+      \item Open-weight models on shared university hardware are used
+        instead of commercial APIs, and the dataset uses openly licensed
+        images with proper attribution.
+    \end{itemize}
+  \item \emph{can develop relevant models, systems, technologies, and
+    processes aimed at solving technological problems.}
+    \begin{itemize}
+      \item A dataset generation pipeline, a vector index of entity images
+        and an LLM agent with Wikidata tools are developed.
+    \end{itemize}
+  \item \emph{can communicate and mediate research-based knowledge both
+    orally and in writing.}
+    \begin{itemize}
+      \item The thesis report and the defence; the dataset and the code are
+        released in documented public repositories.
+    \end{itemize}
+  \item \emph{is familiar with and can seek out leading international
+    research within their specialist area.}
+    \begin{itemize}
+      \item A literature review of knowledge graph question answering,
+        knowledge-based visual question answering and visual entity
+        recognition, used to check whether a comparable benchmark already
+        exists.
+    \end{itemize}
+  \item \emph{can work independently and reflect on own learning, academic
+    development, and specialization.}
+    \begin{itemize}
+      \item Design decisions are made independently, recorded with their
+        rationale and discussed with the supervisor.
+    \end{itemize}
+  \item \emph{masters technical problem-solving at a high level through
+      cross-disciplinary teamwork, and can work with and manage all phases of
+      a project -- including preparation of timetables, design, solution, and
+    documentation.}
+    \begin{itemize}
+      \item All phases are managed through this plan, its timeline and
+        milestones (dataset freeze, results freeze, hand-in).
+      \item Teamwork is limited: this is an individual project, and
+        collaboration happens only with the supervisor and through building
+        on open-source and Wikidata community tools.
+    \end{itemize}
+    \supervisorq{The cross-disciplinary teamwork part of this objective is not
+    entirely connected to an individual project. Could it be left out?}
+\end{enumerate}
+
+\subsection{Project-specific learning objectives}
+
+By the end of the project, the student will be able to:
+
+\begin{enumerate}
+  \item review and position research on knowledge-based visual question
+    answering and agentic text-to-SPARQL;
+  \item design and build a reproducible benchmark from Wikidata and Wikimedia
+    Commons, including LLM-generated questions with human review, gold SPARQL
+    queries and licence-compliant image attribution;
+  \item build a vector index of entity images (e.g.\ CLIP embeddings in a
+    vector database) with controlled distractors, and assess how well it
+    retrieves the correct entity;
+  \item design and implement a ReAct-style agent with Wikidata tools: SPARQL
+    execution, entity and property search, schema exploration and image
+    search;
+  \item deploy and run open-weight LLMs on the DTU HPC cluster;
+  \item design an execution-based evaluation with baselines and ablations,
+    and analyse errors by question type, number of hops and grounding
+    failure;
+  \item discuss the limitations of the approach, in particular
+    reproducibility on a knowledge graph that changes over time and how far
+    the results generalise.
+\end{enumerate}
 
 \section{Timeline}
-Figure~\ref{fig:gantt} shows the planned schedule.
 
-\begin{figure}[htbp]
-  \centering
-  \input{gantt.tex}
-  \caption{Planned schedule (placeholder dates).}
-  \label{fig:gantt} % chktex 24
-\end{figure}
+The planned schedule is shown in Figure~\ref{fig:gantt}. The project runs in
+three overlapping phases: preparation, dataset construction, and agent
+development with experiments. Writing happens alongside each phase.
 
-\section{Risks}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint
-occaecat cupidatat non proident.
+\begin{itemize}
+  \item \textbf{Milestones:}
+    \begin{itemize}
+      \item 2 December 2026: project plan hand-in.
+      \item 22 January 2027: dataset frozen (no changes to the items after
+        this date).
+      \item 16 March 2027: results frozen.
+      \item 22 March 2027: full draft sent to the supervisor.
+      \item 2 April 2027: hand-in.
+    \end{itemize}
+  \item \textbf{Assumptions:}
+    \begin{itemize}
+      \item A small agent prototype on the proof-of-concept examples is
+        built in December to test the model setup on the HPC cluster early;
+        the main agent work starts after the dataset freeze.
+      \item Work continues at a reduced pace between Christmas and New Year.
+      \item The thesis is done alongside a part-time job (3 days per week,
+        which can be reduced to 2 if needed).
+      \item The buffer at the end includes Easter (26--29 March 2027). If the
+        schedule slips, the stretch goal (multi-image questions) is dropped
+        first.
+    \end{itemize}
+\end{itemize}
+
+\supervisorq{Should the timeline cover the whole project period from the
+  start (2 November 2026), or start after the hand-in of the project plan?
+The current draft covers the whole period.}
+
+\begin{landscape}
+  \begin{figure}[p]
+    \centering
+    \input{gantt.tex}
+    \caption{Planned schedule. Diamonds are milestones; the grey bar marks
+      reduced pace over the holidays; the dashed bar is a stretch goal.
+    Columns are project weeks, starting on Mondays.}
+    \label{fig:gantt} % chktex 24
+  \end{figure}
+\end{landscape}
 
 \end{document}
