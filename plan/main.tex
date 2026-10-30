@@ -81,7 +81,9 @@ plan? Is bullet point version fine?}
       \item builds an evaluation dataset of (image, question, gold SPARQL)
         items over Wikidata, where the question never names the depicted
         entity, together with a shared vector index of entity images that
-        also contains distractor images;
+        also contains distractor images. The questions are LLM-assisted and
+        manually curated: LLMs suggest question ideas, which are refined into
+        items only if they meet a set of acceptance criteria;
       \item builds a ReAct-style agent that grounds the image, i.e.\
         identifies the depicted Wikidata entity (with its own vision and/or
         the image index), and generates SPARQL over Wikidata, running an
@@ -100,52 +102,43 @@ plan? Is bullet point version fine?}
 
 \section{Research questions}
 
-Draft, needs to be confirmed by the literature review.
+Draft, needs to be confirmed by the literature review. The evaluation dataset
+is a contribution of the thesis, not a research question. The research
+questions are about the agent and are answered on the dataset.
 
 \begin{description}[style=nextline,leftmargin=1.5em]
-  \item[RQ1 (dataset)] How can an evaluation dataset of items consisting of
-    an image, a question and a gold SPARQL query be built
-    semi-automatically from Wikidata and Wikimedia Commons, such
-    that the depicted entity is only reachable through the image and the gold
-    answers are verifiable?
-    \begin{itemize}
-      \item \emph{H1:} Generating questions from sampled Wikidata paths with
-        an LLM, followed by human review, yields valid items at a manageable
-        review cost (an acceptance-rate target is set after the pilot in
-        December). Most rejected items are ambiguous or reveal the entity in
-        the question text.
-    \end{itemize}
-  \item[RQ2 (agent)] How accurately can a ReAct-style agent based on an
-    open-weight LLM answer such questions by generating SPARQL, and how large
+  \item[RQ1 (agent)] How accurately can a ReAct-style agent based on an
+    open-weight LLM answer image-based questions over Wikidata by generating
+    SPARQL, and how large
     is the gap to an oracle setting in which the entity is named in the text?
     \begin{itemize}
-      \item \emph{H2:} The agent performs clearly below the oracle setting,
+      \item \emph{H1:} The agent performs clearly below the oracle setting,
         and most of the gap comes from failing to identify the entity in the
         image rather than from writing wrong SPARQL, measured by comparing
         grounding accuracy with answer accuracy given correct grounding.
     \end{itemize}
-  \item[RQ3 (grounding)] How do the model's own vision, retrieval from an
+  \item[RQ2 (grounding)] How do the model's own vision, retrieval from an
     image index, and the combination of both compare in grounding accuracy
     and in final answer quality?
     \begin{itemize}
-      \item \emph{H3:} The image index works better than the model's own
+      \item \emph{H2:} The image index works better than the model's own
         vision for less well-known or fine-grained entities, while vision
         works better for well-known ones (popularity measured e.g.\ by the
         number of Wikipedia sitelinks). Combining both works best.
     \end{itemize}
-  \item[RQ4 (difficulty)] How does performance change with question
+  \item[RQ3 (difficulty)] How does performance change with question
     complexity (number of hops, question type) and with the number and visual
     similarity of distractors in the image index?
     \begin{itemize}
-      \item \emph{H4:} Accuracy drops as the number of hops grows and as more
+      \item \emph{H3:} Accuracy drops as the number of hops grows and as more
         visually similar distractors are added. Comparison, count and list
         questions are harder than single-hop lookups.
     \end{itemize}
 \end{description}
 
 \supervisorq{Are the number and scope of these research questions
-  appropriate? Is the dataset itself a valid research question and
-contribution (RQ1), or should the research questions focus on the agent?}
+  appropriate? Is it fine to present the dataset as a contribution instead
+of a research question?}
 
 \section{Learning objectives}
 
@@ -186,7 +179,8 @@ contribution (RQ1), or should the research questions focus on the agent?}
   \item \emph{can develop relevant models, systems, technologies, and
     processes aimed at solving technological problems.}
     \begin{itemize}
-      \item A dataset generation pipeline, a vector index of entity images
+      \item A dataset construction process (acceptance criteria, curation and
+        validation scripts), a vector index of entity images
         and an LLM agent with Wikidata tools are developed.
     \end{itemize}
   \item \emph{can communicate and mediate research-based knowledge both
@@ -233,8 +227,9 @@ By the end of the project, the student will be able to:
   \item review and position research on knowledge-based visual question
     answering and agentic text-to-SPARQL;
   \item design and build a reproducible benchmark from Wikidata and Wikimedia
-    Commons, including LLM-generated questions with human review, gold SPARQL
-    queries and licence-compliant image attribution;
+    Commons, including LLM-assisted, manually curated questions that meet
+    explicit acceptance criteria (with the prompts and models used
+    documented), gold SPARQL queries and licence-compliant image attribution;
   \item build a vector index of entity images (e.g.\ CLIP embeddings in a
     vector database) with controlled distractors, and evaluate its retrieval
     accuracy (e.g.\ top-$k$ recall);
@@ -273,6 +268,8 @@ development with experiments. Writing happens alongside each phase.
         It is limited to about one week of effort; the main agent work starts
         after the dataset freeze.
       \item Work continues at a reduced pace between Christmas and New Year.
+      \item The dataset is curated manually (LLMs only suggest question
+        ideas), so its size is limited by curation time.
       \item The thesis is done alongside a part-time job (3 days per week,
         which can be reduced to 2 if needed).
       \item The test split is only used after tuning on the dev split has
