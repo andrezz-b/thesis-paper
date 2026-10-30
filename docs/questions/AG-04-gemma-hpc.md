@@ -2,7 +2,7 @@
 id: AG-04
 title: What exactly does the Gemma setup on the DTU HPC support?
 area: agent
-status: open
+status: researching
 phase: dataset
 priority: high
 depends_on: []
@@ -30,6 +30,8 @@ To check with the people running it:
 - context length;
 - API type (OpenAI-compatible?), rate limits and throughput, availability;
 - whether things can be swapped for tests (e.g. vision on or off, another model).
+- 2026-10-30: Planned to be tested in practice with a small agent prototype on the
+  POC examples, 2026-12-07 to 2026-12-18 (about one week of effort, [D-015](../decisions.md#d-015)).
 
 ## Resolution
 

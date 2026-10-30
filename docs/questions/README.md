@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**36 questions:** 36 open, 0 researching, 0 decided, 0 dropped.
+**36 questions:** 34 open, 2 researching, 0 decided, 0 dropped.
 
 ## Ready now
 
@@ -21,7 +21,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | --- | --- | --- | --- | --- | --- |
 | [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | dataset | high | open | [DS-01](DS-01-question-types.md) |
 | [DS-02](DS-02-wikidata-subset.md) | Which part of Wikidata is well connected enough to build the dataset on? | dataset | high | open | [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [IX-01](IX-01-distractor-strategy.md) |
-| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | dataset | high | open | [AG-05](AG-05-experiment-configurations.md) |
+| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | dataset | high | researching | [AG-05](AG-05-experiment-configurations.md) |
 | [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | dataset | high | open | [DS-08](DS-08-gold-answers.md), [EV-01](EV-01-metrics.md) |
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | dataset | high | open | [DS-08](DS-08-gold-answers.md) |
 | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | open | [FR-01](FR-01-research-questions.md) |
@@ -71,7 +71,7 @@ _Nothing resolved yet._
 
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
-| [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | open | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | [FR-02](FR-02-thesis-title.md), [DS-01](DS-01-question-types.md), [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
+| [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | researching | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | [FR-02](FR-02-thesis-title.md), [DS-01](DS-01-question-types.md), [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
 | [FR-02](FR-02-thesis-title.md) | What is the thesis title? | open | dataset | medium | [FR-01](FR-01-research-questions.md) | – |
 
 ### Literature (LIT)
@@ -116,7 +116,7 @@ _Nothing resolved yet._
 | [AG-01](AG-01-own-agent-vs-grasp.md) | Build an own agent or build on top of GRASP? | open | agent | medium | – | [AG-02](AG-02-tool-set.md), [AG-03](AG-03-agent-framework.md), [RP-02](RP-02-languages.md), [EV-02](EV-02-baselines.md) |
 | [AG-02](AG-02-tool-set.md) | Which tools does the agent get? | open | agent | high | [AG-01](AG-01-own-agent-vs-grasp.md) | [EV-03](EV-03-ablations.md) |
 | [AG-03](AG-03-agent-framework.md) | Which agent framework or loop implementation is used? | open | agent | low | [AG-01](AG-01-own-agent-vs-grasp.md) | – |
-| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | open | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md), [DS-09](DS-09-generation-pipeline.md) |
+| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | researching | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md), [DS-09](DS-09-generation-pipeline.md) |
 | [AG-05](AG-05-experiment-configurations.md) | Which agent configurations are evaluated? | open | agent | medium | [AG-04](AG-04-gemma-hpc.md) | [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
 
 ### Evaluation (EV)

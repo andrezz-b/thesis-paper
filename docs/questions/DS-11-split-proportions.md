@@ -23,6 +23,8 @@ The dev split prevents tuning prompts and tools on the test set ([D-008](../deci
 - Open: the proportion (suggested 10–20 % dev); stratification by question type and
   domain; whether dev and test entities should be disjoint. The split is assigned at
   generation time and stays fixed.
+- 2026-10-30: Rule adopted in the project plan (suggested in review): the test split
+  is only used after tuning on the dev split has ended (2027-02-26, [D-015](../decisions.md#d-015)).
 
 ## Resolution
 

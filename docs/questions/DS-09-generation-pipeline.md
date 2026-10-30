@@ -30,6 +30,9 @@ Determines dataset quality and how many questions can be produced before the dea
 - Review criteria to define: the entity is not named ([D-004](../decisions.md#d-004)), the question is natural
   and unambiguous, the gold query is correct ([DS-08](DS-08-gold-answers.md)).
 - Review tooling is undecided.
+- 2026-10-30: The plan has a pilot generation and review round 2026-12-14 to
+  2026-12-22 and full generation 2027-01-04 to 2027-01-22 ([D-015](../decisions.md#d-015)). The pilot is used
+  to set an acceptance-rate target for H1 ([FR-01](FR-01-research-questions.md)).
 
 ## Resolution
 

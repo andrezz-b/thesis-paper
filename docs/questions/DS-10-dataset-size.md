@@ -15,8 +15,8 @@ What is the minimum viable size, and what is the target if things go well?
 
 ## Why it matters
 
-Needs to be large enough for per-type results while fitting the mid-January deadline
-([D-013](../decisions.md#d-013)).
+Needs to be large enough for per-type results while fitting the dataset freeze on
+2027-01-22 ([D-015](../decisions.md#d-015)).
 
 ## Notes
 

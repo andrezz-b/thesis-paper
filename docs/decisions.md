@@ -123,7 +123,7 @@ files).
 
 ## <a id="d-013"></a>D-013 (2026-10-29): Timeline
 
-- **Status:** tentative
+- **Status:** superseded by [D-015](#d-015)
 - **Decision:** Start 2026-11-02, hand-in 2027-04-02 (both fixed). Dataset finished
   by mid-January 2027 (personal deadline, so that the agent work fits before the
   hand-in).
@@ -144,3 +144,25 @@ files).
   research notes, and their front matter makes dependencies and the next steps
   visible.
 - **Related:** `.opencode/skills/thesis-description/SKILL.md`
+
+## <a id="d-015"></a>D-015 (2026-10-30): Timeline v1 (project plan)
+
+- **Status:** tentative
+- **Decision:** The timeline of the first project plan (`plan/gantt.tex`):
+  - milestones: project plan hand-in 2026-12-02; dataset frozen 2027-01-22;
+    results frozen 2027-03-16; full draft to the supervisor 2027-03-22; hand-in
+    2027-04-02 (fixed);
+  - a small agent prototype on the POC examples (about one week of effort,
+    2026-12-07 to 2026-12-18) to test the model setup on the HPC early; the main
+    agent work starts after the dataset freeze;
+  - a pilot generation and review round 2026-12-14 to 2026-12-22, full generation
+    and review 2027-01-04 to 2027-01-22;
+  - tuning on the dev split ends 2027-02-26; the test split is only used after that.
+- **Rationale:** Moves the dataset freeze from mid-January ([D-013](#d-013)) to 2027-01-22
+  for one more week of buffer. The user works a part-time job 3 days per week (can be
+  reduced to 2), works at a reduced pace between Christmas and New Year
+  (2026-12-23 to 2027-01-01), and the final buffer includes the Easter holidays
+  (2027-03-25 to 2027-03-29). If the schedule slips, the stretch goal (multi-image
+  questions, [D-009](#d-009)) is dropped first. The prototype and the dev/test rule came up in
+  planning and review of the project plan.
+- **Related:** [D-013](#d-013), [D-008](#d-008), [D-009](#d-009), [AG-04](questions/AG-04-gemma-hpc.md), [DS-09](questions/DS-09-generation-pipeline.md), [DS-11](questions/DS-11-split-proportions.md), `plan/gantt.tex`
