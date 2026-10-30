@@ -72,8 +72,9 @@ the introduction chapter of the thesis?}
     about it.
   \item Benchmarks for knowledge-based visual question answering, such as
     KVQA, InfoSeek, ReasonVQA and M\textsuperscript{3}-VQA, connect images to
-    Wikidata. To our knowledge, none of them provides executable gold SPARQL
-    queries for evaluating query-generating agents; this is to be confirmed
+    Wikidata. To our knowledge, none of the benchmarks examined so
+    far provides executable gold SPARQL
+    queries for evaluating query-generating agents. This is to be confirmed
     in the literature review.
   \item This thesis therefore:
     \begin{enumerate}
@@ -81,16 +82,16 @@ the introduction chapter of the thesis?}
         items over Wikidata, where the question never names the depicted
         entity, together with a shared vector index of entity images that
         also contains distractor images;
-      \item builds a ReAct-style agent that identifies the entity in the
-        image (with its own vision and/or the image index) and generates
-        SPARQL over Wikidata, running an open-weight model on the DTU HPC
-        cluster;
+      \item builds a ReAct-style agent that grounds the image, i.e.\
+        identifies the depicted Wikidata entity (with its own vision and/or
+        the image index), and generates SPARQL over Wikidata, running an
+        open-weight model (currently planned: Gemma) on the DTU HPC cluster;
       \item evaluates the agent on the dataset by executing the predicted
         and the gold queries and comparing their results.
     \end{enumerate}
   \item \textbf{In scope:} Wikidata as the only knowledge graph, with
     Wikidata-specific agent tools; questions with a single image;
-    evaluation-only data (dev and test splits).
+    evaluation-only data (dev and test splits, no train split).
   \item \textbf{Out of scope:} tools that work across knowledge graphs;
     training or fine-tuning models; paid model APIs.
   \item \textbf{Stretch goal:} questions with several images, only if time
@@ -111,7 +112,8 @@ refined after the literature review.
     \begin{itemize}
       \item \emph{H1:} Generating questions from sampled Wikidata paths with
         an LLM, followed by human review, yields valid items at a manageable
-        review cost. Most rejected items are ambiguous or reveal the entity in
+        review cost (an acceptance-rate target is set after the pilot in
+        December). Most rejected items are ambiguous or reveal the entity in
         the question text.
     \end{itemize}
   \item[RQ2 (agent)] How accurately can a ReAct-style agent based on an
@@ -120,7 +122,8 @@ refined after the literature review.
     \begin{itemize}
       \item \emph{H2:} The agent performs clearly below the oracle setting,
         and most of the gap comes from failing to identify the entity in the
-        image rather than from writing wrong SPARQL\@.
+        image rather than from writing wrong SPARQL, measured by comparing
+        grounding accuracy with answer accuracy given correct grounding.
     \end{itemize}
   \item[RQ3 (grounding)] How do the model's own vision, retrieval from an
     image index, and the combination of both compare in grounding accuracy
@@ -128,7 +131,8 @@ refined after the literature review.
     \begin{itemize}
       \item \emph{H3:} The image index works better than the model's own
         vision for less well-known or fine-grained entities, while vision
-        works better for well-known ones. Combining both works best.
+        works better for well-known ones (popularity measured e.g.\ by the
+        number of Wikipedia sitelinks). Combining both works best.
     \end{itemize}
   \item[RQ4 (difficulty)] How does performance change with question
     complexity (number of hops, question type) and with the number and visual
@@ -166,8 +170,9 @@ how this project addresses it. A student who has met the objectives:
     problems.}
     \begin{itemize}
       \item The agent builds on recent work on agentic text-to-SPARQL
-        (SPINACH, GRASP, KGVoyager), and the dataset on knowledge-based
-        visual question answering benchmarks (InfoSeek, ReasonVQA,
+        (SPINACH, GRASP, KGVoyager) and extends it to image input; the
+        dataset builds on knowledge-based visual question answering
+        benchmarks (InfoSeek, ReasonVQA,
         M\textsuperscript{3}-VQA).
     \end{itemize}
   \item \emph{masters technical scientific methodologies, theories, and
@@ -206,7 +211,7 @@ how this project addresses it. A student who has met the objectives:
     development, and specialization.}
     \begin{itemize}
       \item Design decisions are made independently, recorded with their
-        rationale and discussed with the supervisor.
+        rationale in a decision log and discussed with the supervisor.
     \end{itemize}
   \item \emph{masters technical problem-solving at a high level through
       cross-disciplinary teamwork, and can work with and manage all phases of
@@ -219,9 +224,10 @@ how this project addresses it. A student who has met the objectives:
         collaboration happens only with the supervisor and through building
         on open-source and Wikidata community tools.
     \end{itemize}
-    \supervisorq{The cross-disciplinary teamwork part of this objective is not
-    entirely connected to an individual project. Could it be left out?}
 \end{enumerate}
+
+\supervisorq{The cross-disciplinary teamwork part of objective 8 is not
+entirely connected to an individual project. Could it be left out?}
 
 \subsection{Project-specific learning objectives}
 
@@ -234,8 +240,8 @@ By the end of the project, the student will be able to:
     Commons, including LLM-generated questions with human review, gold SPARQL
     queries and licence-compliant image attribution;
   \item build a vector index of entity images (e.g.\ CLIP embeddings in a
-    vector database) with controlled distractors, and assess how well it
-    retrieves the correct entity;
+    vector database) with controlled distractors, and evaluate its retrieval
+    accuracy (e.g.\ top-$k$ recall);
   \item design and implement a ReAct-style agent with Wikidata tools: SPARQL
     execution, entity and property search, schema exploration and image
     search;
@@ -243,7 +249,7 @@ By the end of the project, the student will be able to:
   \item design an execution-based evaluation with baselines and ablations,
     and analyse errors by question type, number of hops and grounding
     failure;
-  \item discuss the limitations of the approach, in particular
+  \item critically assess the limitations of the approach, in particular
     reproducibility on a knowledge graph that changes over time and how far
     the results generalise.
 \end{enumerate}
@@ -267,12 +273,19 @@ development with experiments. Writing happens alongside each phase.
   \item \textbf{Assumptions:}
     \begin{itemize}
       \item A small agent prototype on the proof-of-concept examples is
-        built in December to test the model setup on the HPC cluster early;
-        the main agent work starts after the dataset freeze.
+        built in December to test the model setup on the HPC cluster early.
+        It is limited to about one week of effort; the main agent work starts
+        after the dataset freeze.
       \item Work continues at a reduced pace between Christmas and New Year.
       \item The thesis is done alongside a part-time job (3 days per week,
         which can be reduced to 2 if needed).
-      \item The buffer at the end includes Easter (26--29 March 2027). If the
+      \item The test split is only used after tuning on the dev split has
+        ended (26 February 2027).
+      \item Experiment configurations are scripted and tested on the dev
+        split before the experiments start; waiting times on the HPC cluster
+        are the main schedule risk.
+      \item The buffer at the end includes the Easter holidays (25--29 March
+        2027). If the
         schedule slips, the stretch goal (multi-image questions) is dropped
         first.
     \end{itemize}
@@ -288,7 +301,7 @@ The current draft covers the whole period.}
     \input{gantt.tex}
     \caption{Planned schedule. Diamonds are milestones; the grey bar marks
       reduced pace over the holidays; the dashed bar is a stretch goal.
-    Columns are project weeks, starting on Mondays.}
+    Columns are project weeks numbered from Monday 2 November 2026.}
     \label{fig:gantt} % chktex 24
   \end{figure}
 \end{landscape}
