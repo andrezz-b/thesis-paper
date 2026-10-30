@@ -51,8 +51,10 @@ it.
 
 - Framing: **agentic text-to-SPARQL extended to images** [Decided, [D-001](decisions.md#d-001)]. The dataset
   is built first because evaluation data is needed [Decided, [D-002](decisions.md#d-002)].
-- Research questions and hypotheses: a draft (RQ1–RQ4 with H1–H4) is in the project
-  plan, awaiting supervisor feedback [Tentative; Open: [FR-01](questions/FR-01-research-questions.md)].
+- Research questions and hypotheses: a draft (RQ1 agent, RQ2 grounding, RQ3
+  difficulty, with H1–H3) is in the project plan, awaiting supervisor feedback
+  [Tentative; Open: [FR-01](questions/FR-01-research-questions.md)]. The dataset is a contribution, not a research
+  question [Tentative, [D-017](decisions.md#d-017)].
 - Positioning against the closest work (M³-VQA, ReasonVQA, KVQA, InfoSeek, ...):
   [Open: [LIT-01](questions/LIT-01-existing-image-sparql-benchmarks.md)]. See [`related-work.md`](related-work.md).
 
@@ -108,7 +110,10 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
     count [Tentative].
   - To be formalised from the literature: [Open: [LIT-02](questions/LIT-02-question-type-taxonomy.md), [DS-01](questions/DS-01-question-types.md)].
 - Construction:
-  - LLM-generated with human checking [Tentative]. Pipeline: [Open: [DS-09](questions/DS-09-generation-pipeline.md)].
+  - LLM-assisted, manually curated: any available LLM suggests question ideas from
+    prompts that state the scope (question types, difficulty); ideas become items
+    only if they meet the acceptance criteria; prompts and models used are logged
+    [Decided, [D-016](decisions.md#d-016)]. Criteria and procedure: [Tentative; Open: [DS-09](questions/DS-09-generation-pipeline.md)].
   - Size: depends on progress [Open: [DS-10](questions/DS-10-dataset-size.md)].
 - Query images:
   - Wikimedia Commons photos of the same entity, different from the image in the

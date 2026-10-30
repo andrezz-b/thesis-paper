@@ -166,3 +166,29 @@ files).
   questions, [D-009](#d-009)) is dropped first. The prototype and the dev/test rule came up in
   planning and review of the project plan.
 - **Related:** [D-013](#d-013), [D-008](#d-008), [D-009](#d-009), [AG-04](questions/AG-04-gemma-hpc.md), [DS-09](questions/DS-09-generation-pipeline.md), [DS-11](questions/DS-11-split-proportions.md), `plan/gantt.tex`
+
+## <a id="d-016"></a>D-016 (2026-10-30): LLM-assisted, manually curated questions
+
+- **Status:** decided
+- **Decision:** The dataset is not generated automatically by an LLM, and the Gemma
+  model on the HPC is not used for it.
+  - Any available LLM (also through a chat interface) is asked for question ideas.
+    The prompt states the scope: question types, difficulty and similar details.
+  - The student refines the ideas into items (question, gold SPARQL, answer, image)
+    only if they meet the acceptance criteria (working list in [DS-09](questions/DS-09-generation-pipeline.md)).
+  - The prompts and models used are logged for reproducibility.
+  - The "generation" phases in [D-015](#d-015) now mean curation; the dates stay the same.
+- **Rationale:** The user's intended method: LLMs as a source of ideas, with
+  quality controlled by manual curation against explicit criteria.
+- **Related:** [DS-09](questions/DS-09-generation-pipeline.md), [DS-10](questions/DS-10-dataset-size.md), [AG-04](questions/AG-04-gemma-hpc.md), [D-015](#d-015)
+
+## <a id="d-017"></a>D-017 (2026-10-30): The dataset is a contribution, not a research question
+
+- **Status:** tentative
+- **Decision:** The evaluation dataset is presented as a contribution of the thesis.
+  The research questions are only about the agent (RQ1 agent, RQ2 grounding, RQ3
+  difficulty; see [FR-01](questions/FR-01-research-questions.md)). The dataset construction has no hypothesis.
+- **Rationale:** With manual curation ([D-016](#d-016)), building the dataset is a method and
+  not something that is measured. Tentative until the supervisor answers the
+  question about this in the project plan.
+- **Related:** [FR-01](questions/FR-01-research-questions.md), [D-016](#d-016)

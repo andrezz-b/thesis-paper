@@ -29,7 +29,8 @@ what the evaluation has to show. Also needed for the project plan and the title.
     recognises the entity itself ([AG-05](AG-05-experiment-configurations.md)).
 - The contribution statement depends on what the closest related work already covers
   ([LIT-01](LIT-01-existing-image-sparql-benchmarks.md)).
-- 2026-10-30: Draft research questions and hypotheses for the first project plan
+- 2026-10-30 (superseded by the next entry, [D-017](../decisions.md#d-017)): Draft research questions and
+  hypotheses for the first project plan
   (`plan/main.tex`), to be refined after the literature review and supervisor
   feedback. The plan asks the supervisor whether the number and scope are right and
   whether the dataset (RQ1) counts as a research question and contribution on its own.
@@ -64,6 +65,18 @@ what the evaluation has to show. Also needed for the project plan and the title.
   - Review remarks (2026-10-30, not yet acted on): RQ4 bundles three factors and
     depends on open questions ([DS-03](DS-03-hop-depth.md), [IX-01](IX-01-distractor-strategy.md), [IX-02](IX-02-distractor-count.md)); "visual similarity" could become
     "if time allows". H2 and H3 need precise definitions once [EV-01](EV-01-metrics.md) is settled.
+- 2026-10-30: Current draft, in the project plan. The dataset is a contribution,
+  not a research question ([D-017](../decisions.md#d-017), tentative), because it is curated manually
+  ([D-016](../decisions.md#d-016)). The agent questions are renumbered:
+  - RQ1 (agent): How accurately can a ReAct-style agent based on an open-weight LLM
+    answer image-based questions over Wikidata by generating SPARQL, and how large
+    is the gap to an oracle setting in which the entity is named in the text?
+    - H1: as the previous H2.
+  - RQ2 (grounding): as the previous RQ3. H2: as the previous H3.
+  - RQ3 (difficulty): as the previous RQ4. H3: as the previous H4.
+  - The review remarks above still apply to the new RQ3 (old RQ4).
+  - The supervisor box in the plan now asks whether presenting the dataset as a
+    contribution instead of a research question is fine.
 
 ## Resolution
 

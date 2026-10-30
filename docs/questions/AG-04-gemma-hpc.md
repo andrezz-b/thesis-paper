@@ -6,7 +6,7 @@ status: researching
 phase: dataset
 priority: high
 depends_on: []
-informs: [AG-03, AG-05, DS-09]
+informs: [AG-03, AG-05]
 ---
 
 ## Question
@@ -17,8 +17,8 @@ Can the setup be changed for the experiments?
 ## Why it matters
 
 It is the only planned model (no API credits, [D-010](../decisions.md#d-010)). Its capabilities decide which
-agent configurations are possible ([AG-05](AG-05-experiment-configurations.md)) and whether it can generate questions
-([DS-09](DS-09-generation-pipeline.md)).
+agent configurations are possible ([AG-05](AG-05-experiment-configurations.md)). It is not used to build the dataset
+([D-016](../decisions.md#d-016)), so question generation no longer depends on it.
 
 ## Notes
 

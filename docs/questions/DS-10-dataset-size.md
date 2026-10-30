@@ -23,6 +23,8 @@ Needs to be large enough for per-type results while fitting the dataset freeze o
 - The user expects this to depend on progress and remaining time.
 - Reference sizes: SPINACH 320 questions; KGVoyager's benchmarks 14–100 questions
   each; WikiVQABench 344 questions.
+- 2026-10-30: The questions are curated manually ([D-016](../decisions.md#d-016)), so the reachable size is
+  limited by curation time and smaller than with automatic generation.
 
 ## Resolution
 

@@ -17,7 +17,7 @@ what proportions?
 ## Why it matters
 
 Drives which part of Wikidata is suitable ([DS-02](DS-02-wikidata-subset.md)), the hop depth ([DS-03](DS-03-hop-depth.md)), the
-generation pipeline ([DS-09](DS-09-generation-pipeline.md)) and the record format ([RP-03](RP-03-dataset-format.md)).
+curation process ([DS-09](DS-09-generation-pipeline.md)) and the record format ([RP-03](RP-03-dataset-format.md)).
 
 ## Notes
 
