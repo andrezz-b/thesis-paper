@@ -95,7 +95,7 @@ files).
 
 ## <a id="d-010"></a>D-010 (2026-10-29): Gemma on the DTU HPC, no paid APIs
 
-- **Status:** tentative
+- **Status:** superseded by [D-019](#d-019)
 - **Decision:** Use the Gemma model running on the university HPC cluster (believed to
   be Gemma 4, about 29B). No API credits are planned.
 - **Rationale:** Available to the user without cost. Exact version and capabilities
@@ -192,3 +192,25 @@ files).
   not something that is measured. Tentative until the supervisor answers the
   question about this in the project plan.
 - **Related:** [FR-01](questions/FR-01-research-questions.md), [D-016](#d-016)
+
+## <a id="d-018"></a>D-018 (2026-11-03): Thesis title
+
+- **Status:** decided
+- **Decision:** The title is
+  - English: "Multimodal Knowledge Graph Question Answering using an Agentic/ReAct Framework";
+  - Danish: "Besvarelse af spørgsmål over multimodale vidensgrafer ved hjælp af en agentbaseret/ReAct-tilgang".
+- **Rationale:** Given by the user (2026-11-03). Confirmed by the user for use in the
+  thesis and project plan.
+- **Related:** [FR-02](questions/FR-02-thesis-title.md)
+
+## <a id="d-019"></a>D-019 (2026-11-03): Use DTU CampusAI instead of "Gemma on the HPC"
+
+- **Status:** tentative
+- **Decision:** The LLM deployment at DTU is called CampusAI
+  (https://campusai.compute.dtu.dk/models/, only reachable through the DTU VPN). Models
+  are used through its OpenAI-compatible API with a key from the CampusAI console. No
+  paid APIs (as in [D-010](#d-010)). Which model runs the agent is not decided yet ([AG-04](questions/AG-04-gemma-hpc.md)).
+- **Rationale:** The catalog shown by the user (2026-11-03) lists Qwen3.8-27B as the
+  flagship chat model and Gemma 4 E4B only as the image-input model, so "Gemma, about
+  29B" from [D-010](#d-010) does not match. Tentative until the model choice is made.
+- **Related:** [D-010](#d-010), [AG-04](questions/AG-04-gemma-hpc.md), [AG-05](questions/AG-05-experiment-configurations.md)

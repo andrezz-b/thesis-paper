@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-10-30._
+_Last reviewed: 2026-11-03._
 
 ## TL;DR
 
@@ -43,7 +43,9 @@ it.
   reduced pace 2026-12-23 to 2027-01-01; the final buffer includes Easter
   (2027-03-25 to 2027-03-29). If the schedule slips, the stretch goal is dropped first.
   Full schedule: `plan/gantt.tex`.
-- Title: [Open: [FR-02](questions/FR-02-thesis-title.md)]. It needs approval; do not invent one.
+- Title [Decided, [D-018](decisions.md#d-018)]:
+  - English: Multimodal Knowledge Graph Question Answering using an Agentic/ReAct Framework
+  - Danish: Besvarelse af spørgsmål over multimodale vidensgrafer ved hjælp af en agentbaseret/ReAct-tilgang
 - Next steps: `mise run questions:next`, or the *Ready now* table in
   [`questions/README.md`](questions/README.md).
 
@@ -144,8 +146,10 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
 - Own implementation vs. building on GRASP: [Open: [AG-01](questions/AG-01-own-agent-vs-grasp.md)]. Leaning towards an own
   implementation, to learn more.
 - Framework or loop implementation: [Open: [AG-03](questions/AG-03-agent-framework.md)].
-- Model: Gemma on the DTU HPC, believed to be Gemma 4, about 29B [Tentative, [D-010](decisions.md#d-010)].
-  Capabilities and setup: [Open: [AG-04](questions/AG-04-gemma-hpc.md)].
+- Model: served by DTU CampusAI (OpenAI-compatible API, DTU VPN only) [Tentative, [D-019](decisions.md#d-019)].
+  Available: Qwen3.8-27B (`chat`, `chat:think`, 224K context, tools), Gemma 4 E4B
+  (`vision`, image input), BGE-M3 (`embed`), BGE reranker v2-m3 (`rerank`). Which model
+  runs the agent and how images are handled: [Open: [AG-04](questions/AG-04-gemma-hpc.md)].
 - Planned configurations: oracle (entity named in the text), vision only, index only,
   and both [Tentative; Open: [AG-05](questions/AG-05-experiment-configurations.md)].
 

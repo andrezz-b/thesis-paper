@@ -23,7 +23,7 @@ Decides whether there is one stack or two, and what can be reused.
 - The [POC](https://github.com/andrezz-b/thesis-dataset-poc) is JavaScript only
   (Node 24, ESM, explicitly "no Python"), using `wikibase-sdk`, Qdrant and
   `@huggingface/transformers`.
-- The agent is likely Python (HPC tooling, GRASP and most KGQA code are Python;
+- The agent is likely Python (the OpenAI-compatible CampusAI API, GRASP and most KGQA code are Python;
   [AG-01](AG-01-own-agent-vs-grasp.md)).
 
 ## Resolution

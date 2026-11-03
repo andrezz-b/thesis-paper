@@ -40,7 +40,8 @@
   \fi
 }
 
-\title{Project Plan\\[0.5em]\large \placeholder{Working title: to be decided}}
+\title{Project Plan\\[0.5em]\large Multimodal Knowledge Graph
+Question Answering\\ using an Agentic/ReAct Framework}
 \author{Andrej Bozic, s243167}
 \date{Draft, version 1 --- \today}
 
@@ -87,7 +88,8 @@ plan? Is bullet point version fine?}
       \item builds a ReAct-style agent that grounds the image, i.e.\
         identifies the depicted Wikidata entity (with its own vision and/or
         the image index), and generates SPARQL over Wikidata, running an
-        open-weight model (currently planned: Gemma) on the DTU HPC cluster;
+        open-weight model served by DTU CampusAI (currently planned:
+        Qwen3.8-27B);
       \item evaluates the agent on the dataset by executing the predicted
         and the gold queries and comparing their results.
     \end{enumerate}
@@ -233,7 +235,8 @@ entirely connected to an individual project. Could it be left out?}
   \item design and implement a ReAct-style agent with Wikidata tools: SPARQL
     execution, entity and property search, schema exploration and image
     search;
-  \item Use open-weight LLMs deployed on the DTU HPC cluster through APIs;
+  \item Use open-weight LLMs served by DTU CampusAI through its
+    OpenAI-compatible API;
   \item design an execution-based evaluation with baselines and ablations,
     and analyse errors by question type, number of hops and grounding
     failure;
@@ -262,7 +265,7 @@ development with experiments. Writing happens alongside each phase.
   \item \textbf{Assumptions:}
     \begin{itemize}
       \item A small agent prototype on the proof-of-concept examples is
-        built in December to test the model setup on the HPC cluster early.
+        built in December to test the model setup on CampusAI early.
         It is limited to about one week of effort; the main agent work starts
         after the dataset freeze.
       \item Work continues at a reduced pace between Christmas and New Year.
@@ -273,7 +276,8 @@ development with experiments. Writing happens alongside each phase.
       \item The test split is only used after tuning on the dev split has
         ended (26 February 2027).
       \item Experiment configurations are scripted and tested on the dev
-        split before the experiments start; waiting times on the HPC cluster
+        split before the experiments start; waiting times and rate
+        limits on CampusAI
         are the main schedule risk.
       \item The buffer at the end includes the Easter holidays (25--29 March
         2027). If the

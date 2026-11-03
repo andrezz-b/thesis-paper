@@ -15,7 +15,7 @@ Which factors are varied in ablation studies?
 
 ## Why it matters
 
-Ablations support the research questions ([FR-01](FR-01-research-questions.md)), but cost compute time on the HPC.
+Ablations support the research questions ([FR-01](FR-01-research-questions.md)), but cost compute time on CampusAI.
 
 ## Notes
 

@@ -29,7 +29,7 @@ Options (claims to verify):
 - **QLever Wikidata endpoint (University of Freiburg):** very fast for large
   aggregates; used by GRASP and M³-VQA; check update frequency and whether a fixed
   snapshot can be referenced.
-- **Local dump (e.g. own QLever instance on the HPC):** fully reproducible; heavy
+- **Local dump (e.g. own QLever instance):** fully reproducible; heavy
   (the full dump is billions of triples).
 
 Whatever is chosen, gold results should be frozen with a date ([DS-08](DS-08-gold-answers.md)).

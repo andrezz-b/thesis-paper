@@ -2,7 +2,7 @@
 id: FR-02
 title: What is the thesis title?
 area: framing
-status: open
+status: decided
 phase: dataset
 priority: medium
 depends_on: [FR-01]
@@ -23,6 +23,9 @@ Needed for the thesis front matter (`thesis/Setup/Statics.tex`) and the project 
 - The title has to be approved; the user adds it once approved. Agents must not invent
   or fill in a title.
 
+- 2026-11-03: The user supplied the title and confirmed it (see [D-018](../decisions.md#d-018)); filled into
+  `thesis/Setup/Statics.tex` and `plan/main.tex`.
+
 ## Resolution
 
-_Not resolved yet._
+Title set; English and Danish versions in [D-018](../decisions.md#d-018).
