@@ -27,7 +27,7 @@
   colback=orange!8,
   colframe=orange!70!black,
   fonttitle=\bfseries\small,
-  title={Question for supervisor},
+  title={Question},
   left=4pt,
   right=4pt,
   top=3pt,
@@ -41,16 +41,16 @@
 }
 
 \title{Project Plan\\[0.5em]\large \placeholder{Working title: to be decided}}
-\author{\placeholder{Author name, study number}}
+\author{Andrej Bozic, s243167}
 \date{Draft, version 1 --- \today}
 
 \begin{document}
 \maketitle
 
 \begin{itemize}
-  \item \textbf{Supervisor:} \placeholder{Supervisor (and co-supervisor)}
-  \item \textbf{Study line:} \placeholder{Study line}
-  \item \textbf{ECTS:} \placeholder{30}
+  \item \textbf{Supervisor:} Finn Årup Nielsen
+  \item \textbf{Study line:} Computer Science and Engineering
+  \item \textbf{ECTS:} 30
   \item \textbf{Period:} 2 November 2026 -- 2 April 2027
 \end{itemize}
 
@@ -96,8 +96,7 @@ plan? Is bullet point version fine?}
     evaluation-only data (dev and test splits, no train split).
   \item \textbf{Out of scope:} tools that work across knowledge graphs;
     training or fine-tuning models; paid model APIs.
-  \item \textbf{Stretch goal:} questions with several images, only if time
-    allows.
+  \item \textbf{Stretch goal:} questions with several images
 \end{itemize}
 
 \section{Research questions}
@@ -172,7 +171,7 @@ of a research question?}
     \begin{itemize}
       \item The open problem of multimodal question answering over knowledge
         graphs is delimited to Wikidata, single images and no fine-tuning.
-      \item Open-weight models on shared university hardware are used
+      \item Open-weight models on university hardware are used
         instead of commercial APIs, and the dataset uses openly licensed
         images with proper attribution.
     \end{itemize}
@@ -221,8 +220,6 @@ entirely connected to an individual project. Could it be left out?}
 
 \subsection{Project-specific learning objectives}
 
-By the end of the project, the student will be able to:
-
 \begin{enumerate}
   \item review and position research on knowledge-based visual question
     answering and agentic text-to-SPARQL;
@@ -236,7 +233,7 @@ By the end of the project, the student will be able to:
   \item design and implement a ReAct-style agent with Wikidata tools: SPARQL
     execution, entity and property search, schema exploration and image
     search;
-  \item deploy and run open-weight LLMs on the DTU HPC cluster;
+  \item Use open-weight LLMs deployed on the DTU HPC cluster through APIs;
   \item design an execution-based evaluation with baselines and ablations,
     and analyse errors by question type, number of hops and grounding
     failure;
@@ -245,6 +242,7 @@ By the end of the project, the student will be able to:
     the results generalise.
 \end{enumerate}
 
+\supervisorq{Is 5. ok?}
 \section{Timeline}
 
 The planned schedule is shown in Figure~\ref{fig:gantt}. The project runs in
@@ -287,6 +285,8 @@ development with experiments. Writing happens alongside each phase.
 \supervisorq{Should the timeline cover the whole project period from the
   start (2 November 2026), or start after the hand-in of the project plan?
 The current draft covers the whole period.}
+\supervisorq{Do we know how much usage CampusAI gets? Could I run
+into some limitations here?}
 
 \begin{landscape}
   \begin{figure}[p]
