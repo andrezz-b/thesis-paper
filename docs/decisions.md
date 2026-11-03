@@ -95,7 +95,7 @@ files).
 
 ## <a id="d-010"></a>D-010 (2026-10-29): Gemma on the DTU HPC, no paid APIs
 
-- **Status:** tentative
+- **Status:** superseded by [D-019](#d-019)
 - **Decision:** Use the Gemma model running on the university HPC cluster (believed to
   be Gemma 4, about 29B). No API credits are planned.
 - **Rationale:** Available to the user without cost. Exact version and capabilities
@@ -123,7 +123,7 @@ files).
 
 ## <a id="d-013"></a>D-013 (2026-10-29): Timeline
 
-- **Status:** tentative
+- **Status:** superseded by [D-015](#d-015)
 - **Decision:** Start 2026-11-02, hand-in 2027-04-02 (both fixed). Dataset finished
   by mid-January 2027 (personal deadline, so that the agent work fits before the
   hand-in).
@@ -144,3 +144,73 @@ files).
   research notes, and their front matter makes dependencies and the next steps
   visible.
 - **Related:** `.opencode/skills/thesis-description/SKILL.md`
+
+## <a id="d-015"></a>D-015 (2026-10-30): Timeline v1 (project plan)
+
+- **Status:** tentative
+- **Decision:** The timeline of the first project plan (`plan/gantt.tex`):
+  - milestones: project plan hand-in 2026-12-02; dataset frozen 2027-01-22;
+    results frozen 2027-03-16; full draft to the supervisor 2027-03-22; hand-in
+    2027-04-02 (fixed);
+  - a small agent prototype on the POC examples (about one week of effort,
+    2026-12-07 to 2026-12-18) to test the model setup on the HPC early; the main
+    agent work starts after the dataset freeze;
+  - a pilot generation and review round 2026-12-14 to 2026-12-22, full generation
+    and review 2027-01-04 to 2027-01-22;
+  - tuning on the dev split ends 2027-02-26; the test split is only used after that.
+- **Rationale:** Moves the dataset freeze from mid-January ([D-013](#d-013)) to 2027-01-22
+  for one more week of buffer. The user works a part-time job 3 days per week (can be
+  reduced to 2), works at a reduced pace between Christmas and New Year
+  (2026-12-23 to 2027-01-01), and the final buffer includes the Easter holidays
+  (2027-03-25 to 2027-03-29). If the schedule slips, the stretch goal (multi-image
+  questions, [D-009](#d-009)) is dropped first. The prototype and the dev/test rule came up in
+  planning and review of the project plan.
+- **Related:** [D-013](#d-013), [D-008](#d-008), [D-009](#d-009), [AG-04](questions/AG-04-gemma-hpc.md), [DS-09](questions/DS-09-generation-pipeline.md), [DS-11](questions/DS-11-split-proportions.md), `plan/gantt.tex`
+
+## <a id="d-016"></a>D-016 (2026-10-30): LLM-assisted, manually curated questions
+
+- **Status:** decided
+- **Decision:** The dataset is not generated automatically by an LLM, and the Gemma
+  model on the HPC is not used for it.
+  - Any available LLM (also through a chat interface) is asked for question ideas.
+    The prompt states the scope: question types, difficulty and similar details.
+  - The student refines the ideas into items (question, gold SPARQL, answer, image)
+    only if they meet the acceptance criteria (working list in [DS-09](questions/DS-09-generation-pipeline.md)).
+  - The prompts and models used are logged for reproducibility.
+  - The "generation" phases in [D-015](#d-015) now mean curation; the dates stay the same.
+- **Rationale:** The user's intended method: LLMs as a source of ideas, with
+  quality controlled by manual curation against explicit criteria.
+- **Related:** [DS-09](questions/DS-09-generation-pipeline.md), [DS-10](questions/DS-10-dataset-size.md), [AG-04](questions/AG-04-gemma-hpc.md), [D-015](#d-015)
+
+## <a id="d-017"></a>D-017 (2026-10-30): The dataset is a contribution, not a research question
+
+- **Status:** tentative
+- **Decision:** The evaluation dataset is presented as a contribution of the thesis.
+  The research questions are only about the agent (RQ1 agent, RQ2 grounding, RQ3
+  difficulty; see [FR-01](questions/FR-01-research-questions.md)). The dataset construction has no hypothesis.
+- **Rationale:** With manual curation ([D-016](#d-016)), building the dataset is a method and
+  not something that is measured. Tentative until the supervisor answers the
+  question about this in the project plan.
+- **Related:** [FR-01](questions/FR-01-research-questions.md), [D-016](#d-016)
+
+## <a id="d-018"></a>D-018 (2026-11-03): Thesis title
+
+- **Status:** decided
+- **Decision:** The title is
+  - English: "Multimodal Knowledge Graph Question Answering using an Agentic/ReAct Framework";
+  - Danish: "Besvarelse af spørgsmål over multimodale vidensgrafer ved hjælp af en agentbaseret/ReAct-tilgang".
+- **Rationale:** Given by the user (2026-11-03). Confirmed by the user for use in the
+  thesis and project plan.
+- **Related:** [FR-02](questions/FR-02-thesis-title.md)
+
+## <a id="d-019"></a>D-019 (2026-11-03): Use DTU CampusAI instead of "Gemma on the HPC"
+
+- **Status:** tentative
+- **Decision:** The LLM deployment at DTU is called CampusAI
+  (https://campusai.compute.dtu.dk/models/, only reachable through the DTU VPN). Models
+  are used through its OpenAI-compatible API with a key from the CampusAI console. No
+  paid APIs (as in [D-010](#d-010)). Which model runs the agent is not decided yet ([AG-04](questions/AG-04-gemma-hpc.md)).
+- **Rationale:** The catalog shown by the user (2026-11-03) lists Qwen3.8-27B as the
+  flagship chat model and Gemma 4 E4B only as the image-input model, so "Gemma, about
+  29B" from [D-010](#d-010) does not match. Tentative until the model choice is made.
+- **Related:** [D-010](#d-010), [AG-04](questions/AG-04-gemma-hpc.md), [AG-05](questions/AG-05-experiment-configurations.md)

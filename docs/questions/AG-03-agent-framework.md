@@ -22,8 +22,8 @@ logged.
 ## Notes
 
 - The user has no preference yet.
-- Depends on how the model is served on the HPC ([AG-04](AG-04-gemma-hpc.md)), e.g. whether there is an
-  OpenAI-compatible API.
+- Depends on how the model is served on CampusAI ([AG-04](AG-04-gemma-hpc.md)), e.g. whether the OpenAI-compatible
+  API supports tool calling (CampusAI lists tools as supported).
 
 ## Resolution
 

@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**36 questions:** 36 open, 0 researching, 0 decided, 0 dropped.
+**36 questions:** 32 open, 3 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -21,7 +21,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | --- | --- | --- | --- | --- | --- |
 | [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | dataset | high | open | [DS-01](DS-01-question-types.md) |
 | [DS-02](DS-02-wikidata-subset.md) | Which part of Wikidata is well connected enough to build the dataset on? | dataset | high | open | [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [IX-01](IX-01-distractor-strategy.md) |
-| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | dataset | high | open | [AG-05](AG-05-experiment-configurations.md) |
+| [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | dataset | high | researching | [AG-05](AG-05-experiment-configurations.md) |
 | [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | dataset | high | open | [DS-08](DS-08-gold-answers.md), [EV-01](EV-01-metrics.md) |
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | dataset | high | open | [DS-08](DS-08-gold-answers.md) |
 | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | open | [FR-01](FR-01-research-questions.md) |
@@ -39,13 +39,12 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | ID | Question | Phase | Priority | Waiting on |
 | --- | --- | --- | --- | --- |
 | [DS-01](DS-01-question-types.md) | Which question types will the dataset contain? | dataset | high | [LIT-02](LIT-02-question-type-taxonomy.md) |
-| [DS-09](DS-09-generation-pipeline.md) | How are questions generated and checked (LLM + human review)? | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) |
+| [DS-09](DS-09-generation-pipeline.md) | How are question ideas collected and curated into items? | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) |
 | [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) |
 | [IX-01](IX-01-distractor-strategy.md) | How are distractor images chosen for the image index? | dataset | high | [DS-02](DS-02-wikidata-subset.md) |
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | dataset | medium | [DS-09](DS-09-generation-pipeline.md) |
 | [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) |
 | [DS-03](DS-03-hop-depth.md) | What is the maximum number of hops in a question? | dataset | medium | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) |
-| [FR-02](FR-02-thesis-title.md) | What is the thesis title? | dataset | medium | [FR-01](FR-01-research-questions.md) |
 | [IX-02](IX-02-distractor-count.md) | How many distractors should the index contain? | dataset | medium | [IX-01](IX-01-distractor-strategy.md) |
 | [RP-03](RP-03-dataset-format.md) | What is the dataset record format? | dataset | medium | [DS-01](DS-01-question-types.md), [DS-08](DS-08-gold-answers.md) |
 | [RP-04](RP-04-repo-structure.md) | How is the new dataset repository structured? | dataset | medium | [DS-09](DS-09-generation-pipeline.md), [RP-02](RP-02-languages.md) |
@@ -63,7 +62,9 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 
 ## Resolved
 
-_Nothing resolved yet._
+| ID | Question | Status |
+| --- | --- | --- |
+| [FR-02](FR-02-thesis-title.md) | What is the thesis title? | decided |
 
 ## By area
 
@@ -71,8 +72,8 @@ _Nothing resolved yet._
 
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
-| [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | open | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | [FR-02](FR-02-thesis-title.md), [DS-01](DS-01-question-types.md), [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
-| [FR-02](FR-02-thesis-title.md) | What is the thesis title? | open | dataset | medium | [FR-01](FR-01-research-questions.md) | – |
+| [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | researching | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | [FR-02](FR-02-thesis-title.md), [DS-01](DS-01-question-types.md), [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
+| [FR-02](FR-02-thesis-title.md) | What is the thesis title? | decided | dataset | medium | [FR-01](FR-01-research-questions.md) | – |
 
 ### Literature (LIT)
 
@@ -95,7 +96,7 @@ _Nothing resolved yet._
 | [DS-06](DS-06-multi-image-questions.md) | How would multi-image questions work (stretch goal)? | open | dataset | low | [DS-01](DS-01-question-types.md), [DS-05](DS-05-image-role.md) | – |
 | [DS-07](DS-07-related-entity-images.md) | Can the image show an entity other than the subject of the question? | open | dataset | low | [DS-05](DS-05-image-role.md) | – |
 | [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | open | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) | [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
-| [DS-09](DS-09-generation-pipeline.md) | How are questions generated and checked (LLM + human review)? | open | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) | [DS-10](DS-10-dataset-size.md), [RP-04](RP-04-repo-structure.md) |
+| [DS-09](DS-09-generation-pipeline.md) | How are question ideas collected and curated into items? | researching | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) | [DS-10](DS-10-dataset-size.md), [RP-04](RP-04-repo-structure.md) |
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | open | dataset | medium | [DS-09](DS-09-generation-pipeline.md) | – |
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
@@ -116,7 +117,7 @@ _Nothing resolved yet._
 | [AG-01](AG-01-own-agent-vs-grasp.md) | Build an own agent or build on top of GRASP? | open | agent | medium | – | [AG-02](AG-02-tool-set.md), [AG-03](AG-03-agent-framework.md), [RP-02](RP-02-languages.md), [EV-02](EV-02-baselines.md) |
 | [AG-02](AG-02-tool-set.md) | Which tools does the agent get? | open | agent | high | [AG-01](AG-01-own-agent-vs-grasp.md) | [EV-03](EV-03-ablations.md) |
 | [AG-03](AG-03-agent-framework.md) | Which agent framework or loop implementation is used? | open | agent | low | [AG-01](AG-01-own-agent-vs-grasp.md) | – |
-| [AG-04](AG-04-gemma-hpc.md) | What exactly does the Gemma setup on the DTU HPC support? | open | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md), [DS-09](DS-09-generation-pipeline.md) |
+| [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | researching | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md) |
 | [AG-05](AG-05-experiment-configurations.md) | Which agent configurations are evaluated? | open | agent | medium | [AG-04](AG-04-gemma-hpc.md) | [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
 
 ### Evaluation (EV)
@@ -164,7 +165,7 @@ flowchart LR
     DS_06["DS-06: How would multi-image questions work (stretch goal)?"]
     DS_07["DS-07: Can the image show an entity other than the subject of the question?"]
     DS_08["DS-08: How are gold queries and gold answers defined, frozen and verified?"]
-    DS_09["DS-09: How are questions generated and checked (LLM + human review)?"]
+    DS_09["DS-09: How are question ideas collected and curated into items?"]
     DS_10["DS-10: How large should the dataset be?"]
     DS_11["DS-11: How is the dataset split into dev and test?"]
     DS_12["DS-12: How are query images selected, and how is leakage prevented?"]
@@ -179,7 +180,7 @@ flowchart LR
     AG_01["AG-01: Build an own agent or build on top of GRASP?"]
     AG_02["AG-02: Which tools does the agent get?"]
     AG_03["AG-03: Which agent framework or loop implementation is used?"]
-    AG_04["AG-04: What exactly does the Gemma setup on the DTU HPC support?"]
+    AG_04["AG-04: Which CampusAI models and setup are used, and what do they support?"]
     AG_05["AG-05: Which agent configurations are evaluated?"]
   end
   subgraph EV["Evaluation"]
@@ -231,7 +232,6 @@ flowchart LR
   AG_02 -.-> EV_03
   AG_04 -.-> AG_03
   AG_04 -.-> AG_05
-  AG_04 -.-> DS_09
   AG_05 -.-> EV_02
   AG_05 -.-> EV_03
   DS_01 -.-> DS_02
@@ -272,6 +272,7 @@ flowchart LR
   classDef resolved fill:#c8e6c9,stroke:#2e7d32,color:#000
   classDef ready fill:#fff59d,stroke:#f9a825,color:#000
   classDef blocked fill:#e0e0e0,stroke:#757575,color:#000
+  class FR_02 resolved
   class LIT_02,DS_02,AG_04,LIT_03,DS_04,LIT_01,RP_01,RP_02,DS_05,DS_12,LIT_04,IX_03,IX_04,AG_01 ready
-  class DS_01,DS_09,DS_08,IX_01,DS_10,FR_01,DS_03,FR_02,IX_02,RP_03,RP_04,DS_06,DS_07,DS_11,RP_05,RP_06,AG_02,AG_05,EV_01,EV_02,AG_03,EV_03 blocked
+  class DS_01,DS_09,DS_08,IX_01,DS_10,FR_01,DS_03,IX_02,RP_03,RP_04,DS_06,DS_07,DS_11,RP_05,RP_06,AG_02,AG_05,EV_01,EV_02,AG_03,EV_03 blocked
 ```

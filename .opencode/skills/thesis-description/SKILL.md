@@ -59,7 +59,7 @@ id: DS-02            # <PREFIX>-<NN>; prefix by area: FR framing, LIT literature
 title: Which part of Wikidata is well connected enough?   # phrased as a question
 area: dataset        # framing | literature | dataset | index | agent | evaluation | repo
 status: open         # open | researching | decided | dropped
-phase: dataset       # dataset (deadline: mid-Jan 2027) | agent | writing
+phase: dataset       # dataset (deadline: dataset freeze 2027-01-22) | agent | writing
 priority: high       # high | medium | low
 depends_on: [DS-01]  # HARD: cannot be settled before these are decided/dropped
 informs: [IX-01]     # SOFT: the answer shapes these

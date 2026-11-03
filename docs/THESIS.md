@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-10-29._
+_Last reviewed: 2026-11-03._
 
 ## TL;DR
 
@@ -31,12 +31,21 @@ it.
 | Milestone | Date | Status |
 | --- | --- | --- |
 | Start | 2026-11-02 | [Decided] |
-| Dataset finished | mid-January 2027 | [Tentative] personal deadline, [D-013](decisions.md#d-013) |
-| Agent and experiments | after the dataset, until hand-in | [Tentative] personal plan |
+| Project plan hand-in | 2026-12-02 | [Tentative], [D-015](decisions.md#d-015) |
+| Agent prototype on the POC examples (about one week) | 2026-12-07 to 2026-12-18 | [Tentative], [D-015](decisions.md#d-015) |
+| Dataset frozen | 2027-01-22 | [Tentative] personal deadline, [D-015](decisions.md#d-015) |
+| Results frozen | 2027-03-16 | [Tentative], [D-015](decisions.md#d-015) |
+| Full draft to supervisor | 2027-03-22 | [Tentative], [D-015](decisions.md#d-015) |
 | Hand-in | 2027-04-02 | [Decided] |
 
 - Current phase: preparation. Research for the dataset is starting.
-- Title: [Open: [FR-02](questions/FR-02-thesis-title.md)]. It needs approval; do not invent one.
+- Capacity: the user works a part-time job 3 days per week (can be reduced to 2);
+  reduced pace 2026-12-23 to 2027-01-01; the final buffer includes Easter
+  (2027-03-25 to 2027-03-29). If the schedule slips, the stretch goal is dropped first.
+  Full schedule: `plan/gantt.tex`.
+- Title [Decided, [D-018](decisions.md#d-018)]:
+  - English: Multimodal Knowledge Graph Question Answering using an Agentic/ReAct Framework
+  - Danish: Besvarelse af spørgsmål over multimodale vidensgrafer ved hjælp af en agentbaseret/ReAct-tilgang
 - Next steps: `mise run questions:next`, or the *Ready now* table in
   [`questions/README.md`](questions/README.md).
 
@@ -44,7 +53,10 @@ it.
 
 - Framing: **agentic text-to-SPARQL extended to images** [Decided, [D-001](decisions.md#d-001)]. The dataset
   is built first because evaluation data is needed [Decided, [D-002](decisions.md#d-002)].
-- Research questions and hypotheses: [Open: [FR-01](questions/FR-01-research-questions.md)].
+- Research questions and hypotheses: a draft (RQ1 agent, RQ2 grounding, RQ3
+  difficulty, with H1–H3) is in the project plan, awaiting supervisor feedback
+  [Tentative; Open: [FR-01](questions/FR-01-research-questions.md)]. The dataset is a contribution, not a research
+  question [Tentative, [D-017](decisions.md#d-017)].
 - Positioning against the closest work (M³-VQA, ReasonVQA, KVQA, InfoSeek, ...):
   [Open: [LIT-01](questions/LIT-01-existing-image-sparql-benchmarks.md)]. See [`related-work.md`](related-work.md).
 
@@ -100,7 +112,10 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
     count [Tentative].
   - To be formalised from the literature: [Open: [LIT-02](questions/LIT-02-question-type-taxonomy.md), [DS-01](questions/DS-01-question-types.md)].
 - Construction:
-  - LLM-generated with human checking [Tentative]. Pipeline: [Open: [DS-09](questions/DS-09-generation-pipeline.md)].
+  - LLM-assisted, manually curated: any available LLM suggests question ideas from
+    prompts that state the scope (question types, difficulty); ideas become items
+    only if they meet the acceptance criteria; prompts and models used are logged
+    [Decided, [D-016](decisions.md#d-016)]. Criteria and procedure: [Tentative; Open: [DS-09](questions/DS-09-generation-pipeline.md)].
   - Size: depends on progress [Open: [DS-10](questions/DS-10-dataset-size.md)].
 - Query images:
   - Wikimedia Commons photos of the same entity, different from the image in the
@@ -131,8 +146,10 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
 - Own implementation vs. building on GRASP: [Open: [AG-01](questions/AG-01-own-agent-vs-grasp.md)]. Leaning towards an own
   implementation, to learn more.
 - Framework or loop implementation: [Open: [AG-03](questions/AG-03-agent-framework.md)].
-- Model: Gemma on the DTU HPC, believed to be Gemma 4, about 29B [Tentative, [D-010](decisions.md#d-010)].
-  Capabilities and setup: [Open: [AG-04](questions/AG-04-gemma-hpc.md)].
+- Model: served by DTU CampusAI (OpenAI-compatible API, DTU VPN only) [Tentative, [D-019](decisions.md#d-019)].
+  Available: Qwen3.8-27B (`chat`, `chat:think`, 224K context, tools), Gemma 4 E4B
+  (`vision`, image input), BGE-M3 (`embed`), BGE reranker v2-m3 (`rerank`). Which model
+  runs the agent and how images are handled: [Open: [AG-04](questions/AG-04-gemma-hpc.md)].
 - Planned configurations: oracle (entity named in the text), vision only, index only,
   and both [Tentative; Open: [AG-05](questions/AG-05-experiment-configurations.md)].
 
@@ -154,7 +171,7 @@ still needs checking.
 | Artifact | Location | Notes |
 | --- | --- | --- |
 | Thesis (LaTeX) | this repo, `thesis/` | DTU template |
-| Project plan | this repo, `plan/` | placeholder content so far |
+| Project plan | this repo, `plan/` | draft v1 ([PR #1](https://github.com/andrezz-b/thesis-paper/pull/1)); title and metadata are placeholders |
 | Published PDFs | https://andrezz-b.github.io/thesis-paper/ | GitHub Pages |
 | Dataset proof of concept | [andrezz-b/thesis-dataset-poc](https://github.com/andrezz-b/thesis-dataset-poc) (local checkout: `../dataset-poc`) | JavaScript (Node 24), Qdrant, CLIP ViT-B/32; 4 hand-made [examples](https://github.com/andrezz-b/thesis-dataset-poc/tree/main/examples) (egg chair, Game Boy, Nokia 3310, ThinkPad), 26 indexed entities each |
 | Dataset repository | not created yet | new repo based on the POC [Decided, [D-012](decisions.md#d-012)]; open: [RP-01](questions/RP-01-image-storage.md) to [RP-06](questions/RP-06-dataset-versioning.md) |

@@ -15,14 +15,16 @@ What is the minimum viable size, and what is the target if things go well?
 
 ## Why it matters
 
-Needs to be large enough for per-type results while fitting the mid-January deadline
-([D-013](../decisions.md#d-013)).
+Needs to be large enough for per-type results while fitting the dataset freeze on
+2027-01-22 ([D-015](../decisions.md#d-015)).
 
 ## Notes
 
 - The user expects this to depend on progress and remaining time.
 - Reference sizes: SPINACH 320 questions; KGVoyager's benchmarks 14–100 questions
   each; WikiVQABench 344 questions.
+- 2026-10-30: The questions are curated manually ([D-016](../decisions.md#d-016)), so the reachable size is
+  limited by curation time and smaller than with automatic generation.
 
 ## Resolution
 
