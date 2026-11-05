@@ -80,9 +80,12 @@ class Candidate:
 def norm_id(raw: str) -> str:
     """Canonical form of a paper ID, for comparing candidates with notes and skipped papers."""
     raw = str(raw or "").strip().lower()
-    raw = re.sub(r"^https?://(www\.)?arxiv\.org/(abs|pdf)/", "arxiv:", raw)
+    raw = re.sub(r"[?#].*$", "", raw)
+    raw = re.sub(r"^https?://(www\.|export\.)?(arxiv|alphaxiv)\.org/(abs|pdf|html|overview)/", "arxiv:", raw)
     raw = re.sub(r"^https?://(dx\.)?doi\.org/", "doi:", raw)
     raw = re.sub(r"\.pdf$", "", raw)
+    raw = re.sub(r"^doi:10\.48550/arxiv\.", "arxiv:", raw)
+    raw = re.sub(r"^10\.48550/arxiv\.", "arxiv:", raw)
     if re.match(r"^\d{4}\.\d{4,5}", raw):
         raw = "arxiv:" + raw
     if re.match(r"^10\.\d{4,9}/", raw):
@@ -112,7 +115,7 @@ def question_files() -> dict[str, Path]:
 
 
 def parse_note(path: Path, errors: list[str]) -> Note | None:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n")
     m = re.match(r"^---\n(.*?)\n---\n(.*)$", text, re.DOTALL)
     if not m:
         errors.append(f"{path.name}: missing YAML front matter")
@@ -134,6 +137,23 @@ def section(body: str, name: str) -> str | None:
     return m.group(1).strip() if m else None
 
 
+def balanced(text: str) -> bool:
+    depth = 0
+    for ch in re.sub(r"\\[{}]", "", text):
+        depth += (ch == "{") - (ch == "}")
+        if depth < 0:
+            return False
+    return depth == 0
+
+
+def template_section_texts() -> dict[str, str]:
+    path = LIT_DIR / "_template.md"
+    if not path.exists():
+        return {}
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n")
+    return {name: section(text, name) or "" for name in SECTIONS}
+
+
 def validate(note: Note, questions: dict[str, Path], errors: list[str]) -> None:
     n, meta = note.path.name, note.meta
     if note.path.stem != note.key:
@@ -152,6 +172,11 @@ def validate(note: Note, questions: dict[str, Path], errors: list[str]) -> None:
     for qid in meta["informs"] if isinstance(meta["informs"], list) else []:
         if qid not in questions:
             errors.append(f"{n}: informs unknown question {qid}")
+    for str_key in ("title", "venue", "url", "pdf", "arxiv", "doi", "s2_id", "code", "data"):
+        if not isinstance(meta[str_key], str):
+            errors.append(f"{n}: {str_key} must be a quoted string (found {type(meta[str_key]).__name__}: {meta[str_key]!r})")
+    if not isinstance(meta["year"], int) or isinstance(meta["year"], bool):
+        errors.append(f"{n}: year must be an integer")
     if not meta["title"]:
         errors.append(f"{n}: empty title")
     if not (meta["url"] or meta["doi"] or meta["arxiv"]):
@@ -162,6 +187,8 @@ def validate(note: Note, questions: dict[str, Path], errors: list[str]) -> None:
         errors.append(f"{n}: bibtex is missing or not a BibTeX entry")
     elif bm.group(1) != note.key:
         errors.append(f"{n}: BibTeX key '{bm.group(1)}' must equal the note key '{note.key}'")
+    elif not balanced(bib) or not re.search(r"\btitle\s*=", bib, re.IGNORECASE):
+        errors.append(f"{n}: BibTeX has unbalanced braces or no title field")
 
     for i, cand in enumerate(meta["candidates"] if isinstance(meta["candidates"], list) else []):
         if not isinstance(cand, dict) or not cand.get("id") or not cand.get("title"):
@@ -178,10 +205,13 @@ def validate(note: Note, questions: dict[str, Path], errors: list[str]) -> None:
             errors.append(f"{n}: reviewed notes need a relevance")
         if not meta["reviewed"]:
             errors.append(f"{n}: reviewed notes need a reviewed date")
+        template_sections = template_section_texts()
         for name in REVIEWED_NEEDS_CONTENT:
             content = section(note.body, name)
             if not content:
                 errors.append(f"{n}: reviewed note has an empty '## {name}' section")
+            elif content == template_sections.get(name):
+                errors.append(f"{n}: reviewed note still has the template text in '## {name}'")
 
 
 def load(errors: list[str]) -> list[Note]:
@@ -201,20 +231,34 @@ def load(errors: list[str]) -> list[Note]:
     questions = question_files()
     for note in notes:
         validate(note, questions, errors)
+    owner: dict[str, str] = {}
+    for note in notes:
+        for pid in note_ids(note.meta):
+            if pid in owner and owner[pid] != note.key:
+                errors.append(f"{note.path.name}: same paper ({pid}) as {owner[pid]}.md; keep one note")
+            owner.setdefault(pid, note.key)
     return notes
 
 
-def load_skipped() -> dict[str, str]:
-    """Map normalised ID -> reason, from table rows of skipped.md."""
+ID_START_RE = re.compile(r"^((arxiv|doi|s2):\S|https?://|10\.\d{4}|\d{4}\.\d{4})", re.IGNORECASE)
+
+
+def load_skipped(errors: list[str]) -> dict[str, str]:
+    """Map normalised ID -> reason, from the table rows of skipped.md."""
     skipped: dict[str, str] = {}
     if not SKIPPED_FILE.exists():
         return skipped
-    for line in SKIPPED_FILE.read_text(encoding="utf-8").splitlines():
+    for n, line in enumerate(SKIPPED_FILE.read_text(encoding="utf-8").splitlines(), 1):
         if not line.startswith("|"):
             continue
-        cells = [c.strip().strip("`") for c in line.strip().strip("|").split("|")]
-        if cells and re.match(r"^((arxiv|doi|s2):|https?://|10\.\d|\d{4}\.\d)", cells[0], re.IGNORECASE):
-            skipped[norm_id(cells[0])] = cells[-1] if len(cells) > 1 else ""
+        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+        first = re.sub(r"^\[([^\]]*)\]\([^)]*\)$", r"\1", cells[0]).strip("`").strip()
+        if first.lower() == "id" or re.fullmatch(r"[-: ]*", first):
+            continue
+        if not ID_START_RE.match(first):
+            errors.append(f"skipped.md:{n}: first cell '{first}' is not a paper ID (use arXiv:..., DOI:... or S2:...)")
+            continue
+        skipped[norm_id(first)] = cells[-1].replace("\\|", "|") if len(cells) > 1 else ""
     return skipped
 
 
@@ -319,12 +363,12 @@ def main() -> int:
 
     errors: list[str] = []
     notes = load(errors)
+    skipped = load_skipped(errors)
     if errors:
         print("Literature notes have errors:", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
         return 1
-    skipped = load_skipped()
 
     if args.command == "queue":
         queue = build_queue(notes, skipped)

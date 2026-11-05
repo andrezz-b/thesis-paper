@@ -20,7 +20,19 @@ permissions:
     resource: "*"
     effect: allow
   - action: shell
-    resource: "uv run scripts/papers.py *"
+    resource: "uv run scripts/papers.py meta *"
+    effect: allow
+  - action: shell
+    resource: "uv run scripts/papers.py search *"
+    effect: allow
+  - action: shell
+    resource: "uv run scripts/papers.py refs *"
+    effect: allow
+  - action: shell
+    resource: "uv run scripts/papers.py cites *"
+    effect: allow
+  - action: shell
+    resource: "uv run scripts/papers.py recs *"
     effect: allow
   - action: shell
     resource: "uv run scripts/literature.py queue"
@@ -45,15 +57,19 @@ section.
    agentic text-to-SPARQL system, the image-grounded dataset, the image index, or the
    evaluation. Relevant means a benchmark, method, metric, or analysis the thesis would
    use, contrast with, or cite.
-2. Collect candidates with the script (each call is slow when throttled; do not repeat calls):
+2. Collect candidates with the script (each call is slow when throttled; do not repeat
+   calls; abstracts are included by default). Only `meta`, `search`, `refs`, `cites`, `recs`
+   are allowed; you cannot create notes:
    - `uv run scripts/papers.py cites <id> --top 25` newer papers that cite the seed, with
      the sentence in which they cite it
    - `uv run scripts/papers.py refs <id> --top 25` papers the seed cites
    - `uv run scripts/papers.py recs <id> --top 15`
-   Add `--abstracts` when a title is not enough to judge. Use `--sort year` for `cites` if
-   the seed is old and the default list is dominated by generic papers.
+   Use `--sort year` for `cites` if the seed is old and the default list is dominated by
+   generic papers. If a call fails because of throttling or a 404, report it under
+   "Problems" with the script's wording; never conclude from it that the paper does not exist.
 3. Remove what is already known: run `uv run scripts/literature.py queue` and
-   `grep -ril "<arxiv id or distinctive title words>" docs/` for each shortlisted paper;
+   use the `grep` tool (case-insensitive) on `docs/` for the arXiv ID and distinctive title
+   words of each shortlisted paper;
    drop anything that has a note, is in `docs/literature/skipped.md`, or is already in
    `docs/related-work.md` (mention those in "Already known" instead).
 4. Rank. Prefer: (1) papers that fit several question IDs, (2) benchmarks or datasets with

@@ -28,38 +28,51 @@ correctly from its note alone. Accurate beats complete; say "not stated in the p
 3. **Never copy BibTeX into `thesis/bibliography.bib`.** The entry stays in the note's
    front matter; it is added to the `.bib` only when the thesis actually cites the paper.
 4. **Metadata is checked, not trusted.** The BibTeX and metadata come from the script
-   (DBLP, doi.org or Semantic Scholar). Compare title, authors and year with the paper's
-   first page. If the script says the BibTeX was "generated", say so to the user.
+   (doi.org, DBLP, Semantic Scholar, arXiv). Compare title, authors and year with the
+   paper's first page. **Show the user every `warning:` the script printed** (generated
+   BibTeX, differing titles, abbreviated authors, Semantic Scholar unavailable). Any field the
+   script cannot supply comes from the paper itself or from the user, never from memory;
+   ask the user when in doubt (they can supply metadata or a `.bib` entry).
 5. **Do not set `relevance`, `status: reviewed` or `informs` without the user's
    agreement.** Propose, then wait.
-6. **Do not change `docs/` other than `docs/literature/`.** Thesis-level consequences go
-   through `thesis-description` (step 5).
+6. **Only edit files in `docs/literature/`** (notes and `skipped.md`). Everything else in
+   `docs/` is changed via `thesis-description` (step 5).
 7. Write in English, concisely.
 
 ## Tools
 
 ```bash
 uv run scripts/papers.py meta   <id>             # metadata, abstract, open-access PDF link
+uv run scripts/papers.py search <title words>    # find the ID of a paper (e.g. from a local PDF)
 uv run scripts/papers.py bibtex <id>             # BibTeX with the note key
 uv run scripts/papers.py stub   <id>             # create docs/literature/<key>.md (never overwrites)
-uv run scripts/papers.py refs|cites|recs <id> [--top N] [--sort influence|year|citations] [--abstracts]
+uv run scripts/papers.py stub --title T --authors "A; B" --year Y --url U [--venue --doi --arxiv --pdf --bibtex-file F]
+                                                 # manual note, or override looked-up values
+uv run scripts/papers.py refs|cites|recs <id> [--top N] [--sort influence|year|citations]
 mise run lit            # regenerate the index
 mise run lit:check      # validate notes and index
 mise run lit:queue      # print the reading queue
 ```
 
-`<id>` is an arXiv ID, DOI, Semantic Scholar ID or URL. Semantic Scholar is throttled
-without a key (the script retries on its own; `S2_API_KEY` raises the limit). If a lookup
-fails, say so; do not fill the gap from memory.
+`<id>` is an arXiv ID, DOI, Semantic Scholar ID or URL (arxiv.org abs/pdf/html links with
+versions are fine). Semantic Scholar is throttled without a key (the script retries on its
+own; `S2_API_KEY` raises the limit). A failed lookup is **not** evidence the paper does not
+exist: say what failed, retry later, or fall back to the manual `stub` with values from the
+paper or the user. Do not fill the gap from memory.
 
 ## Procedure
 
 ### 1. Capture
 
-1. Resolve the paper: `uv run scripts/papers.py meta <id>`. If `docs/literature/` already
-   has a note for it (same arXiv ID or DOI), continue with that note. Otherwise run
-   `stub`. The note starts as `status: queued`; set it to `reading` when the user is
-   reading it.
+1. Resolve the paper: `uv run scripts/papers.py meta <id>`. If the user gives a local PDF
+   or only a title, read the first page for the exact title and authors and use `search`
+   to find the ID. Then run `stub <id>`; if a note for the same paper exists it says so
+   and changes nothing, so continue with that note. If the lookup fails or the paper is
+   not indexed, ask the user for the missing metadata (or read it from the paper's first
+   page) and use the manual `stub --title ... --authors ... --year ... --url ...`
+   (`--bibtex-file` for a BibTeX entry the user provides). The note starts as
+   `status: queued`; set it to `reading` when the user is reading it. Check the
+   warnings (rule 4).
 2. Get the full text, in this order: `https://arxiv.org/html/<arxiv-id>` (cleanest, use
    `webfetch`), then the open-access PDF link, then a local PDF the user names (or
    `docs/literature/pdf/<key>.pdf`). If only the abstract is reachable (paywall), tell the
@@ -108,7 +121,8 @@ subagent, in the background if the user wants to keep working, with a prompt tha
 the paper's ID and note path, one or two sentences on why it matters for the thesis (from
 `Relevance to the thesis`), and the question IDs it informs. It returns candidates
 (papers it cites, papers citing it, recommendations) as ready-to-paste YAML plus
-suggestions to skip.
+suggestions to skip. It is read-only; you apply its results. Its descriptions of papers are
+based on abstracts or citation sentences only, so treat `why` lines as leads, not facts.
 
 Then, with the user:
 
@@ -146,5 +160,7 @@ the next item in the reading queue is (`mise run lit:queue`).
   reason from `why`. Change no files.
 - **"Explore from this paper"** (no review): run step 4 only; the paper needs a note first
   (`stub`), because candidates are stored in it.
+- **Bare question IDs in `## My notes`** are never auto-linked (`mise run questions` skips
+  that section), so leave the user's text as written.
 - **A pile of paper IDs**: `stub` each (status `queued`) and stop; reviews happen one paper
   at a time.

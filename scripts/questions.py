@@ -388,12 +388,15 @@ def link_refs(
     head, body = split_front_matter(text)
     lines: list[str] = []
     in_fence = False
+    in_user_notes = False  # "## My notes" in docs/literature/ notes belongs to the user: never rewrite
     for line in body.split("\n"):
         stripped = line.lstrip()
+        if stripped.startswith("## "):
+            in_user_notes = stripped.rstrip().lower() == "## my notes"
         if stripped.startswith("```"):
             in_fence = not in_fence
             lines.append(line)
-        elif in_fence or stripped.startswith("#"):
+        elif in_fence or in_user_notes or stripped.startswith("#"):
             lines.append(line)
         else:
             lines.append(TOKEN_RE.sub(repl, line))
