@@ -54,6 +54,10 @@ To check with the people running it:
   experiments (reproducibility), whether the `decision` endpoint is relevant. See [D-019](../decisions.md#d-019).
 - 2026-10-30: Planned to be tested in practice with a small agent prototype on the
   POC examples, 2026-12-07 to 2026-12-18 (about one week of effort, [D-015](../decisions.md#d-015)).
+- 2026-11-04 (supervisor meeting): contact for CampusAI questions: Benjamin Jakobsen
+  (bstja@dtu.dk). To ask: which models and checkpoints are served and whether they
+  are pinned, throttling and rate limits, throughput, availability.
+- 2026-11-05 (user): Benjamin Jakobsen has not been contacted yet.
 
 ## Resolution
 

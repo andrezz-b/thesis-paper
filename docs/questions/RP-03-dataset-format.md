@@ -25,6 +25,8 @@ code.
 - Candidate fields: id, question text, query image reference(s), gold entity QID(s),
   gold SPARQL, gold result with snapshot date, question type label(s), hop count,
   split, attribution.
+- 2026-11-04 (supervisor meeting): question labels (hops, type, others) are to be
+  defined in [DS-14](DS-14-question-labels.md); difficulty in [DS-13](DS-13-difficulty-levels.md).
 
 ## Resolution
 

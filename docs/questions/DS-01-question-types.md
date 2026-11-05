@@ -27,6 +27,8 @@ curation process ([DS-09](DS-09-generation-pipeline.md)) and the record format (
 - Comparison questions need two entities. With one image, the second has to be named
   in the text or come from a second image (multi-image is a stretch goal, [DS-06](DS-06-multi-image-questions.md)).
 - Possibly quotas per type, so results can be reported per type.
+- 2026-11-04 (supervisor meeting): types should be labelled per item ([DS-14](DS-14-question-labels.md)) and
+  cover a difficulty range ([DS-13](DS-13-difficulty-levels.md)).
 
 ## Resolution
 

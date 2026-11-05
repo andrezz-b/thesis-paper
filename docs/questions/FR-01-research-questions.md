@@ -77,6 +77,9 @@ what the evaluation has to show. Also needed for the project plan and the title.
   - The review remarks above still apply to the new RQ3 (old RQ4).
   - The supervisor box in the plan now asks whether presenting the dataset as a
     contribution instead of a research question is fine.
+- 2026-11-04 (supervisor meeting): the question set should span easy, medium and
+  hard, and results should not end up at 100% or 0%. Relevant for RQ3 (difficulty);
+  see [DS-13](DS-13-difficulty-levels.md).
 
 ## Resolution
 

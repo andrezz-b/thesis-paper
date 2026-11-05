@@ -26,6 +26,7 @@ reporting results.
   `manufacturer → founded by → date of birth`).
 - Recognising the entity from the image is an extra grounding step before the first
   hop.
+- 2026-11-04 (supervisor meeting): hop count is one candidate difficulty axis and a label per item; see [DS-13](DS-13-difficulty-levels.md) and [DS-14](DS-14-question-labels.md).
 
 ## Resolution
 
