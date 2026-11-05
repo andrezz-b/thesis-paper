@@ -59,6 +59,9 @@ Run with `mise run <task>`:
 | `questions`                       | Link bare question/decision IDs in `docs/` and regenerate `docs/questions/README.md`. |
 | `questions:check`                 | Validate `docs/` (metadata, links); fail if anything is stale.        |
 | `questions:next`                  | List open questions that are ready to work on.                        |
+| `lit` / `lit:check`               | Regenerate / validate the literature notes index (`docs/literature/README.md`). |
+| `lit:queue`                       | Print the reading queue (suggested papers not yet read or skipped).   |
+| `paper <cmd> <id>`                | Paper lookup: `meta`, `bibtex`, `refs`, `cites`, `recs`, `stub` (`scripts/papers.py`). |
 | `diff <git-ref> [thesis\|plan]`   | latexdiff against a git ref -> `<doc>/build/diff.pdf` (default thesis). The ref must contain `<doc>/main.tex`. |
 | `clean` / `rebuild`               | Remove build artifacts of both documents / clean then build.          |
 | `hooks`                           | Install git hooks (`lefthook install`).                               |
@@ -82,8 +85,17 @@ Run with `mise run <task>`:
   - `questions/` — one file per open question (YAML front matter: status,
     phase, priority, `depends_on`, `informs`); `README.md` there is generated
     by `scripts/questions.py`.
-- `scripts/` — Python helpers (`questions.py`), run with `uv run`.
-- `.opencode/skills/` — project skills (`thesis-description`).
+  - `literature/` — one note per paper (front matter: authors, URL, BibTeX,
+    relevance, `informs` question IDs, follow-up `candidates`; sections: key
+    parts, relevance to the thesis, citable claims, the user's own notes).
+    `README.md` there (reviewed papers, in progress, reading queue) is generated
+    by `scripts/literature.py`; `skipped.md` lists rejected papers.
+- `scripts/` — Python helpers (`questions.py`, `literature.py`, `papers.py`),
+  run with `uv run`. `papers.py` queries Semantic Scholar, DBLP and doi.org
+  (cache in `.cache/`, gitignored; optional `S2_API_KEY` env var).
+- `.opencode/skills/` — project skills (`thesis-description`, `paper-review`).
+- `.opencode/commands/paper.md` — `/paper <id|url|pdf> [explore]` starts a paper review.
+- `.opencode/agents/lit-scout.md` — read-only subagent that finds related papers.
 - `site/` — static GitHub Pages landing page (`index.html`, `style.css`).
 - `.github/` — workflows: `ci.yml` (PRs/branches: fmt, lint, spell, build,
   PDF artifacts), `pages.yml` (push to main: build changed docs, reuse
@@ -101,6 +113,10 @@ Run with `mise run <task>`:
   `thesis-description` skill. Never hand-edit `docs/questions/README.md`
   or the decision anchors; write question/decision IDs bare (`DS-02`,
   `D-007`) and run `mise run questions` to turn them into links.
+- For a paper the user has read or wants to review, use the `paper-review` skill
+  (`/paper`): it writes the note in `docs/literature/`. BibTeX stays in the note;
+  copy it to `thesis/bibliography.bib` only when the thesis cites the paper.
+  Never hand-edit `docs/literature/README.md`; run `mise run lit`.
 - After drafting or editing any `.tex` file, format it: `mise run fmt`.
   (tex-fmt prints pre-existing "negative indent" warnings for
   `thesis/Setup/Settings.tex`; ignore them.)
@@ -108,7 +124,7 @@ Run with `mise run <task>`:
   latexmk re-runs biber automatically when citations change.
 - Before finishing: `mise run fmt:check`, `mise run spell`; optionally
   `mise run lint` (pre-existing template warnings are expected). If `docs/`
-  changed: `mise run questions:check`.
+  changed: `mise run questions:check`; if `docs/literature/` changed: `mise run lit:check`.
 - If a task fails, read the `latexmk`/`chktex`/`typos` output, fix the file
   that was modified, and re-run the task.
 - Do not commit build output (`*/build/`); it is gitignored.

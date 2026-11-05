@@ -14,3 +14,5 @@ pre-commit:
             run: mise x -- typos --force-exclude {staged_files}
           - name: docs
             run: mise run questions:check
+          - name: literature
+            run: mise run lit:check
