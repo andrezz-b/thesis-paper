@@ -3,7 +3,7 @@
 Papers relevant to the thesis, with full titles and links. **Verified** means the
 title and link were checked online (date given); **unverified** means added from
 memory, so check it before citing. Add BibTeX to `thesis/bibliography.bib` only when
-citing.
+citing. Papers that were read in detail have a note in [`literature/`](literature/README.md); link the row to it.
 
 ## Knowledge-based visual question answering over Wikidata (closest work)
 

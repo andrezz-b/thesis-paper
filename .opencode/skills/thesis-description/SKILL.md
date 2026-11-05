@@ -14,6 +14,7 @@ filling it with something plausible.
 | `docs/THESIS.md` | Overview: current state with markers [Decided], [Tentative], [Open: ID], [Stretch] | Edit in place; keep it short; link to questions instead of repeating them |
 | `docs/decisions.md` | Decision log `D-NNN` | **Append only.** Never delete or rewrite; supersede with a new entry |
 | `docs/related-work.md` | Papers with full titles, links, relevance, verification date | Mark `unverified` unless checked online |
+| `docs/literature/` | Per-paper notes written with the `paper-review` skill | Not edited here; link `related-work.md` rows to a note when one exists |
 | `docs/questions/<ID>-<slug>.md` | One open question each, YAML front matter + sections | See schema below |
 | `docs/questions/README.md` | **Generated** index + dependency graph | Never edit by hand; `mise run questions` |
 | `docs/questions/_template.md` | Template for new questions | Copy it |

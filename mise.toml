@@ -65,6 +65,22 @@ run = "uv run scripts/questions.py check"
 description = "List open questions that are ready to work on (all hard dependencies resolved)"
 run = "uv run scripts/questions.py next"
 
+[tasks.lit]
+description = "Regenerate docs/literature/README.md (reviewed papers, in progress, reading queue)"
+run = "uv run scripts/literature.py generate"
+
+[tasks."lit:check"]
+description = "Validate the literature notes in docs/literature/ and check the index is up to date"
+run = "uv run scripts/literature.py check"
+
+[tasks."lit:queue"]
+description = "Print the reading queue (candidates from all notes, minus read and skipped)"
+run = "uv run scripts/literature.py queue"
+
+[tasks.paper]
+description = "Look up a paper: mise run paper <meta|bibtex|refs|cites|recs|stub> <id> [options]"
+run = "uv run scripts/papers.py"
+
 [tasks.wordcount]
 description = "Count words in the thesis with texcount"
 dir = "thesis"
