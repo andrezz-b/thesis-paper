@@ -49,6 +49,8 @@ Determines dataset quality and how many questions can be produced before the dea
   - the gold SPARQL query runs and returns the answer ([DS-08](DS-08-gold-answers.md));
   - natural phrasing;
   - the image licence allows reuse ([D-005](../decisions.md#d-005)).
+- 2026-11-04 (supervisor meeting): ideas should cover a range of difficulty and
+  carry labels ([DS-13](DS-13-difficulty-levels.md), [DS-14](DS-14-question-labels.md)).
 
 ## Resolution
 

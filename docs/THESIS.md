@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-11-03._
+_Last reviewed: 2026-11-05._
 
 ## TL;DR
 
@@ -88,7 +88,9 @@ Stretch goals:
 - The question never names the depicted entity [Decided, [D-004](decisions.md#d-004)].
 - The image mostly shows one entity, which is the subject of the question
   [Tentative; Open: [DS-05](questions/DS-05-image-role.md)]. Images of related entities instead of the subject:
-  [Open: [DS-07](questions/DS-07-related-entity-images.md)].
+  [Open: [DS-07](questions/DS-07-related-entity-images.md)]. More complex images with other things in them
+  (e.g. "the object the person holds in their right hand") are an idea from the supervisor
+  meeting, not a decision; see [DS-05](questions/DS-05-image-role.md) and [DS-13](questions/DS-13-difficulty-levels.md).
 - **Gold:** each item has a gold SPARQL query that hard-codes the depicted entity
   (e.g. `BIND(wd:Q219691 AS ?product)`) [Tentative], and a gold result [Open: [DS-08](questions/DS-08-gold-answers.md)].
 - **Evaluation:** execution-based. The results of the predicted and gold queries are
@@ -110,6 +112,11 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
 - Question types:
   - Initial ideas: single-hop ("first order"), multi-hop, comparison, yes/no, list,
     count [Tentative].
+  - Difficulty: the dataset should span easy, medium and hard questions, avoiding
+    results near 100% or 0% [Tentative, supervisor feedback 2026-11-04]. Definition and
+    measurement: [Open: [DS-13](questions/DS-13-difficulty-levels.md)].
+  - Labels per question (hops, type, others) to know what each question tests:
+    [Open: [DS-14](questions/DS-14-question-labels.md)].
   - To be formalised from the literature: [Open: [LIT-02](questions/LIT-02-question-type-taxonomy.md), [DS-01](questions/DS-01-question-types.md)].
 - Construction:
   - LLM-assisted, manually curated: any available LLM suggests question ideas from
@@ -148,7 +155,8 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
 - Framework or loop implementation: [Open: [AG-03](questions/AG-03-agent-framework.md)].
 - Model: served by DTU CampusAI (OpenAI-compatible API, DTU VPN only) [Tentative, [D-019](decisions.md#d-019)].
   Available: Qwen3.8-27B (`chat`, `chat:think`, 224K context, tools), Gemma 4 E4B
-  (`vision`, image input), BGE-M3 (`embed`), BGE reranker v2-m3 (`rerank`). Which model
+  (`vision`, image input), BGE-M3 (`embed`), BGE reranker v2-m3 (`rerank`). Contact for
+  CampusAI questions (throttling etc.): Benjamin Jakobsen (bstja@dtu.dk). Which model
   runs the agent and how images are handled: [Open: [AG-04](questions/AG-04-gemma-hpc.md)].
 - Planned configurations: oracle (entity named in the text), vision only, index only,
   and both [Tentative; Open: [AG-05](questions/AG-05-experiment-configurations.md)].
@@ -164,7 +172,8 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
 ## Related work
 
 See [`related-work.md`](related-work.md): full paper names, links, relevance and what
-still needs checking.
+still needs checking. Visual knowledge graphs (scene graphs) were suggested by the
+supervisor as inspiration for visual papers [Open: [LIT-05](questions/LIT-05-visual-knowledge-graphs.md)].
 
 ## Artifacts
 

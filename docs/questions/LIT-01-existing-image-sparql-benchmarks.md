@@ -43,6 +43,8 @@ distractors + evaluation of agentic text-to-SPARQL systems.
 
 Expected output: a comparison table in `related-work.md` and a short gap statement in
 `THESIS.md`.
+- 2026-11-04 (supervisor meeting): visual knowledge graphs were suggested as
+  inspiration for visual papers; see [LIT-05](LIT-05-visual-knowledge-graphs.md).
 
 ## Resolution
 

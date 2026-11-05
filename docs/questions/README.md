@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**36 questions:** 32 open, 3 researching, 1 decided, 0 dropped.
+**39 questions:** 34 open, 4 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -27,9 +27,11 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | open | [FR-01](FR-01-research-questions.md) |
 | [RP-01](RP-01-image-storage.md) | Where are images stored? | dataset | high | open | [RP-06](RP-06-dataset-versioning.md) |
 | [RP-02](RP-02-languages.md) | Which programming language(s) for the dataset pipeline and the agent? | dataset | high | open | [RP-04](RP-04-repo-structure.md) |
-| [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | dataset | medium | open | [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
+| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | dataset | high | open | – |
+| [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | dataset | medium | researching | [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | dataset | medium | open | – |
 | [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | dataset | medium | open | – |
+| [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | dataset | medium | open | – |
 | [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | dataset | low | open | [RP-05](RP-05-multiple-embedding-models.md) |
 | [IX-04](IX-04-index-payload.md) | What does the index store per entity? | dataset | low | open | – |
 | [AG-01](AG-01-own-agent-vs-grasp.md) | Build an own agent or build on top of GRASP? | agent | medium | open | [AG-02](AG-02-tool-set.md), [AG-03](AG-03-agent-framework.md) |
@@ -45,6 +47,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | dataset | medium | [DS-09](DS-09-generation-pipeline.md) |
 | [FR-01](FR-01-research-questions.md) | What are the research questions and hypotheses? | dataset | medium | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) |
 | [DS-03](DS-03-hop-depth.md) | What is the maximum number of hops in a question? | dataset | medium | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) |
+| [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | dataset | medium | [DS-01](DS-01-question-types.md) |
 | [IX-02](IX-02-distractor-count.md) | How many distractors should the index contain? | dataset | medium | [IX-01](IX-01-distractor-strategy.md) |
 | [RP-03](RP-03-dataset-format.md) | What is the dataset record format? | dataset | medium | [DS-01](DS-01-question-types.md), [DS-08](DS-08-gold-answers.md) |
 | [RP-04](RP-04-repo-structure.md) | How is the new dataset repository structured? | dataset | medium | [DS-09](DS-09-generation-pipeline.md), [RP-02](RP-02-languages.md) |
@@ -83,6 +86,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | open | dataset | high | – | – |
 | [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | open | dataset | high | – | [EV-01](EV-01-metrics.md) |
 | [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md) |
+| [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | open | dataset | medium | – | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md), [DS-05](DS-05-image-role.md), [DS-13](DS-13-difficulty-levels.md) |
 
 ### Dataset (DS)
 
@@ -92,7 +96,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-02](DS-02-wikidata-subset.md) | Which part of Wikidata is well connected enough to build the dataset on? | open | dataset | high | – | [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [IX-01](IX-01-distractor-strategy.md) |
 | [DS-03](DS-03-hop-depth.md) | What is the maximum number of hops in a question? | open | dataset | medium | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) | – |
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | open | dataset | high | – | [DS-02](DS-02-wikidata-subset.md), [DS-08](DS-08-gold-answers.md), [AG-02](AG-02-tool-set.md) |
-| [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | open | dataset | medium | – | [DS-01](DS-01-question-types.md), [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
+| [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | researching | dataset | medium | – | [DS-01](DS-01-question-types.md), [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
 | [DS-06](DS-06-multi-image-questions.md) | How would multi-image questions work (stretch goal)? | open | dataset | low | [DS-01](DS-01-question-types.md), [DS-05](DS-05-image-role.md) | – |
 | [DS-07](DS-07-related-entity-images.md) | Can the image show an entity other than the subject of the question? | open | dataset | low | [DS-05](DS-05-image-role.md) | – |
 | [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | open | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) | [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
@@ -100,6 +104,8 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | open | dataset | medium | [DS-09](DS-09-generation-pipeline.md) | – |
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
+| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | open | dataset | high | – | [DS-01](DS-01-question-types.md), [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [DS-14](DS-14-question-labels.md), [FR-01](FR-01-research-questions.md) |
+| [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | open | dataset | medium | [DS-01](DS-01-question-types.md) | [DS-13](DS-13-difficulty-levels.md), [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 
 ### Image index (IX)
 
@@ -155,6 +161,7 @@ flowchart LR
     LIT_02["LIT-02: What question-type taxonomy and terminology does the literature use?"]
     LIT_03["LIT-03: Which evaluation metrics does the KGQA literature use, and how are they computed?"]
     LIT_04["LIT-04: How do related works choose distractors for visual entity retrieval?"]
+    LIT_05["LIT-05: Which visual knowledge graph and scene graph papers are relevant inspiration?"]
   end
   subgraph DS["Dataset"]
     DS_01["DS-01: Which question types will the dataset contain?"]
@@ -169,6 +176,8 @@ flowchart LR
     DS_10["DS-10: How large should the dataset be?"]
     DS_11["DS-11: How is the dataset split into dev and test?"]
     DS_12["DS-12: How are query images selected, and how is leakage prevented?"]
+    DS_13["DS-13: How is question difficulty defined and measured (easy, medium, hard)?"]
+    DS_14["DS-14: Which labels does each dataset question carry?"]
   end
   subgraph IX["Image index"]
     IX_01["IX-01: How are distractor images chosen for the image index?"]
@@ -211,6 +220,7 @@ flowchart LR
   DS_02 --> DS_09
   DS_09 --> DS_10
   DS_01 --> DS_11
+  DS_01 --> DS_14
   LIT_03 --> EV_01
   AG_05 --> EV_02
   DS_10 --> EV_03
@@ -255,6 +265,14 @@ flowchart LR
   DS_09 -.-> RP_04
   DS_12 -.-> IX_01
   DS_12 -.-> RP_01
+  DS_13 -.-> DS_01
+  DS_13 -.-> DS_03
+  DS_13 -.-> DS_09
+  DS_13 -.-> DS_14
+  DS_13 -.-> FR_01
+  DS_14 -.-> DS_13
+  DS_14 -.-> RP_03
+  DS_14 -.-> EV_01
   FR_01 -.-> FR_02
   FR_01 -.-> DS_01
   FR_01 -.-> EV_02
@@ -267,12 +285,15 @@ flowchart LR
   LIT_01 -.-> DS_09
   LIT_03 -.-> EV_01
   LIT_04 -.-> IX_01
+  LIT_05 -.-> LIT_01
+  LIT_05 -.-> DS_05
+  LIT_05 -.-> DS_13
   RP_01 -.-> RP_06
   RP_02 -.-> RP_04
   classDef resolved fill:#c8e6c9,stroke:#2e7d32,color:#000
   classDef ready fill:#fff59d,stroke:#f9a825,color:#000
   classDef blocked fill:#e0e0e0,stroke:#757575,color:#000
   class FR_02 resolved
-  class LIT_02,DS_02,AG_04,LIT_03,DS_04,LIT_01,RP_01,RP_02,DS_05,DS_12,LIT_04,IX_03,IX_04,AG_01 ready
-  class DS_01,DS_09,DS_08,IX_01,DS_10,FR_01,DS_03,IX_02,RP_03,RP_04,DS_06,DS_07,DS_11,RP_05,RP_06,AG_02,AG_05,EV_01,EV_02,AG_03,EV_03 blocked
+  class LIT_02,DS_02,AG_04,LIT_03,DS_04,LIT_01,RP_01,RP_02,DS_13,DS_05,DS_12,LIT_04,LIT_05,IX_03,IX_04,AG_01 ready
+  class DS_01,DS_09,DS_08,IX_01,DS_10,FR_01,DS_03,DS_14,IX_02,RP_03,RP_04,DS_06,DS_07,DS_11,RP_05,RP_06,AG_02,AG_05,EV_01,EV_02,AG_03,EV_03 blocked
 ```

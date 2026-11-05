@@ -1,0 +1,37 @@
+---
+id: DS-14
+title: Which labels does each dataset question carry?
+area: dataset
+status: open
+phase: dataset
+priority: medium
+depends_on: [DS-01]
+informs: [DS-13, RP-03, EV-01]
+---
+
+## Question
+
+Which labels (e.g. number of hops, question type, answer type, image role,
+distractor setting, difficulty) are attached to each item, so that it is clear what
+each question tests and what the dataset as a whole contains?
+
+## Why it matters
+
+Labels give an overview of the dataset (distribution of types, hops, ...) and allow
+reporting results per label. They are part of the record format ([RP-03](RP-03-dataset-format.md)).
+
+## Notes
+
+- 2026-11-04 (supervisor meeting, user's notes): label the questions with the number
+  of hops, question type and other labels. The user's intent: label the different
+  questions so we know what each one does and have a sense of what questions we
+  have.
+- Candidate labels (assistant suggestions, not decided): hop count ([DS-03](DS-03-hop-depth.md)), question
+  type ([DS-01](DS-01-question-types.md)), difficulty level ([DS-13](DS-13-difficulty-levels.md)), answer type (entity, number, date,
+  boolean, list), image role ([DS-05](DS-05-image-role.md)), Wikidata class of the depicted entity ([DS-02](DS-02-wikidata-subset.md)).
+- [RP-03](RP-03-dataset-format.md) already lists "question type label(s), hop count" as candidate fields.
+- 2026-11-05 (user): no further labels known yet beyond hops and question type.
+
+## Resolution
+
+_Not resolved yet._
