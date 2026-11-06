@@ -7,8 +7,14 @@ permissions:
   - action: "*"
     resource: "*"
     effect: deny
+  - action: external_directory
+    resource: "*"
+    effect: allow
   - action: read
     resource: "docs/**"
+    effect: allow
+  - action: read
+    resource: "*/docs/*"
     effect: allow
   - action: grep
     resource: "*"
@@ -48,6 +54,10 @@ return a ranked list with reasons.
 A seed paper (ID and, usually, the path of its note in `docs/literature/`), why it matters,
 and the question IDs it informs. If the note exists, read its `Relevance to the thesis`
 section.
+
+The note may live in a git worktree outside the current directory (an absolute path).
+Then run the `uv run scripts/...` commands with that worktree as the shell working
+directory and read `docs/` from there, not from the current directory.
 
 ## Steps
 

@@ -34,6 +34,7 @@ result defines what "correct" means.
     checks it; optionally an independently written second query gives the same
     result.
   - **Edge cases:** multiple valid answers, ties, yes/no questions (ASK queries).
+- 2026-11-06: SPINACH gold queries are real queries run on the live Wikidata Query Service, kept only if non-empty and under 10 MB, with optimisation, formatting and `mwapi` clauses removed (§3, §3.1, App. C.3); no snapshot date is stated. Source: [SPINACH note](../literature/liu2024spinach.md).
 
 ## Resolution
 
