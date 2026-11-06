@@ -2,7 +2,7 @@
 id: AG-02
 title: Which tools does the agent get?
 area: agent
-status: open
+status: researching
 phase: agent
 priority: high
 depends_on: [AG-01]
@@ -30,6 +30,7 @@ The tools are the core of the system design and the subject of ablations.
 - Design question: how the image tool refers to the image (an ID handle vs pixels in
   the prompt).
 - Endpoint choice ([DS-04](DS-04-endpoint-snapshot.md)) and index payload ([IX-04](IX-04-index-payload.md)) shape the tools.
+- 2026-11-06: SPINACH tool set (§4.1): `search_wikidata`, `get_wikidata_entry` (outgoing edges and qualifiers, pruned by a separate LLM prompt), `get_property_examples`, `execute_sparql` (returns results, empty, syntax error text or timeout; long results truncated to first and last 5 rows) and `stop`. Removing a tool one at a time lowers dev F1 from 46.4 to 36.4 (entry), 29.4 (property examples), 25.3 (search) (Table 4). Leaning (user): the image-index search is one more tool in the same loop. Source: [SPINACH note](../literature/liu2024spinach.md).
 
 ## Resolution
 

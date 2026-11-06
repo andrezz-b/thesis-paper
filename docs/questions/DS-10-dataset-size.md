@@ -25,6 +25,7 @@ Needs to be large enough for per-type results while fitting the dataset freeze o
   each; WikiVQABench 344 questions.
 - 2026-10-30: The questions are curated manually ([D-016](../decisions.md#d-016)), so the reachable size is
   limited by curation time and smaller than with automatic generation.
+- 2026-11-06: SPINACH: 155 dev + 165 test; its dev set separates systems that differ by at least 9.0% EM (minimum detectable effect, App. C.2). Source: [SPINACH note](../literature/liu2024spinach.md).
 
 ## Resolution
 

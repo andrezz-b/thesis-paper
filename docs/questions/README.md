@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 34 open, 4 researching, 1 decided, 0 dropped.
+**39 questions:** 32 open, 6 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -22,7 +22,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | dataset | high | open | [DS-01](DS-01-question-types.md) |
 | [DS-02](DS-02-wikidata-subset.md) | Which part of Wikidata is well connected enough to build the dataset on? | dataset | high | open | [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [IX-01](IX-01-distractor-strategy.md) |
 | [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | dataset | high | researching | [AG-05](AG-05-experiment-configurations.md) |
-| [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | dataset | high | open | [DS-08](DS-08-gold-answers.md), [EV-01](EV-01-metrics.md) |
+| [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | dataset | high | researching | [DS-08](DS-08-gold-answers.md), [EV-01](EV-01-metrics.md) |
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | dataset | high | open | [DS-08](DS-08-gold-answers.md) |
 | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | open | [FR-01](FR-01-research-questions.md) |
 | [RP-01](RP-01-image-storage.md) | Where are images stored? | dataset | high | open | [RP-06](RP-06-dataset-versioning.md) |
@@ -84,7 +84,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | --- | --- | --- | --- | --- | --- | --- |
 | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | open | dataset | high | – | [FR-01](FR-01-research-questions.md), [DS-01](DS-01-question-types.md), [DS-09](DS-09-generation-pipeline.md) |
 | [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | open | dataset | high | – | – |
-| [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | open | dataset | high | – | [EV-01](EV-01-metrics.md) |
+| [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | researching | dataset | high | – | [EV-01](EV-01-metrics.md) |
 | [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md) |
 | [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | open | dataset | medium | – | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md), [DS-05](DS-05-image-role.md), [DS-13](DS-13-difficulty-levels.md) |
 
@@ -121,7 +121,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
 | [AG-01](AG-01-own-agent-vs-grasp.md) | Build an own agent or build on top of GRASP? | open | agent | medium | – | [AG-02](AG-02-tool-set.md), [AG-03](AG-03-agent-framework.md), [RP-02](RP-02-languages.md), [EV-02](EV-02-baselines.md) |
-| [AG-02](AG-02-tool-set.md) | Which tools does the agent get? | open | agent | high | [AG-01](AG-01-own-agent-vs-grasp.md) | [EV-03](EV-03-ablations.md) |
+| [AG-02](AG-02-tool-set.md) | Which tools does the agent get? | researching | agent | high | [AG-01](AG-01-own-agent-vs-grasp.md) | [EV-03](EV-03-ablations.md) |
 | [AG-03](AG-03-agent-framework.md) | Which agent framework or loop implementation is used? | open | agent | low | [AG-01](AG-01-own-agent-vs-grasp.md) | – |
 | [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | researching | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md) |
 | [AG-05](AG-05-experiment-configurations.md) | Which agent configurations are evaluated? | open | agent | medium | [AG-04](AG-04-gemma-hpc.md) | [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |

@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-11-05._
+_Last reviewed: 2026-11-06._
 
 ## TL;DR
 
@@ -149,6 +149,8 @@ Nokia 3310 photo + "In which year was this phone's manufacturer founded?". The p
   - Expected tools: SPARQL execution, entity and property search, schema exploration,
     image-index search [Tentative].
   - Exact tool set: [Open: [AG-02](questions/AG-02-tool-set.md)]. Inspiration: SPINACH, GRASP, KGVoyager.
+    Leaning: SPINACH's Wikidata tools plus the image-index search as one more tool in the
+    same loop, and a high-level zero-shot prompt like SPINACH's [Tentative].
 - The tools are specific to Wikidata [Decided, [D-003](decisions.md#d-003)].
 - Own implementation vs. building on GRASP: [Open: [AG-01](questions/AG-01-own-agent-vs-grasp.md)]. Leaning towards an own
   implementation, to learn more.

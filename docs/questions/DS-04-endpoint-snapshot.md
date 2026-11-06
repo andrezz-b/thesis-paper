@@ -33,6 +33,7 @@ Options (claims to verify):
   (the full dump is billions of triples).
 
 Whatever is chosen, gold results should be frozen with a date ([DS-08](DS-08-gold-answers.md)).
+- 2026-11-06: SPINACH used the live Query Service (60 s limit); QLever on the latest dump failed for their ToG baseline (App. D). Source: [SPINACH note](../literature/liu2024spinach.md).
 
 ## Resolution
 
