@@ -58,6 +58,7 @@ To check with the people running it:
   (bstja@dtu.dk). To ask: which models and checkpoints are served and whether they
   are pinned, throttling and rate limits, throughput, availability.
 - 2026-11-05 (user): Benjamin Jakobsen has not been contacted yet.
+- 2026-11-06: GRASP runs with open models: Qwen2.5 72B reaches 68.7 F1 on WWQ vs 75.3 for GPT-4.1; Qwen3 32B 61.3; performance drops sharply for models below about 14B (Qwen2.5) or 8B (Qwen3) (Tables 5 and 7). Relevant for Qwen3.8-27B on CampusAI. Source: [GRASP note](../literature/walter2025grasp.md).
 
 ## Resolution
 

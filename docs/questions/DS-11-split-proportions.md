@@ -25,6 +25,7 @@ The dev split prevents tuning prompts and tools on the test set ([D-008](../deci
   generation time and stays fixed.
 - 2026-10-30: Rule adopted in the project plan (suggested in review): the test split
   is only used after tuning on the dev split has ended (2027-02-26, [D-015](../decisions.md#d-015)).
+- 2026-11-06: GRASP's few-shot functions (`find_similar_examples`, `find_examples`) draw examples from a benchmark train set (§3.5). We have no train split ([D-008](../decisions.md#d-008)); few-shot would have to use dev items. Considered very unlikely (user). Source: [GRASP note](../literature/walter2025grasp.md).
 
 ## Resolution
 
