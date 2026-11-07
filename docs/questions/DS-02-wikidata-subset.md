@@ -34,6 +34,8 @@ generation) depends on the chosen domains.
   properties; class size (for distractors, [IX-01](IX-01-distractor-strategy.md)).
 - Approach: aggregate SPARQL statistics per candidate class (QLever is fast for this;
   see [DS-04](DS-04-endpoint-snapshot.md)). Question types ([DS-01](DS-01-question-types.md)) tell which path shapes are needed.
+- 2026-11-07 (user): the "well connected" criterion is a consideration raised by the supervisor (enough connections to construct different questions), not a hard constraint. It was formulated before the user knew about datasets such as ReasonVQA. If questions are reused from such datasets ([DS-09](DS-09-generation-pipeline.md)), a multi-hop question already shows that enough connections exist, so the criterion matters less. Not every question has to be hard; simple questions are fine ([DS-13](DS-13-difficulty-levels.md)). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
+- 2026-11-07 (assistant reading): ReasonVQA's released data is mostly landmarks and buildings (Google Landmarks v2), so reused items would cover only that part of Wikidata; this is a coverage consideration, not a constraint.
 
 ## Resolution
 
