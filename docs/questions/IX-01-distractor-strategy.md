@@ -30,6 +30,7 @@ axis ([IX-02](IX-02-distractor-count.md), [FR-01](FR-01-research-questions.md)).
   [egg chair](https://github.com/andrezz-b/thesis-dataset-poc/tree/main/examples/egg-chair)
   the gold entity was not in the top 5, which shows how hard look-alike distractors are.
 - 2026-11-07: M3-VQA adds about 5 hard negatives per entity: embed Wikipedia summaries (all-mpnet-base-v2), take the 20 nearest with FAISS, sample 5 at random; retrieval runs over the whole constructed knowledge base (paper App. D.3). The similarity is textual, not visual. Leaning (user, not decided): choose distractors that are `instance of` the same class; text-similarity neighbours could be an additional distractor source. Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: KVQA's open-world setting uses all 69K reference identities as distractors for visual entity linking (§Knowledge Graph, §Approach); no hard-negative selection. Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 

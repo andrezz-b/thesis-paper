@@ -31,6 +31,7 @@ reporting results per label. They are part of the record format ([RP-03](RP-03-d
   boolean, list), image role ([DS-05](DS-05-image-role.md)), Wikidata class of the depicted entity ([DS-02](DS-02-wikidata-subset.md)).
 - [RP-03](RP-03-dataset-format.md) already lists "question type label(s), hop count" as candidate fields.
 - 2026-11-05 (user): no further labels known yet beyond hops and question type.
+- 2026-11-07: KVQA's ten non-exclusive challenge categories (spatial, 1-hop, multi-hop, Boolean, intersection, subtraction, comparison, counting, multi-entity, multi-relation) are a possible starting point for the tag set; not committed. See [LIT-02](LIT-02-question-type-taxonomy.md). Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 

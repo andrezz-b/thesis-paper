@@ -46,6 +46,7 @@ Expected output: a comparison table in `related-work.md` and a short gap stateme
 - 2026-11-04 (supervisor meeting): visual knowledge graphs were suggested as
   inspiration for visual papers; see [LIT-05](LIT-05-visual-knowledge-graphs.md).
 - 2026-11-07: M3-VQA checked (paper, GitHub repo, Hugging Face dataset). Released fields are question, answers, answer aliases, image entity names (labels, no Wikidata IDs), Wikipedia evidence sentences and URLs; there is no SPARQL and no QIDs. SPARQL was used only during construction of the parallel questions (paper §4.1); QLever was used for entity linking (App. D.2). So M3-VQA does not release image + question + gold SPARQL and contrasts with the planned dataset. Other candidates (ReasonVQA, WikiVQABench) are still unchecked. Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: KVQA checked (full paper). Gold answers come from SPARQL over Wikidata (RDF dump of 2018-05-05) but the queries are deliberately not released (S3, p. 8879). Entities are persons only, identified by face; no agentic system, baselines are memory networks. So KVQA does not release image + question + gold SPARQL and contrasts with the planned dataset. Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 
