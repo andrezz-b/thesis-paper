@@ -52,6 +52,7 @@ Determines dataset quality and how many questions can be produced before the dea
 - 2026-11-04 (supervisor meeting): ideas should cover a range of difficulty and
   carry labels ([DS-13](DS-13-difficulty-levels.md), [DS-14](DS-14-question-labels.md)).
 - 2026-11-06: SPINACH built its dataset with an LLM-assisted, expert-verified pipeline: GPT-4o suggested verbalisations and a modify/include/exclude decision, experts verified by running intermediate queries (App. C.3). Supports [D-016](../decisions.md#d-016) and can be cited in the method section. Source: [SPINACH note](../literature/liu2024spinach.md).
+- 2026-11-07: KVQA paraphrased its test questions (online tool, human accept/refine/discard; S5, p. 8879). Possible later extension, not committed; if done, probably LLM-based. Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 

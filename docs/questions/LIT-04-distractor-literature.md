@@ -29,6 +29,7 @@ Starting points (to verify):
 - Wiki-VEL: visual entity linking for structured data on Wikimedia Commons (2024).
 - Cross-modal retrieval for knowledge-based VQA (Lerner et al., ECIR 2024; CLIP-based).
 - 2026-11-07: M3-VQA (paper App. D.3) is a further starting point: about 5 text-similarity hard negatives per entity in a controlled multimodal knowledge base. Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: KVQA's open world uses reference images of 69K persons as the identity pool; QA accuracy drops by more than 10 points versus the closed world (18K), which the authors attribute partly to distractors (§Approach, p. 8883). Distractors are all other identities, not selected by similarity. Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 

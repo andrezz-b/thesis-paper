@@ -36,6 +36,7 @@ terminology rather than ad hoc, so results are comparable and the thesis can cit
 - There are probably several independent axes: semantic type, structural shape,
   number of hops, and a visual axis (role of the image, [DS-05](DS-05-image-role.md)).
 - 2026-11-07: M3-VQA splits multi-hop questions into parallel (several entities reasoned about independently, then combined) and sequential (the output of one hop feeds the next) (paper §3). Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: KVQA groups questions into ten non-exclusive challenge categories: spatial, 1-hop, multi-hop, Boolean, intersection, subtraction, comparison, counting, multi-entity, multi-relation (§Analysis of KVQA, Fig. 2, Table 5). Source: [KVQA note](../literature/shah2019kvqa.md).
 
 ## Resolution
 
