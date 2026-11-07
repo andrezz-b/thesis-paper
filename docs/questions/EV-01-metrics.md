@@ -31,6 +31,7 @@ Defines how results are compared with the literature and across configurations.
   e.g. the number of Wikipedia sitelinks. The draft H1 needs answer accuracy given
   correct grounding, to separate grounding errors from query errors. (Hypothesis
   numbers updated 2026-10-30 after [D-017](../decisions.md#d-017).)
+- 2026-11-06: GRASP uses SPINACH's F1 variant that allows extra columns, averaged over samples, on 200 random samples per benchmark (§4.1); over 1,024 rows it falls back to standard F1; an ASK vs SELECT mismatch scores 1 if semantically equivalent. Source: [GRASP note](../literature/walter2025grasp.md).
 
 ## Resolution
 

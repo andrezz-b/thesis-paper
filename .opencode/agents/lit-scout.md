@@ -26,22 +26,13 @@ permissions:
     resource: "*"
     effect: allow
   - action: shell
-    resource: "uv run scripts/papers.py meta *"
-    effect: allow
-  - action: shell
-    resource: "uv run scripts/papers.py search *"
-    effect: allow
-  - action: shell
-    resource: "uv run scripts/papers.py refs *"
-    effect: allow
-  - action: shell
-    resource: "uv run scripts/papers.py cites *"
-    effect: allow
-  - action: shell
-    resource: "uv run scripts/papers.py recs *"
+    resource: "uv run scripts/papers.py *"
     effect: allow
   - action: shell
     resource: "uv run scripts/literature.py queue"
+    effect: allow
+  - action: shell
+    resource: "cd *"
     effect: allow
 ---
 
@@ -68,7 +59,7 @@ directory and read `docs/` from there, not from the current directory.
    evaluation. Relevant means a benchmark, method, metric, or analysis the thesis would
    use, contrast with, or cite.
 2. Collect candidates with the script (each call is slow when throttled; do not repeat
-   calls; abstracts are included by default). Only `meta`, `search`, `refs`, `cites`, `recs`
+   calls; abstracts are included by default). Run each command on its own, exactly as shown: no pipes, no redirects (`2>&1`, `| head`), no `&&` chains. Use the shell `workdir` parameter instead of `cd`. Only `meta`, `search`, `refs`, `cites`, `recs`
    are allowed; you cannot create notes:
    - `uv run scripts/papers.py cites <id> --top 25` newer papers that cite the seed, with
      the sentence in which they cite it

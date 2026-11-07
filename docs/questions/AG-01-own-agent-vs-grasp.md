@@ -2,7 +2,7 @@
 id: AG-01
 title: Build an own agent or build on top of GRASP?
 area: agent
-status: open
+status: researching
 phase: agent
 priority: medium
 depends_on: []
@@ -26,6 +26,7 @@ Decides how much engineering is needed and which baselines come for free.
 - Possible middle ground: own agent, with GRASP (plus an image tool) as a baseline
   ([EV-02](EV-02-baselines.md)).
 - Scope is Wikidata only ([D-003](../decisions.md#d-003)); KG-agnostic tooling is out of scope.
+- 2026-11-06: GRASP (Walter and Bast, ISWC 2025) is a single-context ReAct-style loop with a KG-independent function set (§3.1, §3.2); code and indices are open (github.com/ad-freiburg/grasp). Its generality (a `kg` argument on every function, federated queries) is out of scope for the thesis ([D-003](../decisions.md#d-003)); no image input. Leaning unchanged: own agent, GRASP as a possible baseline. Source: [GRASP note](../literature/walter2025grasp.md).
 
 ## Resolution
 
