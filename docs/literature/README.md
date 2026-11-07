@@ -21,7 +21,7 @@ curated overview of related work by theme stays in [`../related-work.md`](../rel
 | [ReasonVQA: A Multi-hop Reasoning Benchmark with Structural Knowledge for Visual Question Answering](tran2025reasonvqa.md) (Tran et al., 2025) | queued | 2026-11-06 |
 | [KGVoyager: Knowledge Graph Agnostic Question Answering via Agentic Navigation](wisam2026kgvoyager.md) (Wisam et al., 2026) | queued | 2026-11-06 |
 
-## Reading queue (10)
+## Reading queue (13)
 
 Candidates suggested by the notes above, not yet read or skipped. Ranked by how many notes
 point to them, then by the relevance of those notes. Start a note with `/paper <id>`;
@@ -37,9 +37,12 @@ reject one by adding a row to [`skipped.md`](skipped.md).
 | Agentic SPARQL: Evaluating SPARQL-MCP-powered Intelligent Agents on the Federated KGQA Benchmark | `arXiv:2603.06582` | [walter2025grasp](walter2025grasp.md) | Agentic SPARQL-tool setup with MCP tool access, evaluated on a federated KGQA benchmark; compare tool design and baselines (AG-02, EV-02) (abstract only) |
 | GRASP and GRISP for Question Answering over Wikidata | `S2:f5281a4defb47a4f0bc322b03a9fd3940c6ebcfc` | [walter2025grasp](walter2025grasp.md) | Same-group follow-up on Wikidata QA; may give the latest GRASP version and Wikidata numbers (AG-01, EV-02) (title only) |
 | ReAct: Synergizing Reasoning and Acting in Language Models | `arXiv:2210.03629` | [walter2025grasp](walter2025grasp.md) | Origin of the ReAct loop that GRASP and the thesis build on (§3.1); to cite for the agent design (AG-01, AG-03) |
+| Select, Substitute, Search: A New Benchmark for Knowledge-Augmented Visual Question Answering | `arXiv:2103.05568` | [ma2026m3](ma2026m3.md) | KG + text + image knowledge VQA benchmark; LIT-01 landscape and image retrieval side of IX-01 (abstract only) |
 | SPARQL-LLM in the TEXT2SPARQL 2026 Challenge | `arXiv:2610.13648` | [walter2025grasp](walter2025grasp.md) | Open-source KGQA system in a shared text-to-SPARQL challenge; possible shared benchmark and baselines (EV-02, LIT-01) (abstract only, partial) |
 | SPARQL-LLM: Real-Time SPARQL Query Generation from Natural Language Questions | `arXiv:2512.14277` | [walter2025grasp](walter2025grasp.md) | Reports runtime and cost next to accuracy and classes GRASP as a toolbox-driven agent; extra metrics and baselines (EV-01, EV-02) |
+| Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking | `arXiv:2609.10745` | [ma2026m3](ma2026m3.md) | Entity rarity from KG structure; possible input for DS-13 and entity selection (abstract only) |
+| VisualWorldBench: A Fine-Grained Multi-Task Benchmark for Evaluating Visual World Knowledge in MLLMs | `arXiv:2610.20083` | [ma2026m3](ma2026m3.md) | Fine-grained visual entity recognition in MLLMs; recognition bottleneck behind AG-05 (abstract only) |
 
-## Skipped (2)
+## Skipped (3)
 
 See [`skipped.md`](skipped.md).

@@ -8,3 +8,4 @@ Rows are added by the `paper-review` skill after the user confirms.
 | --- | --- | --- | --- |
 | arXiv:2412.18702 | CypherBench: Towards Precise Retrieval over Full-scale Modern Knowledge Graphs in the LLM Era | 2026-11-06 | Text-to-Cypher over property graphs; the thesis generates SPARQL over Wikidata [D-003](../decisions.md#d-003) |
 | DOI:10.18653/v1/2026.acl-long.1601 | CypherSmith: Transforming Text-to-Cypher Generation for LLMs with Synthetic Data | 2026-11-06 | Text-to-Cypher with synthetic training data; the thesis uses SPARQL and has no training split ([D-008](../decisions.md#d-008)) |
+| arXiv:2609.19417 | Less Is More: Graph-free Multimodal RAG via Multi-signal Late Fusion | 2026-11-07 | Image + question fusion for document-style RAG without a KG; no Wikidata or SPARQL link |
