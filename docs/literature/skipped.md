@@ -15,3 +15,7 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:1607.08221 | MS-Celeb-1M: A Dataset and Benchmark for Large-Scale Face Recognition | 2026-11-07 | Face-recognition dataset; the thesis images are not faces |
 | arXiv:2204.10448 | Hypergraph Transformer: Weakly-Supervised Multi-hop Reasoning for Knowledge-based Visual Question Answering | 2026-11-07 | Trained KB-VQA model; the thesis does not train models ([D-008](../decisions.md#d-008)) |
 | arXiv:1710.08092 | VGGFace2: A Dataset for Recognising Faces across Pose and Age | 2026-11-07 | Face-recognition dataset; the thesis images are not faces |
+| arXiv:2512.13573 | MMhops-R1: Multimodal Multi-hop Reasoning | 2026-11-07 | Relation to the thesis not established (abstract not read); skipped on the user's call |
+| arXiv:1908.02962 | CRIC: A VQA Dataset for Compositional Reasoning on Vision and Commonsense | 2026-11-07 | Commonsense knowledge (ConceptNet), not Wikidata ([D-003](../decisions.md#d-003)) |
+| arXiv:2009.00145 | Cross-modal Knowledge Reasoning for Knowledge-based Visual Question Answering | 2026-11-07 | Trained KB-VQA method; the thesis does not train models ([D-008](../decisions.md#d-008)) |
+| arXiv:2107.05348 | Zero-shot Visual Question Answering using Knowledge Graph | 2026-11-07 | Trained KB-VQA method on a non-Wikidata KB; the thesis does not train models ([D-008](../decisions.md#d-008)) |

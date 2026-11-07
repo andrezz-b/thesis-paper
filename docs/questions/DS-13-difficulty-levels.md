@@ -44,6 +44,7 @@ reporting in [EV-01](EV-01-metrics.md).
   If results approach 100%, the user would consult the supervisor, but expects that
   something would be done about it (e.g. harder items).
 - 2026-11-07: M3-VQA defines difficulty by hop count and entity count (paper §3, Table 2) and sees accuracy fall with both under the gold-evidence oracle (§5.5). Reusing some of its questions or images as a difficulty axis is an option, not committed: it would need filtering and rewriting as Wikidata SPARQL, and not all items would work. Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: ReasonVQA supports hop count as a difficulty axis: accuracy is clearly lower on 3-hop, while 1-hop is only slightly better than 2-hop and sometimes worse, which the authors attribute to the longer 2-hop questions giving more context (§4.4, Fig. 6). Questions that use scene-graph information score lower than the others (§4.4). Answer-distribution balancing (top ten answers per property) made the benchmark slightly harder (§3.3.1, Table 2). Fixed multiple-choice distractors are random draws (§3.2.2), so a multiple-choice setting is a weak difficulty control. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 

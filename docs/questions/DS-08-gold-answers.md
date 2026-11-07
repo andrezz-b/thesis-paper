@@ -35,6 +35,7 @@ result defines what "correct" means.
     result.
   - **Edge cases:** multiple valid answers, ties, yes/no questions (ASK queries).
 - 2026-11-06: SPINACH gold queries are real queries run on the live Wikidata Query Service, kept only if non-empty and under 10 MB, with optimisation, formatting and `mwapi` clauses removed (§3, §3.1, App. C.3); no snapshot date is stated. Source: [SPINACH note](../literature/liu2024spinach.md).
+- 2026-11-07: Possible shortcut (user idea, not decided): derive a first gold query from ReasonVQA items; recorded in [DS-09](DS-09-generation-pipeline.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 
