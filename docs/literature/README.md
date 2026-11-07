@@ -21,7 +21,7 @@ curated overview of related work by theme stays in [`../related-work.md`](../rel
 | [ReasonVQA: A Multi-hop Reasoning Benchmark with Structural Knowledge for Visual Question Answering](tran2025reasonvqa.md) (Tran et al., 2025) | queued | 2026-11-06 |
 | [KGVoyager: Knowledge Graph Agnostic Question Answering via Agentic Navigation](wisam2026kgvoyager.md) (Wisam et al., 2026) | queued | 2026-11-06 |
 
-## Reading queue (13)
+## Reading queue (21)
 
 Candidates suggested by the notes above, not yet read or skipped. Ranked by how many notes
 point to them, then by the relevance of those notes. Start a note with `/paper <id>`;
@@ -42,6 +42,14 @@ reject one by adding a row to [`skipped.md`](skipped.md).
 | SPARQL-LLM: Real-Time SPARQL Query Generation from Natural Language Questions | `arXiv:2512.14277` | [walter2025grasp](walter2025grasp.md) | Reports runtime and cost next to accuracy and classes GRASP as a toolbox-driven agent; extra metrics and baselines (EV-01, EV-02) |
 | Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking | `arXiv:2609.10745` | [ma2026m3](ma2026m3.md) | Entity rarity from KG structure; possible input for DS-13 and entity selection (abstract only) |
 | VisualWorldBench: A Fine-Grained Multi-Task Benchmark for Evaluating Visual World Knowledge in MLLMs | `arXiv:2610.20083` | [ma2026m3](ma2026m3.md) | Fine-grained visual entity recognition in MLLMs; recognition bottleneck behind AG-05 (abstract only) |
+| End-to-end Knowledge Retrieval with Multi-modal Queries | `arXiv:2306.00424` | [shah2019kvqa](shah2019kvqa.md) | Retrieval with image+text queries; reference for index search; IX-01, LIT-04 (abstract only) |
+| Explicit Knowledge Integration for Knowledge-Aware Visual Question Answering about Named Entities | `DOI:10.1145/3591106.3592227` | [shah2019kvqa](shah2019kvqa.md) | Explicit KB integration for KVQAE, an extension of the KVQA task; LIT-01, AG-05 (abstract only) |
+| Hypergraph Transformer: Weakly-Supervised Multi-hop Reasoning for Knowledge-based Visual Question Answering | `arXiv:2204.10448` | [shah2019kvqa](shah2019kvqa.md) | Reproduces the KVQA memory baseline and reports multi-hop KVQA results; LIT-01, AG-05 (abstract and citing sentence only) |
+| In Factuality: Efficient Integration of Relevant Facts for Visual Question Answering | `DOI:10.18653/v1/2021.acl-short.60` | [shah2019kvqa](shah2019kvqa.md) | Evaluates on KVQA with facts up to two hops; hop depth, DS-03, AG-05 (abstract and citing sentences only) |
+| MS-Celeb-1M: A Dataset and Benchmark for Large-Scale Face Recognition | `arXiv:1607.08221` | [shah2019kvqa](shah2019kvqa.md) | Links face images to KB entity keys at scale; prior art for a large reference-identity set; IX-01, LIT-04 (abstract only) |
+| Multimodal Inverse Cloze Task for Knowledge-based Visual Question Answering | `arXiv:2301.04366` | [shah2019kvqa](shah2019kvqa.md) | Pre-training for named-entity VQA over a KB; LIT-01 landscape, LIT-04 context (abstract only) |
+| Un jeu de données pour répondre à des questions visuelles à propos d'entités nommées | `S2:c94a8af151b91e5146041871e20e0033480c71e5` | [shah2019kvqa](shah2019kvqa.md) | Lerner et al. (ICON 2022), named-entity VQA dataset whose annotation is compared with KVQA; LIT-01, DS-05, IX-01 (title and citing sentences only) |
+| WikiSeeker: Rethinking the Role of Vision-Language Models in Knowledge-Based Visual Question Answering | `arXiv:2604.05818` | [shah2019kvqa](shah2019kvqa.md) | 2026 KB-VQA multimodal RAG using the image as retrieval key; IX-01, AG-05 (abstract only) |
 
 ## Skipped (3)
 

@@ -18,7 +18,39 @@ informs: [LIT-01, LIT-02, LIT-04, DS-01, DS-04, DS-05, DS-13, DS-14, IX-01, AG-0
 themes: [dataset-construction, kgqa, distractors]
 added: 2026-11-06
 reviewed: 2026-11-07
-candidates: []
+candidates:
+  - id: "S2:c94a8af151b91e5146041871e20e0033480c71e5"
+    title: "Un jeu de données pour répondre à des questions visuelles à propos d'entités nommées"
+    via: cites
+    why: "Lerner et al. (ICON 2022), named-entity VQA dataset whose annotation is compared with KVQA; LIT-01, DS-05, IX-01 (title and citing sentences only)"
+  - id: "arXiv:2301.04366"
+    title: "Multimodal Inverse Cloze Task for Knowledge-based Visual Question Answering"
+    via: cites
+    why: "Pre-training for named-entity VQA over a KB; LIT-01 landscape, LIT-04 context (abstract only)"
+  - id: "DOI:10.1145/3591106.3592227"
+    title: "Explicit Knowledge Integration for Knowledge-Aware Visual Question Answering about Named Entities"
+    via: cites
+    why: "Explicit KB integration for KVQAE, an extension of the KVQA task; LIT-01, AG-05 (abstract only)"
+  - id: "DOI:10.18653/v1/2021.acl-short.60"
+    title: "In Factuality: Efficient Integration of Relevant Facts for Visual Question Answering"
+    via: cites
+    why: "Evaluates on KVQA with facts up to two hops; hop depth, DS-03, AG-05 (abstract and citing sentences only)"
+  - id: "arXiv:1607.08221"
+    title: "MS-Celeb-1M: A Dataset and Benchmark for Large-Scale Face Recognition"
+    via: refs
+    why: "Links face images to KB entity keys at scale; prior art for a large reference-identity set; IX-01, LIT-04 (abstract only)"
+  - id: "arXiv:2604.05818"
+    title: "WikiSeeker: Rethinking the Role of Vision-Language Models in Knowledge-Based Visual Question Answering"
+    via: cites
+    why: "2026 KB-VQA multimodal RAG using the image as retrieval key; IX-01, AG-05 (abstract only)"
+  - id: "arXiv:2306.00424"
+    title: "End-to-end Knowledge Retrieval with Multi-modal Queries"
+    via: cites
+    why: "Retrieval with image+text queries; reference for index search; IX-01, LIT-04 (abstract only)"
+  - id: "arXiv:2204.10448"
+    title: "Hypergraph Transformer: Weakly-Supervised Multi-hop Reasoning for Knowledge-based Visual Question Answering"
+    via: cites
+    why: "Reproduces the KVQA memory baseline and reports multi-hop KVQA results; LIT-01, AG-05 (abstract and citing sentence only)"
 bibtex: |
   @article{shah2019kvqa,
     title={KVQA: Knowledge-Aware Visual Question Answering},
