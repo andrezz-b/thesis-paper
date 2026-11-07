@@ -161,7 +161,8 @@ Proposed, to be confirmed with the user (no `relevance`/`informs` set yet).
 - [DS-09](../questions/DS-09-generation-pipeline.md): cite. Template-per-property generation with nested sub-clauses is the query-first alternative to our
   LLM-assisted, manually curated pipeline ([D-016](../decisions.md#d-016)); it still produces no gold SPARQL, so we do not adopt it. Note
   it if we ever move away from LLM curation (§3.2.1, App. 1.2). The user study is a possible quality check (§4.1).
-  The user's idea of reusing its items as a starting point is recorded in [DS-09](../questions/DS-09-generation-pipeline.md).
+  The user's idea of reusing its items as a starting point is recorded in [DS-09](../questions/DS-09-generation-pipeline.md); the released annotations (QID, route, last
+  property; see Data section) make it feasible for GLDv2 items.
 - [LIT-05](../questions/LIT-05-visual-knowledge-graphs.md) / [DS-05](../questions/DS-05-image-role.md) / [DS-13](../questions/DS-13-difficulty-levels.md): cite. Scene-graph (VG) relations as extra sub-clauses add visual context and
   lower scores (§3.2.1, §4.4), a possible route to the "more complex images" idea.
 - [DS-12](../questions/DS-12-query-images-and-leakage.md): cite/adopt idea. VG and GLDv2 as image sources with Wikidata links (§3.1); GLDv2 URLs point to
@@ -185,6 +186,8 @@ Proposed, to be confirmed with the user (no `relevance`/`informs` set yet).
 - Accuracy drops for 3-hop questions compared with 1-hop and 2-hop (§4.4, Fig. 6).
 - 96% of the sampled questions had a correct answer in a user study with 20 participants and 1000 pairs
   (§4.1).
+- The released data (Hugging Face, project Download page) gives per question the main-entity QID, a route of QIDs and
+  the last property, not SPARQL (project page; checked 2026-11-07, not in the paper).
 - Existing knowledge-based datasets such as InfoSeek and Encyclopedic-VQA needed human annotation or validation
   (§2, authors' characterisation).
 
