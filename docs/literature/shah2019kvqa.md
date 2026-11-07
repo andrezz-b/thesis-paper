@@ -22,14 +22,17 @@ candidates:
   - id: "DOI:10.1145/3591106.3592227"
     title: "Explicit Knowledge Integration for Knowledge-Aware Visual Question Answering about Named Entities"
     via: cites
+    priority: low
     why: "Explicit KB integration for KVQAE, an extension of the KVQA task; LIT-01, AG-05 (abstract only)"
   - id: "arXiv:2604.05818"
     title: "WikiSeeker: Rethinking the Role of Vision-Language Models in Knowledge-Based Visual Question Answering"
     via: cites
+    priority: medium
     why: "2026 KB-VQA multimodal RAG using the image as retrieval key; IX-01, AG-05 (abstract only)"
   - id: "arXiv:2306.00424"
     title: "End-to-end Knowledge Retrieval with Multi-modal Queries"
     via: cites
+    priority: medium
     why: "Retrieval with image+text queries; reference for index search; IX-01, LIT-04 (abstract only)"
 bibtex: |
   @article{shah2019kvqa,

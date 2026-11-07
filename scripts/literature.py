@@ -8,7 +8,8 @@ rejected, as table rows whose first cell is a paper ID (`arXiv:...`, `DOI:...`, 
   - reviewed papers by relevance, with the thesis questions they inform,
   - papers in progress (queued or being read),
   - the reading queue: `candidates` from all notes, de-duplicated, minus papers that
-    already have a note or are skipped, ranked by how many notes point to them,
+    already have a note or are skipped, ranked by reading priority (the highest among the
+    notes pointing to it), then by how many notes point to them,
   - a link to the skipped list.
 
 `check` fails if a note is invalid or the index is stale.
@@ -41,6 +42,7 @@ STATUSES = ["queued", "reading", "reviewed"]
 RELEVANCE = ["core", "high", "medium", "low"]
 DEPTHS = ["skim", "full"]
 VIAS = ["cites", "refs", "recs"]
+PRIORITIES = ["very high", "high", "medium", "low"]  # reading priority, most urgent first
 REQUIRED = [
     "key", "title", "authors", "year", "venue", "url", "pdf", "arxiv", "doi", "s2_id",
     "status", "relevance", "read_depth", "informs", "themes", "added", "reviewed",
@@ -75,6 +77,11 @@ class Candidate:
     title: str
     pointers: list[tuple[str, str, str]] = field(default_factory=list)  # (note key, via, why)
     best_rel: int = len(RELEVANCE)
+    prio: int = len(PRIORITIES)
+
+    @property
+    def priority(self) -> str:
+        return PRIORITIES[self.prio] if self.prio < len(PRIORITIES) else "–"
 
 
 def norm_id(raw: str) -> str:
@@ -196,6 +203,10 @@ def validate(note: Note, questions: dict[str, Path], errors: list[str]) -> None:
             continue
         if cand.get("via") not in VIAS:
             errors.append(f"{n}: candidates[{i}].via must be one of {VIAS}")
+        if cand.get("priority") not in PRIORITIES:
+            errors.append(f"{n}: candidates[{i}].priority must be one of {PRIORITIES}")
+        if cand.get("scout_priority") is not None and cand["scout_priority"] not in PRIORITIES:
+            errors.append(f"{n}: candidates[{i}].scout_priority must be one of {PRIORITIES}")
 
     for name in SECTIONS:
         if section(note.body, name) is None:
@@ -277,7 +288,9 @@ def build_queue(notes: list[Note], skipped: dict[str, str]) -> list[Candidate]:
             c = queue.setdefault(cid, Candidate(id=str(cand["id"]), title=str(cand.get("title", ""))))
             c.pointers.append((note.key, str(cand.get("via", "")), str(cand.get("why", ""))))
             c.best_rel = min(c.best_rel, note.rel_index)
-    return sorted(queue.values(), key=lambda c: (-len({p[0] for p in c.pointers}), c.best_rel, c.title.lower()))
+            if cand.get("priority") in PRIORITIES:
+                c.prio = min(c.prio, PRIORITIES.index(cand["priority"]))
+    return sorted(queue.values(), key=lambda c: (c.prio, -len({p[0] for p in c.pointers}), c.best_rel, c.title.lower()))
 
 
 def cell(text: str) -> str:
@@ -338,17 +351,18 @@ def render(notes: list[Note], skipped: dict[str, str]) -> str:
         "",
         f"## Reading queue ({len(queue)})",
         "",
-        "Candidates suggested by the notes above, not yet read or skipped. Ranked by how many notes",
-        "point to them, then by the relevance of those notes. Start a note with `/paper <id>`;",
+        "Candidates suggested by the notes above, not yet read or skipped. Ranked by reading priority",
+        "(very high, high, medium, low), then by how many notes point to them, then by the relevance",
+        "of those notes. Start a note with `/paper <id>`;",
         "reject one by adding a row to [`skipped.md`](skipped.md).",
         "",
     ]
     if queue:
-        out += ["| Paper | ID | Pointed to by | Why |", "| --- | --- | --- | --- |"]
+        out += ["| Priority | Paper | ID | Pointed to by | Why |", "| --- | --- | --- | --- | --- |"]
         for c in queue:
             by = ", ".join(sorted({f"[{k}]({k}.md)" for k, _, _ in c.pointers}))
             why = "; ".join(dict.fromkeys(w for _, _, w in c.pointers if w))
-            out.append(f"| {cell(c.title)} | `{c.id}` | {by} | {cell(why) or '–'} |")
+            out.append(f"| {c.priority} | {cell(c.title)} | `{c.id}` | {by} | {cell(why) or '–'} |")
     else:
         out.append("_The queue is empty._")
 
@@ -375,7 +389,7 @@ def main() -> int:
         for c in queue:
             n = len({p[0] for p in c.pointers})
             why = "; ".join(dict.fromkeys(w for _, _, w in c.pointers if w))
-            print(f"{c.id:28} [{n} note{'s' if n != 1 else ''}] {c.title}" + (f" - {why}" if why else ""))
+            print(f"{c.priority:9} {c.id:28} [{n} note{'s' if n != 1 else ''}] {c.title}" + (f" - {why}" if why else ""))
         if not queue:
             print("The reading queue is empty.")
         return 0
