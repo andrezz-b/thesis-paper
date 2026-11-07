@@ -27,6 +27,7 @@ reporting results.
 - Recognising the entity from the image is an extra grounding step before the first
   hop.
 - 2026-11-04 (supervisor meeting): hop count is one candidate difficulty axis and a label per item; see [DS-13](DS-13-difficulty-levels.md) and [DS-14](DS-14-question-labels.md).
+- 2026-11-07: M3-VQA reports 1, 2, 3 and 4+ hops (8.3%, 24.2%, 34.6%, 32.8% of 13,125 items; Table 2). Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 

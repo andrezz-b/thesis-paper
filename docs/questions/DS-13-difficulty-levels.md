@@ -2,7 +2,7 @@
 id: DS-13
 title: How is question difficulty defined and measured (easy, medium, hard)?
 area: dataset
-status: open
+status: researching
 phase: dataset
 priority: high
 depends_on: []
@@ -43,6 +43,7 @@ reporting in [EV-01](EV-01-metrics.md).
   define it from the properties of the question only (leaning, not decided).
   If results approach 100%, the user would consult the supervisor, but expects that
   something would be done about it (e.g. harder items).
+- 2026-11-07: M3-VQA defines difficulty by hop count and entity count (paper §3, Table 2) and sees accuracy fall with both under the gold-evidence oracle (§5.5). Reusing some of its questions or images as a difficulty axis is an option, not committed: it would need filtering and rewriting as Wikidata SPARQL, and not all items would work. Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 

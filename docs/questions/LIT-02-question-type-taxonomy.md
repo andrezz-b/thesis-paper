@@ -2,7 +2,7 @@
 id: LIT-02
 title: What question-type taxonomy and terminology does the literature use?
 area: literature
-status: open
+status: researching
 phase: dataset
 priority: high
 depends_on: []
@@ -35,6 +35,7 @@ terminology rather than ad hoc, so results are comparable and the thesis can cit
     aggregates, optional, union, ...).
 - There are probably several independent axes: semantic type, structural shape,
   number of hops, and a visual axis (role of the image, [DS-05](DS-05-image-role.md)).
+- 2026-11-07: M3-VQA splits multi-hop questions into parallel (several entities reasoned about independently, then combined) and sequential (the output of one hop feeds the next) (paper §3). Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 
