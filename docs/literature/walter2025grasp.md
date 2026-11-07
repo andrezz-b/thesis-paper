@@ -22,22 +22,27 @@ candidates:
   - id: "arXiv:2603.06582"
     title: "Agentic SPARQL: Evaluating SPARQL-MCP-powered Intelligent Agents on the Federated KGQA Benchmark"
     via: cites
+    priority: high
     why: "Agentic SPARQL-tool setup with MCP tool access, evaluated on a federated KGQA benchmark; compare tool design and baselines (AG-02, EV-02) (abstract only)"
   - id: "arXiv:2512.14277"
     title: "SPARQL-LLM: Real-Time SPARQL Query Generation from Natural Language Questions"
     via: cites
+    priority: medium
     why: "Reports runtime and cost next to accuracy and classes GRASP as a toolbox-driven agent; extra metrics and baselines (EV-01, EV-02)"
   - id: "arXiv:2610.13648"
     title: "SPARQL-LLM in the TEXT2SPARQL 2026 Challenge"
     via: recs
+    priority: low
     why: "Open-source KGQA system in a shared text-to-SPARQL challenge; possible shared benchmark and baselines (EV-02, LIT-01) (abstract only, partial)"
   - id: "S2:f5281a4defb47a4f0bc322b03a9fd3940c6ebcfc"
     title: "GRASP and GRISP for Question Answering over Wikidata"
     via: cites
+    priority: high
     why: "Same-group follow-up on Wikidata QA; may give the latest GRASP version and Wikidata numbers (AG-01, EV-02) (title only)"
   - id: "arXiv:2210.03629"
     title: "ReAct: Synergizing Reasoning and Acting in Language Models"
     via: refs
+    priority: high
     why: "Origin of the ReAct loop that GRASP and the thesis build on (§3.1); to cite for the agent design (AG-01, AG-03)"
 bibtex: |
   @inbook{walter2025grasp,

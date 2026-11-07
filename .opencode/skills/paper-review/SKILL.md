@@ -124,13 +124,24 @@ the paper's ID and note path, one or two sentences on why it matters for the the
 suggestions to skip. It is read-only; you apply its results. Its descriptions of papers are
 based on abstracts or citation sentences only, so treat `why` lines as leads, not facts.
 
+Every candidate carries the scout's `priority` (`very high | high | medium | low`). Treat it
+as a starting estimate and adjust it with context the scout lacks: the user's notes,
+decisions in `docs/THESIS.md`, what has been read, what is already in the queue, and the
+priority and status of the question IDs involved. Present the candidates with the scout's
+and your priority, and give a one-line reason **only where you differ** (for example
+"higher: decides AG-01", "lower: duplicates GRASP").
+
 Then, with the user:
 
 1. Go through the candidates; for each the user keeps, add it to the note's `candidates:`
-   list (fields `id`, `title`, `via`, `why`). Drop the rest.
-2. For candidates the user rejects for good, append a row to `docs/literature/skipped.md`
+   list (fields `id`, `title`, `via`, `priority`, `why`). `priority` is required and holds
+   the final value agreed with the user; add `scout_priority` only when it differs. Drop
+   the rest.
+2. Re-rate affected entries already in the queue (in other notes' `candidates:`) when the
+   review changed what matters; tell the user which ones and why.
+3. For candidates the user rejects for good, append a row to `docs/literature/skipped.md`
    (`| ID | Title | date | reason |`).
-3. If a candidate is clearly a **core** paper for an open question, say so; the user may
+4. If a candidate is clearly a **core** paper for an open question, say so; the user may
    want to read it next.
 
 ### 5. Hand off thesis-level findings

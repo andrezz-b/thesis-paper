@@ -23,6 +23,8 @@ candidates: [] # follow-up papers, filled in after the user confirms them
 #   - id: "arXiv:2507.08107"
 #     title: Paper title
 #     via: cites # cites (newer paper citing this one) | refs (cited by this one) | recs
+#     priority: high # reading priority, required: very high | high | medium | low (final value)
+#     scout_priority: medium # optional: lit-scout's estimate, only when the final priority differs
 #     why: One line on why it matters for the thesis
 bibtex: |
   @misc{walter2025grasp,

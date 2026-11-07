@@ -92,11 +92,26 @@ Reply with exactly these parts, nothing else:
    - id: "arXiv:2604.21133"      # arXiv:/DOI: ID exactly as printed by the script
      title: "Full title"
      via: cites                  # cites | refs | recs
+     priority: high              # very high | high | medium | low (required)
      why: "One line: what it offers and which question ID it helps (e.g. LIT-01)"
    ```
 
    Base `why` only on the abstract or the citation sentence you saw. If you judged from
    the title alone, end the line with "(title only)".
+
+   `priority` is your estimate of how urgently the thesis should read the paper; the
+   calling agent may adjust it. Rubric, using the `priority` and `phase` in the front
+   matter of the question files:
+   - **very high**: bears directly on a high-priority open question (especially phase
+     `dataset`) and is a likely baseline, competitor, benchmark or certain citation.
+     At most 2 per run.
+   - **high**: supplies a method, metric or dataset the thesis will probably use, or fits
+     several questions.
+   - **medium**: useful context or contrast, usually one question link.
+   - **low**: completeness only, a passing link, or a peripheral topic.
+
+   Judgements from the title or abstract alone are at most `high`. State the deciding
+   factor in `why`. Order the list by priority, then by fit.
 2. **Already known**: papers you dropped because the thesis docs have them (one line each).
 3. **Suggest skipping**: noisy results you rejected, with a few words of reason each.
 4. **Problems**: failed or empty lookups (e.g. throttling). Say so; never fill gaps from

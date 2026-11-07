@@ -22,22 +22,27 @@ candidates:
   - id: "arXiv:2511.22843"
     title: "Breaking the Visual Shortcuts in Multimodal Knowledge-Based Visual Question Answering"
     via: cites
+    priority: high
     why: "KB-VQA benchmark where the query image no longer matches the subject entity; related-entity images; LIT-04, IX-01, DS-07, DS-12 (abstract only)"
   - id: "arXiv:2609.20843"
     title: "VISPATH: Visual-Intent-Guided Path Reasoning for Multimodal Knowledge Graph Question Answering"
     via: cites
+    priority: medium
     why: "Multimodal KGQA with KG-path reasoning and a 2 to 4 hop benchmark; LIT-01, AG-03 (abstract only)"
   - id: "arXiv:2602.00593"
     title: "Pix2Fact: When Vision Is Not Enough -- Benchmarking Fine-Grained VQA with Web Verification on High-Resolution Real-World Scenes"
     via: cites
+    priority: medium
     why: "Benchmark needing visual grounding plus external search, evaluated with search tools; LIT-01 contrast, EV-02 (abstract only)"
   - id: "DOI:10.1109/CVPR.2019.00686"
     title: "GQA: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering"
     via: refs
+    priority: medium
     why: "Template engine over Visual Genome scene graphs with answer balancing that ReasonVQA reuses; DS-09, DS-13, DS-14 (via Semantic Scholar refs only)"
   - id: "arXiv:1602.07332"
     title: "Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations"
     via: refs
+    priority: low
     why: "Objects, relations, scene graphs and WordNet synsets; ReasonVQA's image source; LIT-05, DS-12 (abstract only)"
 bibtex: |
   @misc{tran2025reasonvqa,

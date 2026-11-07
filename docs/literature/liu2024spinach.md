@@ -22,22 +22,27 @@ candidates:
   - id: "arXiv:2510.02200"
     title: "ARUQULA - An LLM based Text2SPARQL Approach using ReAct and Knowledge Graph Exploration Utilities"
     via: cites
+    priority: high
     why: "Generalises SPINACH's ReAct exploration design to other RDF graphs; compare tool set and loop (AG-02, AG-03)"
   - id: "S2:354a417f5e8d678b19f1f75705ed2305f4a92789"
     title: "QAWiki: A Knowledge Graph Question Answering & SPARQL Query Generation Dataset for Wikidata"
     via: cites
+    priority: very high
     why: "Wikidata question/SPARQL dataset that compares result tables as SPINACH does (LIT-03, DS-08, DS-09)"
   - id: "arXiv:2610.06650"
     title: "Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents"
     via: recs
+    priority: medium
     why: "Agents that explore Wikidata, with recorded search traces (AG-02, EV-03; abstract only)"
   - id: "arXiv:2604.21133"
     title: "GRISP: Guided Recurrent IRI Selection over SPARQL Skeletons"
     via: cites
+    priority: high
     why: "Evaluates on SPINACH and WDQL with its own metric; shows how the dataset is used as a test set (LIT-03)"
   - id: "S2:f88318e3bdb5a8d39d57e2d7b48d7e3b218c2e21"
     title: "Graf von Data: A Knowledge Graph Question Answering Agent for Organisational Usage"
     via: cites
+    priority: medium
     why: "KG-agnostic ReAct agent; categorises agent actions (entity retrieval, property subgraph, path discovery, SPARQL execution) (AG-02)"
 bibtex: |
   @inproceedings{liu2024spinach,
