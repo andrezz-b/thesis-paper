@@ -2,7 +2,7 @@
 id: LIT-04
 title: How do related works choose distractors for visual entity retrieval?
 area: literature
-status: open
+status: researching
 phase: dataset
 priority: medium
 depends_on: []
@@ -28,6 +28,7 @@ Starting points (to verify):
   used by InfoSeek.
 - Wiki-VEL: visual entity linking for structured data on Wikimedia Commons (2024).
 - Cross-modal retrieval for knowledge-based VQA (Lerner et al., ECIR 2024; CLIP-based).
+- 2026-11-07: M3-VQA (paper App. D.3) is a further starting point: about 5 text-similarity hard negatives per entity in a controlled multimodal knowledge base. Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 

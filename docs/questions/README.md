@@ -13,27 +13,27 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 28 open, 10 researching, 1 decided, 0 dropped.
+**39 questions:** 21 open, 17 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
 | ID | Question | Phase | Priority | Status | Unblocks |
 | --- | --- | --- | --- | --- | --- |
-| [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | dataset | high | open | [DS-01](DS-01-question-types.md) |
+| [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | dataset | high | researching | [DS-01](DS-01-question-types.md) |
 | [DS-02](DS-02-wikidata-subset.md) | Which part of Wikidata is well connected enough to build the dataset on? | dataset | high | open | [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [IX-01](IX-01-distractor-strategy.md) |
 | [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | dataset | high | researching | [AG-05](AG-05-experiment-configurations.md) |
 | [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | dataset | high | researching | [DS-08](DS-08-gold-answers.md), [EV-01](EV-01-metrics.md) |
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | dataset | high | researching | [DS-08](DS-08-gold-answers.md) |
-| [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | open | [FR-01](FR-01-research-questions.md) |
+| [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | dataset | high | researching | [FR-01](FR-01-research-questions.md) |
 | [RP-01](RP-01-image-storage.md) | Where are images stored? | dataset | high | open | [RP-06](RP-06-dataset-versioning.md) |
 | [RP-02](RP-02-languages.md) | Which programming language(s) for the dataset pipeline and the agent? | dataset | high | open | [RP-04](RP-04-repo-structure.md) |
-| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | dataset | high | open | – |
+| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | dataset | high | researching | – |
 | [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | dataset | medium | researching | [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | dataset | medium | open | – |
-| [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | dataset | medium | open | – |
+| [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | dataset | medium | researching | – |
 | [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | dataset | medium | open | – |
-| [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | dataset | low | open | [RP-05](RP-05-multiple-embedding-models.md) |
-| [IX-04](IX-04-index-payload.md) | What does the index store per entity? | dataset | low | open | – |
+| [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | dataset | low | researching | [RP-05](RP-05-multiple-embedding-models.md) |
+| [IX-04](IX-04-index-payload.md) | What does the index store per entity? | dataset | low | researching | – |
 | [AG-01](AG-01-own-agent-vs-grasp.md) | Build an own agent or build on top of GRASP? | agent | medium | researching | [AG-02](AG-02-tool-set.md), [AG-03](AG-03-agent-framework.md) |
 
 ## Blocked
@@ -82,10 +82,10 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
-| [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | open | dataset | high | – | [FR-01](FR-01-research-questions.md), [DS-01](DS-01-question-types.md), [DS-09](DS-09-generation-pipeline.md) |
-| [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | open | dataset | high | – | – |
+| [LIT-01](LIT-01-existing-image-sparql-benchmarks.md) | Does a benchmark with image + question + gold SPARQL already exist? | researching | dataset | high | – | [FR-01](FR-01-research-questions.md), [DS-01](DS-01-question-types.md), [DS-09](DS-09-generation-pipeline.md) |
+| [LIT-02](LIT-02-question-type-taxonomy.md) | What question-type taxonomy and terminology does the literature use? | researching | dataset | high | – | – |
 | [LIT-03](LIT-03-kgqa-metrics.md) | Which evaluation metrics does the KGQA literature use, and how are they computed? | researching | dataset | high | – | [EV-01](EV-01-metrics.md) |
-| [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md) |
+| [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | researching | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md) |
 | [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | open | dataset | medium | – | [LIT-01](LIT-01-existing-image-sparql-benchmarks.md), [DS-05](DS-05-image-role.md), [DS-13](DS-13-difficulty-levels.md) |
 
 ### Dataset (DS)
@@ -104,17 +104,17 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | open | dataset | medium | [DS-09](DS-09-generation-pipeline.md) | – |
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
-| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | open | dataset | high | – | [DS-01](DS-01-question-types.md), [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [DS-14](DS-14-question-labels.md), [FR-01](FR-01-research-questions.md) |
+| [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | researching | dataset | high | – | [DS-01](DS-01-question-types.md), [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [DS-14](DS-14-question-labels.md), [FR-01](FR-01-research-questions.md) |
 | [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | open | dataset | medium | [DS-01](DS-01-question-types.md) | [DS-13](DS-13-difficulty-levels.md), [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 
 ### Image index (IX)
 
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
-| [IX-01](IX-01-distractor-strategy.md) | How are distractor images chosen for the image index? | open | dataset | high | [DS-02](DS-02-wikidata-subset.md) | [IX-02](IX-02-distractor-count.md) |
+| [IX-01](IX-01-distractor-strategy.md) | How are distractor images chosen for the image index? | researching | dataset | high | [DS-02](DS-02-wikidata-subset.md) | [IX-02](IX-02-distractor-count.md) |
 | [IX-02](IX-02-distractor-count.md) | How many distractors should the index contain? | open | dataset | medium | [IX-01](IX-01-distractor-strategy.md) | – |
-| [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | open | dataset | low | – | [RP-05](RP-05-multiple-embedding-models.md) |
-| [IX-04](IX-04-index-payload.md) | What does the index store per entity? | open | dataset | low | – | [AG-02](AG-02-tool-set.md) |
+| [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | researching | dataset | low | – | [RP-05](RP-05-multiple-embedding-models.md) |
+| [IX-04](IX-04-index-payload.md) | What does the index store per entity? | researching | dataset | low | – | [AG-02](AG-02-tool-set.md) |
 
 ### Agent (AG)
 

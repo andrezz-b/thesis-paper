@@ -32,6 +32,7 @@ Defines the visual axis of the dataset and what the image tool has to support.
   holding in their right hand?". Exploratory, not a decision; the current
   assumption stays. It is a possible difficulty axis ([DS-13](DS-13-difficulty-levels.md)); visual knowledge
   graph papers may help ([LIT-05](LIT-05-visual-knowledge-graphs.md)).
+- 2026-11-07: M3-VQA has images with several visual entities (paper §3, Table 2), the same idea as the multi-entity direction above. Stretch, not committed. Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 

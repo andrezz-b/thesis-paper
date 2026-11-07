@@ -2,7 +2,7 @@
 id: IX-03
 title: Which image embedding model(s) are used for the index?
 area: index
-status: open
+status: researching
 phase: dataset
 priority: low
 depends_on: []
@@ -25,6 +25,7 @@ index-based agent configurations.
   ([`embeddings/clip.js`](https://github.com/andrezz-b/thesis-dataset-poc/blob/main/embeddings/clip.js)).
 - Comparing several models (e.g. larger CLIP variants, SigLIP) is a nice-to-have if
   there is time.
+- 2026-11-07: M3-VQA indexes each entity as the sum of the CLIP ViT-L embeddings of its article summary and its image; this beat either alone and name + image in their preliminary experiments (paper App. F.4). Source: [M3-VQA note](../literature/ma2026m3.md).
 
 ## Resolution
 

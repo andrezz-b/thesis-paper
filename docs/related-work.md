@@ -12,7 +12,7 @@ them provides executable gold SPARQL is what [LIT-01](questions/LIT-01-existing-
 
 | Paper | Venue | Link | Relevance | Verified |
 | --- | --- | --- | --- | --- |
-| M³-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering (Ma et al.) | ACL 2026 | https://arxiv.org/abs/2604.25122 | Uses SPARQL over Wikidata (QLever) to extract answers; multi-entity, multi-hop; evaluates agentic retrieval. **Closest so far.** | 2026-10-29 |
+| M³-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering (Ma et al.) | ACL 2026 (main) | https://arxiv.org/abs/2604.25122 ([note](literature/ma2026m3.md)) | Multi-entity, multi-hop; entities linked to Wikidata, SPARQL used to build parallel questions, but the released gold is Wikipedia evidence (no SPARQL, no QIDs in the released data); evaluates agentic retrieval. Closest so far, contrasts with our gold SPARQL. | 2026-11-07 |
 | ReasonVQA: A Multi-hop Reasoning Benchmark with Structural Knowledge for Visual Question Answering (Tran et al.) | ICCV 2025 | https://arxiv.org/abs/2507.16403 | Generates 1–3 hop questions from Wikidata for objects in images | 2026-10-29 |
 | WikiVQABench: A Knowledge-Grounded Visual Question Answering Benchmark from Wikipedia and Wikidata (Shbita et al.) | arXiv 2026 | https://arxiv.org/abs/2605.21479 | LLM-generated, human-curated multiple-choice questions grounded in Wikidata triples | 2026-10-29 |
 | KVQA: Knowledge-Aware Visual Question Answering (Shah et al.) | AAAI 2019 | https://doi.org/10.1609/aaai.v33i01.33018876 | Persons in images, Wikidata, multi-hop; reference images for visual entity linking | 2026-10-29 |
