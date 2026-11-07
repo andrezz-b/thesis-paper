@@ -97,7 +97,15 @@ evaluating only plain VLMs without tools.
   question, answer choices and hop count and has a Download page (content not checked). The code repository
   (https://github.com/duong-tr/ReasonVQA) contained only a LICENSE file with one commit when checked
   (2026-11-07), although the paper says source code is provided (§5).
-- Is the depicted entity named in the question text? No, the class name is used ("this church", "this skyscraper")
+  The data is on Hugging Face (`duongtr/ReasonVQA`, checked 2026-11-07 via the Download page, a Hugging Face
+  API call and range reads of the files). Per question there is an annotation record with `hop`, `entity_id` (QID
+  of the main entity), `entity_name`, `route` (list of QIDs from the main entity to the answer node),
+  `property_id` and `property_label` (PID of the last property only) and `has_scene_graph`. Still no SPARQL. The
+  intermediate properties of a multi-hop route are not stored; example: question 171 has hop 2, route
+  Q11746980 -> Q179718 -> Q2886278 and property P2348 (time period), while the first property (P138, named after)
+  is only visible in the 1-hop question 169 about the same entity.
+- Is the depicted entity named in the question text? No (also in the released data, e.g. "After whom or what is
+  this church named?"), the class name is used ("this church", "this skyscraper")
   (§3.2.1, Fig. 1). For GLDv2 landmarks the main object is a specific entity; for VG the linked concept is a
   WordNet-derived Wikidata concept (e.g. traffic light, App. 1.2, Fig. 1).
 - Which knowledge graph? Wikidata. Snapshot or endpoint: not stated.
@@ -107,7 +115,7 @@ evaluating only plain VLMs without tools.
   choices, not images (§3.2.2).
 - Agentic systems? No. Only VLMs prompted zero-shot and three fine-tuned (§4.2).
 - Size: full 598.5K images, 4.2M questions; ReasonVQA-U 13.3K images, 78K questions; ReasonVQA-B 8.7K images,
-  51.9K questions (§4.1 Table 1). Splits: 70/30 train/test (§3.3.2). Licence: not stated in the paper; the project page and demo say "This work is licensed under AGPL 3.0" and the repository has an AGPL-3.0 LICENSE (2026-11-07). The licences of the source images (VG, GLDv2) are not discussed in the paper.
+  51.9K questions (§4.1 Table 1). Splits: 70/30 train/test (§3.3.2). Licence: not stated in the paper; the Hugging Face dataset card says `agpl-3.0`, the project page and demo say "This work is licensed under AGPL 3.0" and the repository has an AGPL-3.0 LICENSE (2026-11-07). The licences of the source images (VG, GLDv2) are not discussed in the paper.
 
 ## Key results
 
@@ -190,7 +198,16 @@ Proposed, to be confirmed with the user (no `relevance`/`informs` set yet).
 
 ## Open doubts
 
-- Does the downloadable dataset contain the fact path or SPARQL used per question? The project page and demo do not say. The repository had no code on 2026-11-07 (only LICENSE), contrary to §5.
+- Released annotations contain the main-entity QID, the route of QIDs and the last property, but not the
+  intermediate properties; a gold SPARQL would have to be reconstructed (checked on a few rows only). The
+  repository had no code on 2026-11-07 (only LICENSE), contrary to §5.
+- Sample of 6,671 rows at ten offsets of `val.jsonl`: all from GLDv2, none from Visual Genome (not a full
+  count). The data is therefore mostly landmark and building images; check the share of Visual Genome questions.
+- Multiple-choice distractors in the released rows look implausible (e.g. country of a church: Malawi,
+  Vanuatu, Kosovo for the answer Poland; time period: May, November). The released rows hold `answers` and
+  `correct` per question.
+- `image_url` points to Wikimedia Commons for GLDv2 images (per-file licences not checked); `image_path` is
+  empty in the rows read.
 - Dataset download: the demo has a Download page; format, contents and licence of the data itself are not checked.
 - The repository had no code on 2026-11-07 (only LICENSE), contrary to §5.
 - The BibTeX in the front matter is the arXiv `@misc`; the paper is ICCV 2025 (DOI 10.1109/ICCV51701.2025.01746).
