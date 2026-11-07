@@ -26,6 +26,7 @@ therefore the image role ([DS-05](DS-05-image-role.md)) and image-based difficul
 - 2026-11-04 (supervisor meeting, user's notes): "Visual Knowledge Graph: cup on a
   desk, desk inside the room. Inspiration for visual papers." No specific papers
   were named; none have been looked up yet.
+- 2026-11-07: ReasonVQA uses Visual Genome scene graphs: scene-graph relations become sub-clauses of a question ("__ parked next to the sidewalk"), and such questions score lower (§3.2.1, §4.4). Visual Genome is added as a candidate in the ReasonVQA note. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 

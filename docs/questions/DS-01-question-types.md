@@ -30,6 +30,7 @@ curation process ([DS-09](DS-09-generation-pipeline.md)) and the record format (
 - 2026-11-04 (supervisor meeting): types should be labelled per item ([DS-14](DS-14-question-labels.md)) and
   cover a difficulty range ([DS-13](DS-13-difficulty-levels.md)).
 - 2026-11-07: M3-VQA builds parallel questions from human-written templates per relation type with category placeholders, and answers them with SPARQL on Wikidata (paper §4.1). Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-07: ReasonVQA's question types are defined by the Wikidata property and hop count only (no comparison, count or boolean); see [LIT-02](LIT-02-question-type-taxonomy.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 

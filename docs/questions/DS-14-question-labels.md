@@ -32,6 +32,7 @@ reporting results per label. They are part of the record format ([RP-03](RP-03-d
 - [RP-03](RP-03-dataset-format.md) already lists "question type label(s), hop count" as candidate fields.
 - 2026-11-05 (user): no further labels known yet beyond hops and question type.
 - 2026-11-07: KVQA's ten non-exclusive challenge categories (spatial, 1-hop, multi-hop, Boolean, intersection, subtraction, comparison, counting, multi-entity, multi-relation) are a possible starting point for the tag set; not committed. See [LIT-02](LIT-02-question-type-taxonomy.md). Source: [KVQA note](../literature/shah2019kvqa.md).
+- 2026-11-07: ReasonVQA tags each question with hop count, one or more of 20 knowledge domains (by property), whether scene-graph information was used, and the source image dataset (§3.2.1, §4.4, App. 2.2). Possible starting points for labels; not committed. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 

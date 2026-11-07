@@ -32,6 +32,7 @@ Defines how results are compared with the literature and across configurations.
   correct grounding, to separate grounding errors from query errors. (Hypothesis
   numbers updated 2026-10-30 after [D-017](../decisions.md#d-017).)
 - 2026-11-06: GRASP uses SPINACH's F1 variant that allows extra columns, averaged over samples, on 200 random samples per benchmark (§4.1); over 1,024 rows it falls back to standard F1; an ASK vs SELECT mismatch scores 1 if semantically equivalent. Source: [GRASP note](../literature/walter2025grasp.md).
+- 2026-11-07: ReasonVQA's metrics (exact match, substring, semantic similarity on answer text; §4.3) do not apply to query results; semantic similarity could only matter for comparing label answers. Contrast, see [LIT-03](LIT-03-kgqa-metrics.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 

@@ -32,6 +32,7 @@ photo shows the name, the task becomes reading text.
   - Near-duplicate photos (e.g. perceptual hash).
   - Visible text or logos naming the entity.
   - File names and captions must never reach the agent.
+- 2026-11-07: ReasonVQA takes images from Visual Genome (objects linked to Wikidata via WordNet synsets) and Google Landmarks v2 (annotated with Wikimedia URLs that lead to Wikidata entities) (§3.1, App. 1.2). Licences of these images are not discussed in the paper. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 
 ## Resolution
 
