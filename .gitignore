@@ -45,3 +45,6 @@ diff.tex
 # Cached API responses and downloaded PDFs for the literature notes
 .cache/
 docs/literature/pdf/
+
+# Scratch material (not committed)
+tmp/

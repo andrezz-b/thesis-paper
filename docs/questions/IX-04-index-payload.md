@@ -25,6 +25,7 @@ Determines what the image tool returns to the agent.
   the conventions in the POC's
   [AGENTS.md](https://github.com/andrezz-b/thesis-dataset-poc/blob/main/AGENTS.md)).
 - 2026-11-07: M3-VQA stores per entity the Wikipedia summary and the first page image (image corpus), plus at least 3 page sections (text corpus) (paper App. D.3, F.4). Source: [M3-VQA note](../literature/ma2026m3.md).
+- 2026-11-08: OVEN's entity representation is the name (text) plus the first infobox image; a black image when the entity has none (§2 footnote 2, §3, §5.1). Infobox images exist for 2,032,340 of 6,063,945 entities. Source: [OVEN note](../literature/hu2023open.md).
 
 ## Resolution
 

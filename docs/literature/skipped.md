@@ -28,3 +28,8 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:2601.13942 | Glance-or-Gaze: Incentivizing LMMs to Adaptively Focus Search via Reinforcement Learning | 2026-11-08 | RL-trained search agent; the thesis does not train models ([D-008](../decisions.md#d-008)) |
 | arXiv:2502.20964 | Fine-Grained Retrieval-Augmented Generation for Visual Question Answering | 2026-11-08 | Only an InfoSeek ablation of a RAG pipeline (citing sentence); no thesis link |
 | arXiv:2603.05256 | Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum | 2026-11-08 | RL training for KB-VQA; the thesis does not train models ([D-008](../decisions.md#d-008)) |
+| arXiv:2311.17136 | UniIR: Training and Benchmarking Universal Multimodal Information Retrievers | 2026-11-08 | Multimodal retriever that uses OVEN as one of many tasks; embedding-model context only |
+| arXiv:2507.19054 | Closing the Modality Gap for Mixed Modality Search | 2026-11-08 | Mixed-modality CLIP index study that uses OVEN; embedding-model context only |
+| S2:37ea01066a563c661587b7c3f50fbf64d1bf311a | Accelerating Large-Scale Inference with Anisotropic Vector Quantization (ScaNN) | 2026-11-08 | Search library OVEN used over 6M candidates; no thesis link |
+| arXiv:2306.07196 | Retrieval-Enhanced Contrastive Vision-Text Models | 2026-11-08 | Only uses OVEN's candidates in its evaluation; peripheral |
+| arXiv:2412.13614 | Reverse Region-to-Entity Annotation for Pixel-Level Visual Entity Linking | 2026-11-08 | Pixel-level entity linking; peripheral to the thesis |

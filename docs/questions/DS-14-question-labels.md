@@ -34,6 +34,7 @@ reporting results per label. They are part of the record format ([RP-03](RP-03-d
 - 2026-11-07: KVQA's ten non-exclusive challenge categories (spatial, 1-hop, multi-hop, Boolean, intersection, subtraction, comparison, counting, multi-entity, multi-relation) are a possible starting point for the tag set; not committed. See [LIT-02](LIT-02-question-type-taxonomy.md). Source: [KVQA note](../literature/shah2019kvqa.md).
 - 2026-11-07: ReasonVQA tags each question with hop count, one or more of 20 knowledge domains (by property), whether scene-graph information was used, and the source image dataset (§3.2.1, §4.4, App. 2.2). Possible starting points for labels; not committed. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: entity popularity (e.g. Wikipedia page views or sitelink count; not decided how to measure) is a candidate label, since the vision-only configuration should do better on popular entities (user expectation, InfoSeek §5.2 Fig. 7). Source: [InfoSeek note](../literature/chen2023can.md).
+- 2026-11-08: OVEN also splits results by monthly page views (Fig. 6), supporting popularity as a candidate label next to the InfoSeek evidence. Source: [OVEN note](../literature/hu2023open.md).
 
 ## Resolution
 

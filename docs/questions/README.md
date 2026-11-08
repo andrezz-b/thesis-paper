@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 20 open, 18 researching, 1 decided, 0 dropped.
+**39 questions:** 19 open, 19 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -112,7 +112,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | ID | Question | Status | Phase | Priority | Depends on | Informs |
 | --- | --- | --- | --- | --- | --- | --- |
 | [IX-01](IX-01-distractor-strategy.md) | How are distractor images chosen for the image index? | researching | dataset | high | [DS-02](DS-02-wikidata-subset.md) | [IX-02](IX-02-distractor-count.md) |
-| [IX-02](IX-02-distractor-count.md) | How many distractors should the index contain? | open | dataset | medium | [IX-01](IX-01-distractor-strategy.md) | – |
+| [IX-02](IX-02-distractor-count.md) | How many distractors should the index contain? | researching | dataset | medium | [IX-01](IX-01-distractor-strategy.md) | – |
 | [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | researching | dataset | low | – | [RP-05](RP-05-multiple-embedding-models.md) |
 | [IX-04](IX-04-index-payload.md) | What does the index store per entity? | researching | dataset | low | – | [AG-02](AG-02-tool-set.md) |
 

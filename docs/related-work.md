@@ -46,6 +46,6 @@ them provides executable gold SPARQL is what [LIT-01](questions/LIT-01-existing-
 
 | Paper | Venue | Link | Relevance | Verified |
 | --- | --- | --- | --- | --- |
-| Open-domain Visual Entity Recognition: Towards Recognizing Millions of Wikipedia Entities (OVEN; Hu et al.) | arXiv 2023 | https://arxiv.org/abs/2302.11154 | Large-scale visual entity recognition; used by InfoSeek | unverified (seen cited) |
+| Open-domain Visual Entity Recognition: Towards Recognizing Millions of Wikipedia Entities (OVEN; Hu et al.) | arXiv 2023 | https://arxiv.org/abs/2302.11154 | Image + intent query linked to one of about 6M Wikipedia entities; entity not named, no SPARQL; whole KB as distractors; used by InfoSeek. Note: [hu2023open](literature/hu2023open.md) | 2026-11-08 (full paper) |
 | Wiki-VEL: Visual Entity Linking for Structured Data on Wikimedia Commons | ALVR workshop 2024 | https://aclanthology.org/2024.alvr-1.16.pdf | Links Commons images to Wikidata entities | 2026-10-29 |
 | Cross-modal Retrieval for Knowledge-based Visual Question Answering (Lerner, Ferret, Guinaudeau) | ECIR 2024 | https://arxiv.org/abs/2401.05736 | CLIP-based cross-modal retrieval for named-entity VQA | 2026-10-29 |
