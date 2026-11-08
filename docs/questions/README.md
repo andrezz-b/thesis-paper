@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 21 open, 17 researching, 1 decided, 0 dropped.
+**39 questions:** 20 open, 18 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -99,7 +99,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | researching | dataset | medium | – | [DS-01](DS-01-question-types.md), [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
 | [DS-06](DS-06-multi-image-questions.md) | How would multi-image questions work (stretch goal)? | open | dataset | low | [DS-01](DS-01-question-types.md), [DS-05](DS-05-image-role.md) | – |
 | [DS-07](DS-07-related-entity-images.md) | Can the image show an entity other than the subject of the question? | open | dataset | low | [DS-05](DS-05-image-role.md) | – |
-| [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | open | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) | [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
+| [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | researching | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) | [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 | [DS-09](DS-09-generation-pipeline.md) | How are question ideas collected and curated into items? | researching | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) | [DS-10](DS-10-dataset-size.md), [RP-04](RP-04-repo-structure.md) |
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | open | dataset | medium | [DS-09](DS-09-generation-pipeline.md) | – |
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |

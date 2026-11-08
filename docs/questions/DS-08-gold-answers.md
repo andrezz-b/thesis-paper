@@ -2,7 +2,7 @@
 id: DS-08
 title: How are gold queries and gold answers defined, frozen and verified?
 area: dataset
-status: open
+status: researching
 phase: dataset
 priority: high
 depends_on: [LIT-03, DS-04]
@@ -36,6 +36,7 @@ result defines what "correct" means.
   - **Edge cases:** multiple valid answers, ties, yes/no questions (ASK queries).
 - 2026-11-06: SPINACH gold queries are real queries run on the live Wikidata Query Service, kept only if non-empty and under 10 MB, with optimisation, formatting and `mwapi` clauses removed (§3, §3.1, App. C.3); no snapshot date is stated. Source: [SPINACH note](../literature/liu2024spinach.md).
 - 2026-11-07: Possible shortcut (user idea, not decided): derive a first gold query from ReasonVQA items; recorded in [DS-09](DS-09-generation-pipeline.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
+- 2026-11-08: KGVoyager failure analysis (App. F, Table 9): 18% of complete failures (28 of 156) are answer-representation errors, where the content is analogous to the gold but the form differs: result shape (20, e.g. extra label columns), SELECT instead of ASK (4), label instead of IRI (4). Relevant for which columns count and for yes/no questions. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
 
 ## Resolution
 
