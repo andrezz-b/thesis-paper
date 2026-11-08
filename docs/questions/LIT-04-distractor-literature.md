@@ -30,6 +30,7 @@ Starting points (to verify):
 - Cross-modal retrieval for knowledge-based VQA (Lerner et al., ECIR 2024; CLIP-based).
 - 2026-11-07: M3-VQA (paper App. D.3) is a further starting point: about 5 text-similarity hard negatives per entity in a controlled multimodal knowledge base. Source: [M3-VQA note](../literature/ma2026m3.md).
 - 2026-11-07: KVQA's open world uses reference images of 69K persons as the identity pool; QA accuracy drops by more than 10 points versus the closed world (18K), which the authors attribute partly to distractors (§Approach, p. 8883). Distractors are all other identities, not selected by similarity. Source: [KVQA note](../literature/shah2019kvqa.md).
+- 2026-11-08: InfoSeek's With-KB protocol uses a 100K Wikipedia KB with the benchmark entities plus top frequent Wikipedia entities (§4); no hard-negative selection is described. A pool of general frequent entities next to same-class distractors is an option for [IX-01](IX-01-distractor-strategy.md). Retrieval uses a fine-tuned CLIP2CLIP with an (image, question) query against (Wikipedia image, title) candidates, top-5 (§4.2); entity accuracy was 22.2 (Table 5). Source: [InfoSeek note](../literature/chen2023can.md).
 
 ## Resolution
 
