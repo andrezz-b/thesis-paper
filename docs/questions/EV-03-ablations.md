@@ -25,6 +25,7 @@ Ablations support the research questions ([FR-01](FR-01-research-questions.md)),
   type and hop count.
 - 2026-11-06: SPINACH ablates by removing each non-essential tool one at a time on the dev set (§5.5, Table 4) and analyses 20 low-F1 cases by error category (§5.4); both are templates. Source: [SPINACH note](../literature/liu2024spinach.md).
 - 2026-11-06: GRASP studies function sets, model provider, model size, feedback and few-shot examples (§4.3, Tables 5 to 8), templates for our ablations. Optional candidate, not committed (user): a feedback step when the agent wants to finish; in GRASP the same model sees only the final call and the SPARQL rules, at most 2 loops (§3.6), and it helps zero-shot but little with few-shot examples (Table 8). Source: [GRASP note](../literature/walter2025grasp.md).
+- 2026-11-08: KGVoyager ablations (§4.4, Table 4), each on only 2 to 4 model-benchmark pairs, 3 runs, mean ± std: without `explore_entity_relations` F1 drops by 1.5 to 8.6; without `explore_property_usage` by 12.5, 4.2 and 0.7 (the last within run-to-run variability); keyword-only instead of hybrid retrieval by 1.1 to 26.5. Ideas (user, not decided): removing tools; execution feedback on partial queries as an ablation; hybrid vs. keyword-only entity search. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
 
 ## Resolution
 

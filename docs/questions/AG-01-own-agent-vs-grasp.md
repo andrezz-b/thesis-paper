@@ -27,6 +27,7 @@ Decides how much engineering is needed and which baselines come for free.
   ([EV-02](EV-02-baselines.md)).
 - Scope is Wikidata only ([D-003](../decisions.md#d-003)); KG-agnostic tooling is out of scope.
 - 2026-11-06: GRASP (Walter and Bast, ISWC 2025) is a single-context ReAct-style loop with a KG-independent function set (§3.1, §3.2); code and indices are open (github.com/ad-freiburg/grasp). Its generality (a `kg` argument on every function, federated queries) is out of scope for the thesis ([D-003](../decisions.md#d-003)); no image input. Leaning unchanged: own agent, GRASP as a possible baseline. Source: [GRASP note](../literature/walter2025grasp.md).
+- 2026-11-08: Leaning (user): build an own implementation and use the GRASP and KGVoyager code and tool specifications (KGVoyager App. G) as inspiration, because building it is the part the user enjoys. KGVoyager's code is only an anonymous review link so far. Its gain over GRASP (+3.7 F1 on average, Table 3) is not what decides this. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
 
 ## Resolution
 

@@ -19,3 +19,5 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:1908.02962 | CRIC: A VQA Dataset for Compositional Reasoning on Vision and Commonsense | 2026-11-07 | Commonsense knowledge (ConceptNet), not Wikidata ([D-003](../decisions.md#d-003)) |
 | arXiv:2009.00145 | Cross-modal Knowledge Reasoning for Knowledge-based Visual Question Answering | 2026-11-07 | Trained KB-VQA method; the thesis does not train models ([D-008](../decisions.md#d-008)) |
 | arXiv:2107.05348 | Zero-shot Visual Question Answering using Knowledge Graph | 2026-11-07 | Trained KB-VQA method on a non-Wikidata KB; the thesis does not train models ([D-008](../decisions.md#d-008)) |
+| arXiv:2609.11569 | Enabling Knowledge Graph Understanding at Scale with the EXplore Your Graphs ENgine (EXYGEN) | 2026-11-08 | RAG over VoID/ShEx metadata of domain KGs; Wikidata does not offer this context, and KG-agnostic tooling is out of scope ([D-003](../decisions.md#d-003)) |
+| DOI:10.18653/v1/2025.knowledgenlp-1.5 | Investigating Large Language Models for Text-to-SPARQL Generation | 2026-11-08 | General LLM text-to-SPARQL comparison (title only); skipped on the user's call |

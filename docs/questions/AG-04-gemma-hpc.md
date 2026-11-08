@@ -59,6 +59,7 @@ To check with the people running it:
   are pinned, throttling and rate limits, throughput, availability.
 - 2026-11-05 (user): Benjamin Jakobsen has not been contacted yet.
 - 2026-11-06: GRASP runs with open models: Qwen2.5 72B reaches 68.7 F1 on WWQ vs 75.3 for GPT-4.1; Qwen3 32B 61.3; performance drops sharply for models below about 14B (Qwen2.5) or 8B (Qwen3) (Tables 5 and 7). Relevant for Qwen3.8-27B on CampusAI. Source: [GRASP note](../literature/walter2025grasp.md).
+- 2026-11-08: KGVoyager suggests small models suffer from long contexts: the gap to a grep-over-ontology baseline is +19.6 F1 for GPT-OSS-120B and +9.5 for Muse Glimmer 30B (§4.3), and 50 of 56 query generation/execution failures were "agent gave up" (App. F). This is the authors' hypothesis, not tested directly. Worth watching for Qwen3.8-27B as tool outputs and image-index results accumulate; mitigations are capped result lengths and a relevance cut-off ([AG-02](AG-02-tool-set.md)). Not a decision. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
 
 ## Resolution
 
