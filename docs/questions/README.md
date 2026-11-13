@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 19 open, 19 researching, 1 decided, 0 dropped.
+**39 questions:** 17 open, 21 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -29,7 +29,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [RP-02](RP-02-languages.md) | Which programming language(s) for the dataset pipeline and the agent? | dataset | high | open | [RP-04](RP-04-repo-structure.md) |
 | [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | dataset | high | researching | – |
 | [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | dataset | medium | researching | [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
-| [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | dataset | medium | open | – |
+| [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | dataset | medium | researching | – |
 | [LIT-04](LIT-04-distractor-literature.md) | How do related works choose distractors for visual entity retrieval? | dataset | medium | researching | – |
 | [LIT-05](LIT-05-visual-knowledge-graphs.md) | Which visual knowledge graph and scene graph papers are relevant inspiration? | dataset | medium | open | – |
 | [IX-03](IX-03-embedding-models.md) | Which image embedding model(s) are used for the index? | dataset | low | researching | [RP-05](RP-05-multiple-embedding-models.md) |
@@ -98,12 +98,12 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-04](DS-04-endpoint-snapshot.md) | Which Wikidata endpoint and snapshot should be used (WDQS, QLever, dump)? | researching | dataset | high | – | [DS-02](DS-02-wikidata-subset.md), [DS-08](DS-08-gold-answers.md), [AG-02](AG-02-tool-set.md) |
 | [DS-05](DS-05-image-role.md) | What role does the image play; is it always the single subject entity? | researching | dataset | medium | – | [DS-01](DS-01-question-types.md), [DS-06](DS-06-multi-image-questions.md), [DS-07](DS-07-related-entity-images.md) |
 | [DS-06](DS-06-multi-image-questions.md) | How would multi-image questions work (stretch goal)? | open | dataset | low | [DS-01](DS-01-question-types.md), [DS-05](DS-05-image-role.md) | – |
-| [DS-07](DS-07-related-entity-images.md) | Can the image show an entity other than the subject of the question? | open | dataset | low | [DS-05](DS-05-image-role.md) | – |
+| [DS-07](DS-07-related-entity-images.md) | Can the image show an entity other than the subject of the question? | researching | dataset | low | [DS-05](DS-05-image-role.md) | – |
 | [DS-08](DS-08-gold-answers.md) | How are gold queries and gold answers defined, frozen and verified? | researching | dataset | high | [LIT-03](LIT-03-kgqa-metrics.md), [DS-04](DS-04-endpoint-snapshot.md) | [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 | [DS-09](DS-09-generation-pipeline.md) | How are question ideas collected and curated into items? | researching | dataset | high | [DS-01](DS-01-question-types.md), [DS-02](DS-02-wikidata-subset.md) | [DS-10](DS-10-dataset-size.md), [RP-04](RP-04-repo-structure.md) |
 | [DS-10](DS-10-dataset-size.md) | How large should the dataset be? | open | dataset | medium | [DS-09](DS-09-generation-pipeline.md) | – |
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |
-| [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | open | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
+| [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | researching | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
 | [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | researching | dataset | high | – | [DS-01](DS-01-question-types.md), [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [DS-14](DS-14-question-labels.md), [FR-01](FR-01-research-questions.md) |
 | [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | open | dataset | medium | [DS-01](DS-01-question-types.md) | [DS-13](DS-13-difficulty-levels.md), [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 

@@ -33,6 +33,7 @@ axis ([IX-02](IX-02-distractor-count.md), [FR-01](FR-01-research-questions.md)).
 - 2026-11-07: KVQA's open-world setting uses all 69K reference identities as distractors for visual entity linking (§Knowledge Graph, §Approach); no hard-negative selection. Source: [KVQA note](../literature/shah2019kvqa.md).
 - 2026-11-07: ReasonVQA has no image distractors; its distractors are answer choices (random dates within +-10 years, numbers in a range, literals of the same property; §3.2.2). If its items are reused ([DS-09](DS-09-generation-pipeline.md)), image distractors still have to be added. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: OVEN's distractors are all other Wikipedia entities, no similarity-based selection; see [IX-02](IX-02-distractor-count.md) for the candidate-size effect (§6, Fig. 5). Source: [OVEN note](../literature/hu2023open.md).
+- 2026-11-12: RETINA defines hard distractors as documents whose main entity matches the query image; once the visual shortcut is gone, MuKA retrieves them more often than the gold document on the unseen subset, and in 14.5 % of cases where one is retrieved, 78 % of those had only distractors in the top 5 (Sec. 5.2, Fig. 5). Supports look-alike distractors for the shared index. Source: [Lee et al. note](../literature/lee2025breaking.md).
 
 ## Resolution
 
