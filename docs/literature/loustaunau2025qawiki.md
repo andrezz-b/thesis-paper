@@ -11,13 +11,13 @@ doi: ""
 s2_id: "354a417f5e8d678b19f1f75705ed2305f4a92789"
 code: "https://qawiki.org/"
 data: "https://doi.org/10.5281/zenodo.16787599"
-status: reading
-relevance: null
-read_depth: null
-informs: []
-themes: []
+status: reviewed
+relevance: medium
+read_depth: full
+informs: [LIT-02, DS-01, DS-14, DS-09, DS-08, LIT-03, EV-01, AG-05, DS-04]
+themes: [kgqa, dataset-construction, metrics, wikidata]
 added: 2026-11-08
-reviewed: null
+reviewed: 2026-11-13
 candidates:
   - id: "DOI:10.1145/3477495.3531751"
     title: "Knowledge Graph Question Answering Datasets and Their Generalizability: Are They Enough for Future Research?"
