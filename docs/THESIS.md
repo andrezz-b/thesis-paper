@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-11-08._
+_Last reviewed: 2026-11-12._
 
 ## TL;DR
 
@@ -88,7 +88,7 @@ Stretch goals:
 - The question never names the depicted entity [Decided, [D-004](decisions.md#d-004)].
 - The image mostly shows one entity, which is the subject of the question
   [Tentative; Open: [DS-05](questions/DS-05-image-role.md)]. Images of related entities instead of the subject:
-  [Open: [DS-07](questions/DS-07-related-entity-images.md)]. More complex images with other things in them
+  [Open: [DS-07](questions/DS-07-related-entity-images.md); RETINA is a precedent, leaning towards using it]. More complex images with other things in them
   (e.g. "the object the person holds in their right hand") are an idea from the supervisor
   meeting, not a decision; see [DS-05](questions/DS-05-image-role.md) and [DS-13](questions/DS-13-difficulty-levels.md).
 - **Gold:** each item has a gold SPARQL query that hard-codes the depicted entity

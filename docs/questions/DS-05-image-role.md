@@ -34,6 +34,7 @@ Defines the visual axis of the dataset and what the image tool has to support.
   graph papers may help ([LIT-05](LIT-05-visual-knowledge-graphs.md)).
 - 2026-11-07: M3-VQA has images with several visual entities (paper §3, Table 2), the same idea as the multi-entity direction above. Stretch, not committed. Source: [M3-VQA note](../literature/ma2026m3.md).
 - 2026-11-07: ReasonVQA questions about Visual Genome images refer to one object among others via scene-graph context ("the appliance on the street", "the keyboard instrument next to the table"), a possible model for the "more complex image" idea (§3.2.1, demo). Also see [LIT-05](LIT-05-visual-knowledge-graphs.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
+- 2026-11-12: RETINA builds questions where the query image shows a related entity of the answer document, not its main entity, and shows existing retrievers drop sharply (Table 1, Sec. 1). Closest precedent for the "image shows another entity" role. Source: [Lee et al. note](../literature/lee2025breaking.md).
 
 ## Resolution
 
