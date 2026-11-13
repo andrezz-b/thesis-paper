@@ -43,6 +43,7 @@ Determines dataset quality and how many questions can be produced before the dea
   they meet the acceptance criteria; prompts and models used are logged.
 - 2026-10-30: Working list of acceptance criteria [Tentative]:
   - a single correct, unambiguous answer;
+  - no quality-tag issue: not subjective, and the gold result is not incomplete, tie-dependent or based on unconfirmed data (2026-11-13, [Tentative], from QAWiki §3.5);
   - the answer is stable in the snapshot used ([DS-04](DS-04-endpoint-snapshot.md));
   - the depicted entity is not named ([D-004](../decisions.md#d-004));
   - the image is necessary (not answerable from the text alone);
@@ -62,6 +63,7 @@ Determines dataset quality and how many questions can be produced before the dea
 - 2026-11-08: InfoSeek's generation recipe: human-written templates per Wikidata relation with a hypernym placeholder, a consistency filter (answer must be found in the entity's Wikipedia article; 97% passed), and subsampling by (relation, category) to avoid skew (§3.2, App. A.2). For us the Wikidata entity holds the answer, but the consistency check and subsampling are worth listing. Source: [InfoSeek note](../literature/chen2023can.md).
 - 2026-11-08: OVEN's human evaluation set: 30+ annotators, three annotations per example, who check the entity link, check that the entity is physically present (10.3% not), and rewrite the query so no other object can be the answer and the answer is not in the question (99.9% rewritten; App. 10.2). A template for the review step; not a decision. Related work to read: LLM-assisted data construction for visual entity recognition (arXiv 2410.23676, queued). Source: [OVEN note](../literature/hu2023open.md).
 - 2026-11-12: RETINA's pipeline (LLM extracts a one-hop graph with a relation sentence per related entity; query entity + qualifying entity for a unique answer; demonstrative instead of the entity name; paraphrase; BM25 filter; human curation, 29.16 % of 6k sampled questions kept) is described in Sec. 3.1 and App. A. User: the 2k curated test set is the more likely source of example questions; the LLM pipeline is a fallback if ideas run short, as it is not straightforward and every item still needs a gold query (leaning, not decided). The test set has no SPARQL (Sec. 3, 5.1). Source: [Lee et al. note](../literature/lee2025breaking.md).
+- 2026-11-13: QAWiki tags questions as ambiguous or subjective and queries as incomplete, no ties (LIMIT 1 on a superlative) or controversial/unconfirmed data, and keeps them with best-effort queries (§3.5). User decision: we exclude such items instead (added to the acceptance criteria above as [Tentative]). QAWiki also runs 14 quality-control SPARQL queries over its Wikibase and uses LLMs to suggest phrasing corrections that are reviewed manually (§3.7), which fits [D-016](../decisions.md#d-016). Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 

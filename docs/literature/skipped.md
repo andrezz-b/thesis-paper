@@ -33,3 +33,7 @@ Rows are added by the `paper-review` skill after the user confirms.
 | S2:37ea01066a563c661587b7c3f50fbf64d1bf311a | Accelerating Large-Scale Inference with Anisotropic Vector Quantization (ScaNN) | 2026-11-08 | Search library OVEN used over 6M candidates; no thesis link |
 | arXiv:2306.07196 | Retrieval-Enhanced Contrastive Vision-Text Models | 2026-11-08 | Only uses OVEN's candidates in its evaluation; peripheral |
 | arXiv:2412.13614 | Reverse Region-to-Entity Annotation for Pixel-Level Visual Entity Linking | 2026-11-08 | Pixel-level entity linking; peripheral to the thesis |
+| S2:32cde1e55cb223bb4ecbeade98641e1d4719c1c9 | TF-IDF Example Retrieval and Execution-Guided Selection for Few-Shot Text-to-SPARQL over Wikidata with Open-Weight LLMs | 2026-11-13 | Few-shot prompting; the thesis agent is zero-shot (title only) |
+| DOI:10.1145/3799682.3840181 | TempBench: A Temporal Knowledge-Graph QA Benchmark with Per-Question Gold Subgraphs and Retrieval-Quality Metrics | 2026-11-13 | Temporal KGQA with retrieval metrics; not Wikidata text-to-SPARQL |
+| S2:9241f6d4e707ec0afc9e53f18634dc2354d328a6 | Efficient RAG for MediaWiki and Wikibase: Hyperparameter Tuning for Semantic Retrieval under Resource Constraints | 2026-11-13 | Wikibase document retrieval; peripheral |
+| arXiv:2610.00224 | Build2SPARQL: A Large-Scale Text-to-SPARQL Benchmark Dataset for Building Knowledge Graph Querying | 2026-11-13 | Building-domain KG, not Wikidata |

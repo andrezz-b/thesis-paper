@@ -22,9 +22,9 @@ curated overview of related work by theme stays in [`../related-work.md`](../rel
 
 | Paper | Status | Added |
 | --- | --- | --- |
-| [QAWiki: A Knowledge Graph Question Answering & SPARQL Query Generation Dataset for Wikidata](loustaunau2025qawiki.md) (Loustaunau et al., 2025) | queued | 2026-11-08 |
+| [QAWiki: A Knowledge Graph Question Answering & SPARQL Query Generation Dataset for Wikidata](loustaunau2025qawiki.md) (Loustaunau et al., 2025) | reading | 2026-11-08 |
 
-## Reading queue (31)
+## Reading queue (33)
 
 Candidates suggested by the notes above, not yet read or skipped. Ranked by reading priority
 (very high, high, medium, low), then by how many notes point to them, then by the relevance
@@ -44,6 +44,7 @@ reject one by adding a row to [`skipped.md`](skipped.md).
 | high | ReAct: Synergizing Reasoning and Acting in Language Models | `arXiv:2210.03629` | [walter2025grasp](walter2025grasp.md) | Origin of the ReAct loop that GRASP and the thesis build on (§3.1); to cite for the agent design (AG-01, AG-03) |
 | high | A Generative Approach for Wikipedia-Scale Visual Entity Recognition | `arXiv:2403.02041` | [hu2023open](hu2023open.md) | Successor to OVEN on the same 6M-entity space, comparing generative and dual-encoder recognition; LIT-04 and IX-02 for how candidate-set size affects accuracy (abstract and citing sentences) |
 | high | Web-Scale Visual Entity Recognition: An LLM-Driven Data Approach | `arXiv:2410.23676` | [hu2023open](hu2023open.md) | Uses an LLM for label verification, metadata and rationale when building visual entity recognition data; a model for DS-09 given the LLM-assisted, manually curated pipeline (D-016) (abstract only) |
+| high | Knowledge Graph Question Answering Datasets and Their Generalizability: Are They Enough for Future Research? | `DOI:10.1145/3477495.3531751` | [loustaunau2025qawiki](loustaunau2025qawiki.md) | Survey of 25 KGQA datasets that QAWiki leans on for dataset quality and generalisation issues (§2); source for LIT-02 and LIT-01 |
 | medium | Graf von Data: A Knowledge Graph Question Answering Agent for Organisational Usage | `S2:f88318e3bdb5a8d39d57e2d7b48d7e3b218c2e21` | [liu2024spinach](liu2024spinach.md) | KG-agnostic ReAct agent; categorises agent actions (entity retrieval, property subgraph, path discovery, SPARQL execution) (AG-02) |
 | medium | Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents | `arXiv:2610.06650` | [liu2024spinach](liu2024spinach.md) | Agents that explore Wikidata, with recorded search traces (AG-02, EV-03; abstract only) |
 | medium | EchoSight: Advancing Visual-Language Models with Wiki Knowledge | `arXiv:2407.12735` | [chen2023can](chen2023can.md) | Image-to-Wikipedia retrieval plus LLM answering, evaluated on InfoSeek and EVQA; retrieval baseline for IX-03 and EV-02, but we do not train (abstract and citing sentences) |
@@ -59,12 +60,13 @@ reject one by adding a row to [`skipped.md`](skipped.md).
 | medium | SPARQL Query Generation with LLMs: Measuring the Impact of Training Data Memorization and Knowledge Injection | `arXiv:2507.13859` | [wisam2026kgvoyager](wisam2026kgvoyager.md) | Measures how much text-to-SPARQL depends on memorised knowledge vs. injected knowledge; Wikidata memorisation confound (AG-04, DS-08) (abstract only) |
 | medium | Think-on-Graph: Deep and Responsible Reasoning of Large Language Model on Knowledge Graph | `arXiv:2307.07697` | [wisam2026kgvoyager](wisam2026kgvoyager.md) | Early LLM-as-agent KG exploration; KGVoyager and GRASP both contrast with it (AG-01, AG-02) (abstract only) |
 | medium | WikiSeeker: Rethinking the Role of Vision-Language Models in Knowledge-Based Visual Question Answering | `arXiv:2604.05818` | [shah2019kvqa](shah2019kvqa.md) | 2026 KB-VQA multimodal RAG using the image as retrieval key; IX-01, AG-05 (abstract only) |
+| medium | From Transport to Grounding: Designing MCP Connectors for Reliable SPARQL Querying by LLMs | `S2:446e8de94d5b1bc91653fb58ea5de607ccf0603a` | [loustaunau2025qawiki](loustaunau2025qawiki.md) | Uses QAWiki as its benchmark for LLM SPARQL grounding; may inform AG-02 and AG-03 (abstract and citing sentence only) |
 | low | SPARQL-LLM in the TEXT2SPARQL 2026 Challenge | `arXiv:2610.13648` | [walter2025grasp](walter2025grasp.md) | Open-source KGQA system in a shared text-to-SPARQL challenge; possible shared benchmark and baselines (EV-02, LIT-01) (abstract only, partial) |
 | low | Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking | `arXiv:2609.10745` | [ma2026m3](ma2026m3.md) | Entity rarity from KG structure; possible input for DS-13 and entity selection (abstract only) |
 | low | Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations | `arXiv:1602.07332` | [tran2025reasonvqa](tran2025reasonvqa.md) | Objects, relations, scene graphs and WordNet synsets; ReasonVQA's image source; LIT-05, DS-12 (abstract only) |
 | low | VisualWorldBench: A Fine-Grained Multi-Task Benchmark for Evaluating Visual World Knowledge in MLLMs | `arXiv:2610.20083` | [ma2026m3](ma2026m3.md) | Fine-grained visual entity recognition in MLLMs; recognition bottleneck behind AG-05 (abstract only) |
 | low | Explicit Knowledge Integration for Knowledge-Aware Visual Question Answering about Named Entities | `DOI:10.1145/3591106.3592227` | [shah2019kvqa](shah2019kvqa.md) | Explicit KB integration for KVQAE, an extension of the KVQA task; LIT-01, AG-05 (abstract only) |
 
-## Skipped (27)
+## Skipped (31)
 
 See [`skipped.md`](skipped.md).

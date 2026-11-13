@@ -31,6 +31,7 @@ curation process ([DS-09](DS-09-generation-pipeline.md)) and the record format (
   cover a difficulty range ([DS-13](DS-13-difficulty-levels.md)).
 - 2026-11-07: M3-VQA builds parallel questions from human-written templates per relation type with category placeholders, and answers them with SPARQL on Wikidata (paper §4.1). Source: [M3-VQA note](../literature/ma2026m3.md).
 - 2026-11-07: ReasonVQA's question types are defined by the Wikidata property and hop count only (no comparison, count or boolean); see [LIT-02](LIT-02-question-type-taxonomy.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
+- 2026-11-13: QAWiki's answer-type categories (entity, entity-set, numeric, temporal, boolean, miscellaneous attribute; §3.1) are another possible axis; see [LIT-02](LIT-02-question-type-taxonomy.md). Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 

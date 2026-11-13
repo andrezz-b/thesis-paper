@@ -37,6 +37,7 @@ result defines what "correct" means.
 - 2026-11-06: SPINACH gold queries are real queries run on the live Wikidata Query Service, kept only if non-empty and under 10 MB, with optimisation, formatting and `mwapi` clauses removed (§3, §3.1, App. C.3); no snapshot date is stated. Source: [SPINACH note](../literature/liu2024spinach.md).
 - 2026-11-07: Possible shortcut (user idea, not decided): derive a first gold query from ReasonVQA items; recorded in [DS-09](DS-09-generation-pipeline.md). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: KGVoyager failure analysis (App. F, Table 9): 18% of complete failures (28 of 156) are answer-representation errors, where the content is analogous to the gold but the form differs: result shape (20, e.g. extra label columns), SELECT instead of ASK (4), label instead of IRI (4). Relevant for which columns count and for yes/no questions. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
+- 2026-11-13: QAWiki writes each gold query "as generally as possible" (property paths such as `P131*/P17?/P30?` so the entity can be swapped) and allows several gold queries per question; gold returns identifiers only (§3.4, §4.1). User is unsure about both; recorded as options, not adopted. Its query tags no ties and incomplete (§3.5) are handled by exclusion here ([DS-09](DS-09-generation-pipeline.md)). Result-only scoring can credit a wrong query, especially for ASK (§4.4). Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 

@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 17 open, 21 researching, 1 decided, 0 dropped.
+**39 questions:** 16 open, 22 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -105,7 +105,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [DS-11](DS-11-split-proportions.md) | How is the dataset split into dev and test? | open | dataset | low | [DS-01](DS-01-question-types.md) | – |
 | [DS-12](DS-12-query-images-and-leakage.md) | How are query images selected, and how is leakage prevented? | researching | dataset | medium | – | [IX-01](IX-01-distractor-strategy.md), [RP-01](RP-01-image-storage.md) |
 | [DS-13](DS-13-difficulty-levels.md) | How is question difficulty defined and measured (easy, medium, hard)? | researching | dataset | high | – | [DS-01](DS-01-question-types.md), [DS-03](DS-03-hop-depth.md), [DS-09](DS-09-generation-pipeline.md), [DS-14](DS-14-question-labels.md), [FR-01](FR-01-research-questions.md) |
-| [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | open | dataset | medium | [DS-01](DS-01-question-types.md) | [DS-13](DS-13-difficulty-levels.md), [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
+| [DS-14](DS-14-question-labels.md) | Which labels does each dataset question carry? | researching | dataset | medium | [DS-01](DS-01-question-types.md) | [DS-13](DS-13-difficulty-levels.md), [RP-03](RP-03-dataset-format.md), [EV-01](EV-01-metrics.md) |
 
 ### Image index (IX)
 
