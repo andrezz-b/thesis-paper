@@ -2,7 +2,7 @@
 id: DS-14
 title: Which labels does each dataset question carry?
 area: dataset
-status: open
+status: researching
 phase: dataset
 priority: medium
 depends_on: [DS-01]
@@ -35,6 +35,7 @@ reporting results per label. They are part of the record format ([RP-03](RP-03-d
 - 2026-11-07: ReasonVQA tags each question with hop count, one or more of 20 knowledge domains (by property), whether scene-graph information was used, and the source image dataset (§3.2.1, §4.4, App. 2.2). Possible starting points for labels; not committed. Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: entity popularity (e.g. Wikipedia page views or sitelink count; not decided how to measure) is a candidate label, since the vision-only configuration should do better on popular entities (user expectation, InfoSeek §5.2 Fig. 7). Source: [InfoSeek note](../literature/chen2023can.md).
 - 2026-11-08: OVEN also splits results by monthly page views (Fig. 6), supporting popularity as a candidate label next to the InfoSeek evidence. Source: [OVEN note](../literature/hu2023open.md).
+- 2026-11-13: user leaning: QAWiki's answer-type category (§3.1) is a candidate label; its property mention types (§3.3) are too costly to annotate and unlikely to be used. Quality tags are not labels here: tagged items are excluded ([DS-09](DS-09-generation-pipeline.md)). Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 

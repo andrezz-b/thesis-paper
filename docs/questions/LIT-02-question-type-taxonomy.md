@@ -39,6 +39,7 @@ terminology rather than ad hoc, so results are comparable and the thesis can cit
 - 2026-11-07: KVQA groups questions into ten non-exclusive challenge categories: spatial, 1-hop, multi-hop, Boolean, intersection, subtraction, comparison, counting, multi-entity, multi-relation (§Analysis of KVQA, Fig. 2, Table 5). Source: [KVQA note](../literature/shah2019kvqa.md).
 - 2026-11-07: ReasonVQA's types follow the Wikidata property used (who designed, how tall, which country, ...) with a template per property, and it has hop count (1 to 3) as the only structural dimension; no comparison, count or boolean types (§3.2.1, App. 1.2). 20 predefined knowledge domains are assigned by property (§3.2.1, App. 2.2). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: InfoSeek's question types are answer types (Time, Numerical, String; Table 7), not structural types; its Wikidata split is single-hop (§3.2). Source: [InfoSeek note](../literature/chen2023can.md).
+- 2026-11-13: QAWiki's categories are answer types: entity 77, entity-set 284, numeric 45, temporal 54, boolean 35, miscellaneous attribute 31 (§3.1). It also annotates property mention types (direct, inverse, existence, non-existence, specific value, superlative; §3.3); user: noted only, too costly to annotate, unlikely to be used. Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 

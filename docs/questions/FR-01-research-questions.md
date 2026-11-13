@@ -80,6 +80,7 @@ what the evaluation has to show. Also needed for the project plan and the title.
 - 2026-11-04 (supervisor meeting): the question set should span easy, medium and
   hard, and results should not end up at 100% or 0%. Relevant for RQ3 (difficulty);
   see [DS-13](DS-13-difficulty-levels.md).
+- 2026-11-13: pointer for H2 (gap to the oracle): QAWiki shows a large entity-linking gap for text-only Wikidata query generation (F1 0.164 to 0.406 with linked entities, Table 2); see [AG-05](AG-05-experiment-configurations.md). Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
 
 ## Resolution
 
