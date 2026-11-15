@@ -23,7 +23,7 @@ candidates:
     title: "CRAG-MM-Diagnostics: Enabling Stage-Wise Analysis of Knowledge-Intensive VQA"
     via: cites
     priority: high
-    why: "Splits knowledge-intensive VQA into referring expression, grounding, recognition, retrieval and reasoning stages and argues end-task accuracy hides where failures occur; supports the stage-wise oracle ladder (AG-05) and metrics (EV-01, DS-13) (abstract)"
+    why: "Splits knowledge-intensive VQA into referring expression, grounding, recognition, retrieval and reasoning stages and argues end-task accuracy hides where failures occur; supports staged oracle settings (AG-05) and metrics (EV-01, DS-13) (abstract)"
   - id: "arXiv:2404.05465"
     title: "HAMMR: HierArchical MultiModal React agents for generic VQA"
     via: cites
@@ -110,7 +110,7 @@ Ours (assistant reading):
 - [LIT-01](../questions/LIT-01-existing-image-sparql-benchmarks.md): contrast. Image + question benchmark with hidden subject and two-hop questions, but Wikipedia text as KB and no SPARQL or graph (§4, Tab. 1). Cite as a precedent that is not directly reusable.
 - [DS-01](../questions/DS-01-question-types.md) / [LIT-02](../questions/LIT-02-question-type-taxonomy.md): cite. Terminology: single-hop (templated, automatic), multi-answer, two-hop via "bridge entity" (§4.2, §4.3). Whether we reuse the chaining pattern for Wikidata multi-hop questions (e.g. P176 then P571) is an idea, not decided.
 - [DS-03](../questions/DS-03-hop-depth.md): cite. Maximum depth in this dataset is two hops (§4.3); two-hop accuracy is lower than single-hop (§5.6).
-- [AG-05](../questions/AG-05-experiment-configurations.md): adopt (partly). The ladder no retrieval / oracle subject / oracle retrieval / real retrieval (§5.1 to §5.3). Our oracle maps to "Oracle Subject C" (Tab. 5); the KB article and section oracles have no KG analogue.
+- [AG-05](../questions/AG-05-experiment-configurations.md): adopt (partly). Staged settings with increasing help: no retrieval, oracle subject, oracle article or section, real retrieval via Google Lens (§5.1 to §5.3); only the oracle-subject and real-retrieval settings have a counterpart in our table. Our oracle maps to "Oracle Subject C" (Tab. 5); the KB article and section oracles have no KG analogue.
 - [DS-10](../questions/DS-10-dataset-size.md): cite. Disparity (§4.5) is a possible diversity measure; variety (unique bigrams) grows with dataset size and is not comparable to a small set. Not decided.
 - [IX-01](../questions/IX-01-distractor-strategy.md) / [LIT-04](../questions/LIT-04-distractor-literature.md): cite only. The Lens index covers web-scale images (App. C), a point of comparison for our explicit index; the paper does not discuss distractors.
 - [EV-01](../questions/EV-01-metrics.md): contrast. Accuracy via BEM (§5) vs. our execution-based comparison ([D-007](../decisions.md#d-007)); App. B shows exact match is too strict for free-text answers, which does not apply to SPARQL results.
