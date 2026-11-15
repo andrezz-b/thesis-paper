@@ -40,3 +40,9 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:2603.09921 | WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition | 2026-11-13 | Another training-based contrastive OVEN model; KnowCoL already covers this line (abstract only) |
 | arXiv:2410.15981 | Visual Representation Learning Guided By Multi-modal Prior Knowledge | 2026-11-13 | KG as training signal for visual models; peripheral (title only) |
 | arXiv:2102.08747 | Learning Visual Models Using a Knowledge Graph as a Trainer | 2026-11-13 | KG-NN, KG as training signal; peripheral (title only) |
+| arXiv:2604.07146 | Learning to Search: A Decision-Based Agent for Knowledge-Based Visual Question Answering | 2026-11-15 | Trained decision-based agent for KB-VQA; we do not train ([D-008](../decisions.md#d-008)) (abstract) |
+| arXiv:2004.01804 | Google Landmarks Dataset v2 - A Large-Scale Benchmark for Instance-Level Recognition and Retrieval | 2026-11-15 | We take images from Commons ([D-005](../decisions.md#d-005)), not GLDv2 |
+| arXiv:2205.01883 | All You May Need for VQA are Image Captions | 2026-11-15 | Caption-based question generation; our questions are curated manually ([D-016](../decisions.md#d-016)) |
+| arXiv:2505.24073 | mRAG: Elucidating the Design Space of Multi-modal Retrieval-Augmented Generation | 2026-11-15 | Text RAG pipeline ablations, far from our agent |
+| arXiv:2605.15019 | From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG | 2026-11-15 | Landmark element-level RAG benchmark; weak link to [DS-05](../questions/DS-05-image-role.md) |
+| arXiv:2103.01913 | WIT: Wikipedia-based Image Text Dataset for Multimodal Multilingual Machine Learning | 2026-11-15 | Only the source of the Wikipedia text KB; nothing for us |

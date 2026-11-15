@@ -40,6 +40,7 @@ terminology rather than ad hoc, so results are comparable and the thesis can cit
 - 2026-11-07: ReasonVQA's types follow the Wikidata property used (who designed, how tall, which country, ...) with a template per property, and it has hop count (1 to 3) as the only structural dimension; no comparison, count or boolean types (§3.2.1, App. 1.2). 20 predefined knowledge domains are assigned by property (§3.2.1, App. 2.2). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: InfoSeek's question types are answer types (Time, Numerical, String; Table 7), not structural types; its Wikidata split is single-hop (§3.2). Source: [InfoSeek note](../literature/chen2023can.md).
 - 2026-11-13: QAWiki's categories are answer types: entity 77, entity-set 284, numeric 45, temporal 54, boolean 35, miscellaneous attribute 31 (§3.1). It also annotates property mention types (direct, inverse, existence, non-existence, specific value, superlative; §3.3); user: noted only, too costly to annotate, unlikely to be used. Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
+- 2026-11-15: Encyclopedic-VQA types: single-hop (templated or automatically generated), multi-answer (list) and two-hop chained via a bridge entity (§4.2, §4.3). Whether to reuse the chaining pattern for Wikidata multi-hop questions is an idea, not decided. Source: [Encyclopedic-VQA note](../literature/mensink2023encyclopedic.md).
 
 ## Resolution
 
