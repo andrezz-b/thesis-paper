@@ -37,3 +37,6 @@ Rows are added by the `paper-review` skill after the user confirms.
 | DOI:10.1145/3799682.3840181 | TempBench: A Temporal Knowledge-Graph QA Benchmark with Per-Question Gold Subgraphs and Retrieval-Quality Metrics | 2026-11-13 | Temporal KGQA with retrieval metrics; not Wikidata text-to-SPARQL |
 | S2:9241f6d4e707ec0afc9e53f18634dc2354d328a6 | Efficient RAG for MediaWiki and Wikibase: Hyperparameter Tuning for Semantic Retrieval under Resource Constraints | 2026-11-13 | Wikibase document retrieval; peripheral |
 | arXiv:2610.00224 | Build2SPARQL: A Large-Scale Text-to-SPARQL Benchmark Dataset for Building Knowledge Graph Querying | 2026-11-13 | Building-domain KG, not Wikidata |
+| arXiv:2603.09921 | WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition | 2026-11-13 | Another training-based contrastive OVEN model; KnowCoL already covers this line (abstract only) |
+| arXiv:2410.15981 | Visual Representation Learning Guided By Multi-modal Prior Knowledge | 2026-11-13 | KG as training signal for visual models; peripheral (title only) |
+| arXiv:2102.08747 | Learning Visual Models Using a Knowledge Graph as a Trainer | 2026-11-13 | KG-NN, KG as training signal; peripheral (title only) |
