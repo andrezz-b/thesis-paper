@@ -34,6 +34,7 @@ labels, multiple answers) decide how gold answers must be stored ([DS-08](DS-08-
 - 2026-11-07: ReasonVQA scores free-text answers with exact match, substring and semantic similarity (all-MiniLM-L6-v2); multiple choice is plain accuracy (§4.3). This is answer-text based, not execution-based, and contrasts with [D-007](../decisions.md#d-007). Source: [ReasonVQA note](../literature/tran2025reasonvqa.md).
 - 2026-11-08: KGVoyager uses SPINACH's row-major F1 as GRASP does (§4.3) and does not define it again; it also reports cost, iterations and wall-clock time (Table 3), and tool calls and SPARQL executions per question (App. E). Its failure analysis shows result-shape mismatches ([DS-08](DS-08-gold-answers.md)). Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
 - 2026-11-13: QAWiki reuses SPINACH's row-level recall, optimal row matching, F1 and EM unchanged (§4.1) and states two limits: rows are compared as sets so correct values in wrong columns count, and result-only scoring can credit a wrong ASK query (§4.4). Its Table 2 F1 does not follow from the summed TP/FP/FN in the same table (about 0.04 vs 0.164 for QAWiki Base), so F1 is probably averaged per question; not stated. Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
+- 2026-11-15: GRISP follows the GRASP evaluation protocol: row-wise F1 averaged over samples, and EM = 1 iff F1 = 1 (§4, Metric); no new definition. Reports average runtime per question next to F1 and EM (Tables 1, 2, 3). Source: [GRISP note](../literature/walter2026grisp.md).
 
 ## Resolution
 
