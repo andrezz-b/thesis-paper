@@ -23,12 +23,12 @@ candidates:
     title: "CRAG-MM-Diagnostics: Enabling Stage-Wise Analysis of Knowledge-Intensive VQA"
     via: cites
     priority: high
-    why: "Splits knowledge-intensive VQA into referring expression, grounding, recognition, retrieval and reasoning stages and argues end-task accuracy hides where failures occur; supports staged oracle settings (AG-05) and metrics (EV-01, DS-13) (abstract)"
+    why: "Its stage-wise analysis could help distinguish grounding, retrieval and reasoning failures and inform staged settings/metrics (AG-05, EV-01, DS-13). (abstract)"
   - id: "arXiv:2404.05465"
     title: "HAMMR: HierArchical MultiModal React agents for generic VQA"
     via: cites
-    priority: high
-    why: "ReAct-style LLM agent with visual and knowledge tools, same group as Encyclopedic-VQA, evaluated on it including two-hop questions; design precedent for AG-02 and AG-03 (abstract and citing sentence)"
+    priority: medium
+    why: "A multimodal ReAct/tool precedent, but its broad hierarchical VQA setup is less directly applicable than the thesis's focused Wikidata agent (AG-02, AG-03). (abstract and citing sentence)"
 bibtex: |
   @inproceedings{mensink2023encyclopedic,
     title={Encyclopedic VQA: Visual questions about detailed properties of fine-grained categories},

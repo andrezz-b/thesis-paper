@@ -28,12 +28,12 @@ candidates:
     title: "WikiSeeker: Rethinking the Role of Vision-Language Models in Knowledge-Based Visual Question Answering"
     via: cites
     priority: medium
-    why: "2026 KB-VQA multimodal RAG using the image as retrieval key; IX-01, AG-05 (abstract only)"
+    why: "Useful comparison for image-conditioned retrieval and VLM roles, but it focuses on multimodal RAG rather than executable graph queries (IX-01, AG-05). (abstract only)"
   - id: "arXiv:2306.00424"
     title: "End-to-end Knowledge Retrieval with Multi-modal Queries"
     via: cites
-    priority: medium
-    why: "Retrieval with image+text queries; reference for index search; IX-01, LIT-04 (abstract only)"
+    priority: low
+    why: "Retrieves multimodal documents with a trained model rather than grounding an entity for Wikidata SPARQL; peripheral to the planned index approach (IX-01, LIT-04). (abstract only)"
 bibtex: |
   @article{shah2019kvqa,
     title={KVQA: Knowledge-Aware Visual Question Answering},

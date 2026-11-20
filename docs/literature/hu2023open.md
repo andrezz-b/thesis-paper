@@ -27,8 +27,8 @@ candidates:
   - id: "arXiv:2403.02041"
     title: "A Generative Approach for Wikipedia-Scale Visual Entity Recognition"
     via: cites
-    priority: high
-    why: "Successor to OVEN on the same 6M-entity space, comparing generative and dual-encoder recognition; LIT-04 and IX-02 for how candidate-set size affects accuracy (abstract and citing sentences)"
+    priority: medium
+    why: "Useful context on large-scale visual recognition and candidate-set size, but its generative approach is less aligned with the fixed image index and no-training scope (LIT-04, IX-02). (abstract and citing sentences)"
   - id: "arXiv:2410.23676"
     title: "Web-Scale Visual Entity Recognition: An LLM-Driven Data Approach"
     via: cites

@@ -27,18 +27,18 @@ candidates:
   - id: "arXiv:2609.20843"
     title: "VISPATH: Visual-Intent-Guided Path Reasoning for Multimodal Knowledge Graph Question Answering"
     via: cites
-    priority: medium
-    why: "Multimodal KGQA with KG-path reasoning and a 2 to 4 hop benchmark; LIT-01, AG-03 (abstract only)"
+    priority: high
+    why: "A recent multimodal KGQA benchmark with multi-hop reasoning, making it a strong contrast for LIT-01 and a source of agent-design ideas (AG-03). (abstract only)"
   - id: "arXiv:2602.00593"
     title: "Pix2Fact: When Vision Is Not Enough -- Benchmarking Fine-Grained VQA with Web Verification on High-Resolution Real-World Scenes"
     via: cites
-    priority: medium
-    why: "Benchmark needing visual grounding plus external search, evaluated with search tools; LIT-01 contrast, EV-02 (abstract only)"
+    priority: low
+    why: "Its expert-domain, high-resolution questions and web verification are substantially outside the Wikidata/SPARQL task; a lower-priority benchmark contrast (LIT-01, EV-02). (abstract only)"
   - id: "DOI:10.1109/CVPR.2019.00686"
     title: "GQA: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering"
     via: refs
-    priority: medium
-    why: "Template engine over Visual Genome scene graphs with answer balancing that ReasonVQA reuses; DS-09, DS-13, DS-14 (via Semantic Scholar refs only)"
+    priority: low
+    why: "Its scene-graph question engine is useful background, but the thesis is not building a scene-graph VQA dataset and has closer benchmark precedents (DS-09, DS-13, DS-14). (abstract)"
   - id: "arXiv:1602.07332"
     title: "Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations"
     via: refs

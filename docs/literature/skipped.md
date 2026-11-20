@@ -46,3 +46,6 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:2505.24073 | mRAG: Elucidating the Design Space of Multi-modal Retrieval-Augmented Generation | 2026-11-15 | Text RAG pipeline ablations, far from our agent |
 | arXiv:2605.15019 | From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG | 2026-11-15 | Landmark element-level RAG benchmark; weak link to [DS-05](../questions/DS-05-image-role.md) |
 | arXiv:2103.01913 | WIT: Wikipedia-based Image Text Dataset for Multimodal Multilingual Machine Learning | 2026-11-15 | Only the source of the Wikipedia text KB; nothing for us |
+| arXiv:2406.19593 | SK-VQA: Synthetic Knowledge Generation at Scale for Training Context-Augmented Multimodal LLMs | 2026-11-20 | Synthetic KB-VQA data for training MLLMs; our questions are curated manually ([D-016](../decisions.md#d-016)) |
+| arXiv:2601.16400 | Clarify or Answer: Reinforcement Learning for Agentic VQA with Context Under-specification | 2026-11-20 | Trains agents to ask clarifying questions; peripheral to our question-sufficiency checks |
+| arXiv:2411.16863 | Augmenting Multimodal LLMs with Self-Reflective Tokens for Knowledge-based Visual Question Answering (ReflectiVA) | 2026-11-20 | Trained KB-VQA method; we do not train models |

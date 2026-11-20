@@ -38,14 +38,14 @@ candidates:
   - id: "arXiv:2607.00159"
     title: "Identifying and Resolving Pitfalls of Knowledge-Based VQA Benchmarks: Auditing, Repairing, and Augmenting"
     via: cites
-    priority: high
-    why: "Audits KB-VQA benchmarks including InfoSeek for answer-validity assumptions behind accuracy metrics; bears on EV-01, DS-08 and LIT-01 (abstract)"
+    priority: very high
+    why: "Directly challenges benchmark answer validity and whether images require grounded disambiguation; important for LIT-01, DS-08 and evaluation design (EV-01). (abstract)"
   - id: "DOI:10.18653/v1/2024.emnlp-main.613"
     title: "Large Language Models Know What is Key Visual Entity: An LLM-assisted Multimodal Retrieval for VQA"
     via: cites
     priority: high
     scout_priority: medium
-    why: "An LLM names the key visual entity before retrieval, close to our agent's grounding step; AG-05 and IX-03 (abstract)"
+    why: "Its key-entity selection before retrieval closely matches the thesis grounding step and may inform AG-05/IX-03. (abstract)"
 bibtex: |
   @inproceedings{chen2023can,
     title = "Can Pre-trained Vision and Language Models Answer Visual Information-Seeking Questions?",

@@ -27,9 +27,8 @@ candidates:
   - id: "S2:446e8de94d5b1bc91653fb58ea5de607ccf0603a"
     title: "From Transport to Grounding: Designing MCP Connectors for Reliable SPARQL Querying by LLMs"
     via: cites
-    priority: medium
-    scout_priority: high
-    why: "Uses QAWiki as its benchmark for LLM SPARQL grounding; may inform AG-02 and AG-03 (abstract and citing sentence only)"
+    priority: high
+    why: "Its comparison of MCP tool surfaces on QAWiki directly informs tool-set design; abstract reports the importance of grounding and schema tools (AG-02, AG-03). (abstract and citing sentence only)"
 bibtex: |
   @inproceedings{loustaunau2025qawiki,
     title = {{QAWiki}: A Knowledge Graph Question Answering \& {SPARQL} Query Generation Dataset for {Wikidata}},

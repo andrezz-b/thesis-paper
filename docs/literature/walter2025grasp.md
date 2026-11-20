@@ -22,8 +22,8 @@ candidates:
   - id: "arXiv:2603.06582"
     title: "Agentic SPARQL: Evaluating SPARQL-MCP-powered Intelligent Agents on the Federated KGQA Benchmark"
     via: cites
-    priority: high
-    why: "Agentic SPARQL-tool setup with MCP tool access, evaluated on a federated KGQA benchmark; compare tool design and baselines (AG-02, EV-02) (abstract only)"
+    priority: medium
+    why: "MCP tool design is relevant to AG-02, but the paper's main focus is federated KGQA, outside the thesis scope. (abstract only)"
   - id: "arXiv:2512.14277"
     title: "SPARQL-LLM: Real-Time SPARQL Query Generation from Natural Language Questions"
     via: cites
@@ -37,13 +37,13 @@ candidates:
   - id: "S2:f5281a4defb47a4f0bc322b03a9fd3940c6ebcfc"
     title: "GRASP and GRISP for Question Answering over Wikidata"
     via: cites
-    priority: high
-    why: "Same-group follow-up on Wikidata QA; may give the latest GRASP version and Wikidata numbers (AG-01, EV-02) (title only)"
+    priority: very high
+    why: "Directly informs the GRASP decision and Wikidata baselines with current results; focus on GRASP and off-the-shelf agent comparisons because GRISP fine-tuning is out of scope (AG-01, EV-02)."
   - id: "arXiv:2210.03629"
     title: "ReAct: Synergizing Reasoning and Acting in Language Models"
     via: refs
-    priority: high
-    why: "Origin of the ReAct loop that GRASP and the thesis build on (§3.1); to cite for the agent design (AG-01, AG-03)"
+    priority: medium
+    why: "Foundational source for citing the ReAct loop in the agent design (AG-01, AG-03); likely useful for citation only, rather than resolving an implementation choice."
 bibtex: |
   @inbook{walter2025grasp,
     title={GRASP: Generic Reasoning And SPARQL Generation Across Knowledge Graphs},
