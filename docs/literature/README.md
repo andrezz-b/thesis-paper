@@ -23,13 +23,11 @@ curated overview of related work by theme stays in [`../related-work.md`](../rel
 | [GRISP: Guided Recurrent IRI Selection over SPARQL Skeletons](walter2026grisp.md) (Walter et al., 2026) | low | full | [AG-01](../questions/AG-01-own-agent-vs-grasp.md), [LIT-03](../questions/LIT-03-kgqa-metrics.md), [EV-02](../questions/EV-02-baselines.md), [AG-02](../questions/AG-02-tool-set.md) | kgqa, fine-tuning, wikidata | 2026-11-15 |
 | [Seeing and Knowing in the Wild: Open-domain Visual Entity Recognition with Large-scale Knowledge Graphs via Contrastive Learning](zhou2025seeing.md) (Zhou et al., 2026) | low | full | [LIT-01](../questions/LIT-01-existing-image-sparql-benchmarks.md), [IX-03](../questions/IX-03-embedding-models.md), [IX-04](../questions/IX-04-index-payload.md), [AG-02](../questions/AG-02-tool-set.md) | visual-entity-recognition, kg-embeddings | 2026-11-13 |
 
-## In progress (1)
+## In progress (0)
 
-| Paper | Status | Added |
-| --- | --- | --- |
-| [GRASP and GRISP for Question Answering over Wikidata](walter2026grasp.md) (Walter et al., 2026) | queued | 2026-11-20 |
+_Nothing in progress._
 
-## Reading queue (34)
+## Reading queue (35)
 
 Candidates suggested by the notes above, not yet read or skipped. Ranked by reading priority
 (very high, high, medium, low), then by how many notes point to them, then by the relevance
@@ -38,6 +36,7 @@ reject one by adding a row to [`skipped.md`](skipped.md).
 
 | Priority | Paper | ID | Pointed to by | Why |
 | --- | --- | --- | --- | --- |
+| very high | GRASP and GRISP for Question Answering over Wikidata | `S2:f5281a4defb47a4f0bc322b03a9fd3940c6ebcfc` | [walter2025grasp](walter2025grasp.md) | Directly informs the GRASP decision and Wikidata baselines with current results; focus on GRASP and off-the-shelf agent comparisons because GRISP fine-tuning is out of scope (AG-01, EV-02). |
 | high | Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents | `arXiv:2610.06650` | [liu2024spinach](liu2024spinach.md) | Directly studies multi-hop exploration over Wikidata and evidence management, relevant to AG-02/EV-03; its training-trace focus is less directly applicable. (abstract only) |
 | high | Large Language Models Know What is Key Visual Entity: An LLM-assisted Multimodal Retrieval for VQA | `DOI:10.18653/v1/2024.emnlp-main.613` | [chen2023can](chen2023can.md) | Its key-entity selection before retrieval closely matches the thesis grounding step and may inform AG-05/IX-03. (abstract) |
 | high | Select, Substitute, Search: A New Benchmark for Knowledge-Augmented Visual Question Answering | `arXiv:2103.05568` | [ma2026m3](ma2026m3.md) | Its select-an-image-entity, then search-for-knowledge structure closely matches the task framing and informs the benchmark landscape and image retrieval (LIT-01, IX-01). (abstract only) |
