@@ -28,9 +28,9 @@ candidates:
   - id: "arXiv:2402.08327"
     title: "PreFLMR: Scaling Up Fine-Grained Late-Interaction Multi-modal Retrievers"
     via: refs
-    priority: medium
+    priority: low
     scout_priority: high
-    why: "Source of M2KR; its text-only retriever beats single-image retrievers on RETINA (Lee Table 1); IX-03 baseline (abstract seen)"
+    why: "Useful background for M2KR and the RETINA comparison, but focuses on trained document retrieval rather than the planned fixed embedding index (IX-03). (abstract seen)"
 bibtex: |
   @misc{lee2025breaking,
     doi = {10.48550/ARXIV.2511.22843},

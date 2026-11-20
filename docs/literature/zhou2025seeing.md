@@ -23,7 +23,7 @@ candidates:
     title: "Grounding Language Models for Visual Entity Recognition"
     via: refs
     priority: medium
-    why: "AutoVER: retrieval-augmented constrained generation with an MLLM on OVEN; the closest to an agent-style approach to the identification step, and the strongest seen-entity baseline in Table 1 (abstract only)"
+    why: "Directly relevant to entity identification, but its trained constrained-generation approach is not a close match for the planned CLIP-style index search. (abstract only)"
 bibtex: |
   @article{zhou2025seeing,
     title={Seeing and Knowing in the Wild: Open-domain Visual Entity Recognition with Large-scale Knowledge Graphs via Contrastive Learning},

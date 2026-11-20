@@ -35,7 +35,7 @@ candidates:
     via: refs
     priority: medium
     scout_priority: low
-    why: "Measures how much text-to-SPARQL depends on memorised knowledge vs. injected knowledge; Wikidata memorisation confound (AG-04, DS-08) (abstract only)"
+    why: "Raises a useful Wikidata memorization confound for interpreting agent results, though its experimental conditions are not directly actionable under the no-training decision (AG-04, DS-08). (abstract only)"
 bibtex: |
   @misc{wisam2026kgvoyager,
     doi = {10.48550/ARXIV.2609.01780},

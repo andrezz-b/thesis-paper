@@ -22,8 +22,8 @@ candidates:
   - id: "arXiv:2510.02200"
     title: "ARUQULA - An LLM based Text2SPARQL Approach using ReAct and Knowledge Graph Exploration Utilities"
     via: cites
-    priority: high
-    why: "Generalises SPINACH's ReAct exploration design to other RDF graphs; compare tool set and loop (AG-02, AG-03)"
+    priority: medium
+    why: "Useful ReAct exploration comparison for AG-02/AG-03, but it generalises beyond Wikidata and overlaps with the already-reviewed SPINACH."
   - id: "S2:354a417f5e8d678b19f1f75705ed2305f4a92789"
     title: "QAWiki: A Knowledge Graph Question Answering & SPARQL Query Generation Dataset for Wikidata"
     via: cites
@@ -32,8 +32,8 @@ candidates:
   - id: "arXiv:2610.06650"
     title: "Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents"
     via: recs
-    priority: medium
-    why: "Agents that explore Wikidata, with recorded search traces (AG-02, EV-03; abstract only)"
+    priority: high
+    why: "Directly studies multi-hop exploration over Wikidata and evidence management, relevant to AG-02/EV-03; its training-trace focus is less directly applicable. (abstract only)"
   - id: "arXiv:2604.21133"
     title: "GRISP: Guided Recurrent IRI Selection over SPARQL Skeletons"
     via: cites

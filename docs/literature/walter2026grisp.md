@@ -22,13 +22,13 @@ candidates:
   - id: "arXiv:2610.08095"
     title: "Natural Language Questions as an Interface for Knowledge Graphs: QRAKEN Graph Distillation and Semantic Self-Healing"
     via: recs
-    priority: medium
-    why: "Training-free, ontology-agnostic text-to-SPARQL that grounds generation in populated graph patterns and repairs queries; possible idea for an agent exploration tool (AG-02). (abstract seen)"
+    priority: high
+    why: "Its training-free grounding in populated graph patterns and query repair could inform Wikidata exploration tools and the agent design (AG-02/AG-03). (abstract seen)"
   - id: "S2:6a48700bd6d8d1ab5fa4b882c5cb8b692a3055d7"
     title: "Structured Agentic Retrieval over Knowledge Graphs with MCP and Query Containers"
     via: recs
-    priority: medium
-    why: "Agentic KG retrieval exposed through MCP tools; comparison point for tool-set design (AG-02). (title only)"
+    priority: high
+    why: "Its incremental, execution-validated query construction is a strong comparison for agent tool design, despite evaluation on a different KG (AG-02). (abstract)"
 bibtex: |
   @misc{walter2026grisp,
     doi = {10.48550/ARXIV.2604.21133},
