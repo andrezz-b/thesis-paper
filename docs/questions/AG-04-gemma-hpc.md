@@ -60,6 +60,7 @@ To check with the people running it:
 - 2026-11-05 (user): Benjamin Jakobsen has not been contacted yet.
 - 2026-11-06: GRASP runs with open models: Qwen2.5 72B reaches 68.7 F1 on WWQ vs 75.3 for GPT-4.1; Qwen3 32B 61.3; performance drops sharply for models below about 14B (Qwen2.5) or 8B (Qwen3) (Tables 5 and 7). Relevant for Qwen3.8-27B on CampusAI. Source: [GRASP note](../literature/walter2025grasp.md).
 - 2026-11-08: KGVoyager suggests small models suffer from long contexts: the gap to a grep-over-ontology baseline is +19.6 F1 for GPT-OSS-120B and +9.5 for Muse Glimmer 30B (§4.3), and 50 of 56 query generation/execution failures were "agent gave up" (App. F). This is the authors' hypothesis, not tested directly. Worth watching for Qwen3.8-27B as tool outputs and image-index results accumulate; mitigations are capped result lengths and a relevance cut-off ([AG-02](AG-02-tool-set.md)). Not a decision. Source: [KGVoyager note](../literature/wisam2026kgvoyager.md).
+- 2026-11-21: In WikiKGQA 2026, GRASP's backbone moves validation F1 by about 9 points (GPT-5.4 86.8, GPT-5.5 86.3, Sonnet 4.6 80.7, GPT-5.4 mini 78.1; Table 1); the open-weight Kimi K2.7 is 4 points behind GPT-5.4 on both test tracks (§4). No small open model was tested as GRASP backbone, so no direct evidence for Qwen3.8-27B. Source: [GRASP/WikiKGQA note](../literature/walter2026grasp.md).
 
 ## Resolution
 

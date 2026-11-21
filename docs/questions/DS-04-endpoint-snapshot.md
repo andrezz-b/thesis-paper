@@ -37,6 +37,7 @@ Whatever is chosen, gold results should be frozen with a date ([DS-08](DS-08-gol
 - 2026-11-06: GRASP uses the public QLever endpoints (§3) and builds its own entity and property search indices from two SPARQL queries per KG (§3.4; Wikidata: 85M entities, 6 GB index, Table 3); SPINACH uses the Wikidata search API. Leaning (user): the Wikidata search API is enough as a search tool, since the thesis is Wikidata-only ([D-003](../decisions.md#d-003)); not decided. Not checked: how the Wikidata API ranks results compared to GRASP's index. Source: [GRASP note](../literature/walter2025grasp.md).
 - 2026-11-07: KVQA used a fixed Wikidata RDF dump (2018-05-05) as its snapshot (§Knowledge Graph). Source: [KVQA note](../literature/shah2019kvqa.md).
 - 2026-11-13: QAWiki evaluates gold and predicted queries on the live Query Service in the same time frame and lists changing results as a limitation (§4.2, §4.4); no snapshot date. Source: [QAWiki note](../literature/loustaunau2025qawiki.md).
+- 2026-11-21: Precedent: WikiKGQA 2026 fixes one Wikidata version (provided dump, 21B triples, or the challenge endpoint) so results match the evaluation version (§2); the GRASP authors load the dump into their own local QLever for control over load and limits, using no QLever-specific extensions (§3). Recorded as precedent; no change of leaning (user). Source: [GRASP/WikiKGQA note](../literature/walter2026grasp.md).
 
 ## Resolution
 

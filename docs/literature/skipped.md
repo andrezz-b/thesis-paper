@@ -49,3 +49,6 @@ Rows are added by the `paper-review` skill after the user confirms.
 | arXiv:2406.19593 | SK-VQA: Synthetic Knowledge Generation at Scale for Training Context-Augmented Multimodal LLMs | 2026-11-20 | Synthetic KB-VQA data for training MLLMs; our questions are curated manually ([D-016](../decisions.md#d-016)) |
 | arXiv:2601.16400 | Clarify or Answer: Reinforcement Learning for Agentic VQA with Context Under-specification | 2026-11-20 | Trains agents to ask clarifying questions; peripheral to our question-sufficiency checks |
 | arXiv:2411.16863 | Augmenting Multimodal LLMs with Self-Reflective Tokens for Knowledge-based Visual Question Answering (ReflectiVA) | 2026-11-20 | Trained KB-VQA method; we do not train models |
+| https://ceur-ws.org/Vol-4284/paper1.pdf | Answer-Convention Alignment for Agentic Text-to-SPARQL: AMA-KBQA at the WikiKGQA 2026 Challenge | 2026-11-21 | Aligns answers to the single-column QALD-F1 convention, which the thesis does not use (title only) |
+| https://ceur-ws.org/Vol-4284/paper3.pdf | A Prompt-Based Approach to WikiKGQA 2026: SPARQL Generation with Large Language Models | 2026-11-21 | Prompt-only, no agent (title only) |
+| arXiv:2609.27669 | The Path Matters: Evaluating Small Language Models Beyond Answer Accuracy in KGQA | 2026-11-21 | Path-level evaluation of small LMs; not needed for our execution-based metrics (abstract) |
