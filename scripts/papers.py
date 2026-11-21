@@ -467,7 +467,7 @@ def cmd_bibtex(args: argparse.Namespace) -> int:
 def cmd_search(args: argparse.Namespace) -> int:
     query = " ".join(args.query)
     try:
-        found = get_json(f"{S2}/paper/search?query={urllib.parse.quote(query)}&limit={args.top}&fields={SEARCH_FIELDS}").get("data", [])
+        found = get_json(f"{S2}/paper/search?query={urllib.parse.quote(query)}&limit={args.top}&fields={SEARCH_FIELDS}").get("data") or []
         label = "Semantic Scholar"
     except PaperError as exc:
         warn(f"Semantic Scholar search failed ({exc}); using the arXiv API instead")
@@ -527,12 +527,21 @@ def cmd_links(args: argparse.Namespace) -> int:
     kind = args.command
     if kind == "recs":
         url = f"{S2_RECS}/papers/forpaper/{ident}?fields={LIST_FIELDS}&limit={min(max(args.top, 1), 100)}"
-        entries = s2_get(url, args.id).get("recommendedPapers", [])
+        entries = s2_get(url, args.id).get("recommendedPapers") or []
     else:
         sub = "citingPaper" if kind == "cites" else "citedPaper"
         fields = ",".join(["contexts", "intents", "isInfluential"] + [f"{sub}.{f}" for f in LIST_FIELDS.split(",")])
         endpoint = {"cites": "citations", "refs": "references"}[kind]
-        entries = s2_get(f"{S2}/paper/{ident}/{endpoint}?fields={fields}&limit={LINK_LIMIT}", args.id).get("data", [])
+        entries = s2_get(f"{S2}/paper/{ident}/{endpoint}?fields={fields}&limit={LINK_LIMIT}", args.id).get("data")
+        if entries is None:
+            what = "reference" if kind == "refs" else "citation"
+            if args.json:
+                print("[]")
+            warn(
+                f"Semantic Scholar has no {what} list for this paper (not indexed yet or not available); "
+                "this does not mean the paper has none"
+            )
+            return 0
     total = len(entries)
     entries = sort_entries(entries, args.sort)[: args.top]
     if args.json:
