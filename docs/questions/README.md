@@ -13,7 +13,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 - Order: phase (`dataset` first, it has a deadline), then priority, then how many
   questions it unblocks transitively. The *Unblocks* column lists direct dependents.
 
-**39 questions:** 16 open, 22 researching, 1 decided, 0 dropped.
+**39 questions:** 15 open, 23 researching, 1 decided, 0 dropped.
 
 ## Ready now
 
@@ -124,7 +124,7 @@ See [`../THESIS.md`](../THESIS.md) for the overall description and
 | [AG-02](AG-02-tool-set.md) | Which tools does the agent get? | researching | agent | high | [AG-01](AG-01-own-agent-vs-grasp.md) | [EV-03](EV-03-ablations.md) |
 | [AG-03](AG-03-agent-framework.md) | Which agent framework or loop implementation is used? | open | agent | low | [AG-01](AG-01-own-agent-vs-grasp.md) | – |
 | [AG-04](AG-04-gemma-hpc.md) | Which CampusAI models and setup are used, and what do they support? | researching | dataset | high | – | [AG-03](AG-03-agent-framework.md), [AG-05](AG-05-experiment-configurations.md) |
-| [AG-05](AG-05-experiment-configurations.md) | Which agent configurations are evaluated? | open | agent | medium | [AG-04](AG-04-gemma-hpc.md) | [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
+| [AG-05](AG-05-experiment-configurations.md) | Which agent configurations are evaluated? | researching | agent | medium | [AG-04](AG-04-gemma-hpc.md) | [EV-02](EV-02-baselines.md), [EV-03](EV-03-ablations.md) |
 
 ### Evaluation (EV)
 
