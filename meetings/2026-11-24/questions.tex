@@ -143,10 +143,11 @@ Wikidata triples) and ViQuAE.\\
     the image: R@1 43.5 $\to$ 14.7 / 20.4 (Table 2) \cite{ma2026identifying};
     more objects in the image: 41.6 $\to$ 37.1 (Table 3)
     \cite{jian2024large}; distractors, see IX-01.
-  \item \emph{Popularity} changes which approach wins, but the two papers
-    disagree on direction: in InfoSeek the end-to-end model wins on tail
-    entities (Fig.~7) \cite{chen2023can}, in OVEN it wins on head entities
-    and CLIP2CLIP on tail ones (Fig.~6) \cite{hu2023open}.
+  \item \emph{Popularity} changes which approach wins. For recognition, OVEN:
+    PaLI wins on head entities ($>$5K monthly views), CLIP2CLIP is on par or
+    better on tail ones ($<$2.5K) (Fig.~6) \cite{hu2023open}. For answer
+    accuracy, InfoSeek points the other way, but its pipeline also needs a
+    text QA model to know facts about the entity (Fig.~7) \cite{chen2023can}.
   \item \emph{Answer type.} Time and numerical answers are hardest in InfoSeek
     (Table 6) \cite{chen2023can}.
 \end{itemize}
@@ -454,11 +455,13 @@ configurations plus a VLM direct answer enough?
 \qblock{FR-01}{Research questions and hypotheses}{5}{\leaning}
 \ev\ The oracle gaps above support H1 (most of the gap is grounding)
 \cite{loustaunau2025qawiki,ma2026m3}. H2 (index better for less known
-entities) is supported by OVEN but InfoSeek points the other way
-\cite{hu2023open,chen2023can}. The GRASP authors name Wikidata in LLM
-training data as a threat to validity (\S\,5) \cite{walter2026grasp}.\\
-\ask\ Keep H2 as a directional hypothesis, or ask an open question about
-popularity?
+entities, vision for well-known ones) matches OVEN's recognition result
+\cite{hu2023open}; InfoSeek's opposite result is for answer accuracy with a
+Wikipedia-text pipeline \cite{chen2023can}. The GRASP authors name Wikidata
+in LLM training data as a threat to validity (\S\,5) \cite{walter2026grasp}.\\
+\lean\ State H2 on grounding accuracy (OVEN), and mention InfoSeek as a
+caveat for final answers.\\
+\ask\ Is grounding accuracy the right measure for H2?
 
 \qblock{AG-04}{Which CampusAI model?}{4}{\leaning}
 \ev\ GRASP with open models: Qwen2.5-72B 68.7 vs.\ GPT-4.1 75.3; Qwen3-32B
