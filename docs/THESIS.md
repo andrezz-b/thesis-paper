@@ -12,7 +12,7 @@ Markers used below:
 - **[Open: ID]**: an open question; see the file in [`questions/`](questions/README.md).
 - **[Stretch]**: only if time allows.
 
-_Last reviewed: 2026-11-21._
+_Last reviewed: 2026-11-22._
 
 ## TL;DR
 
@@ -56,7 +56,9 @@ it.
 - Research questions and hypotheses: a draft (RQ1 agent, RQ2 grounding, RQ3
   difficulty, with H1–H3) is in the project plan, awaiting supervisor feedback
   [Tentative; Open: [FR-01](questions/FR-01-research-questions.md)]. The dataset is a contribution, not a research
-  question [Tentative, [D-017](decisions.md#d-017)].
+  question [Tentative, [D-017](decisions.md#d-017)]. H2 (index vs. own vision by entity popularity) is
+  about grounding accuracy, following OVEN; InfoSeek's opposite result for answer
+  accuracy is a caveat [Tentative; Open: [FR-01](questions/FR-01-research-questions.md)].
 - Positioning against the closest work (M³-VQA, ReasonVQA, KVQA, InfoSeek, ...):
   [Open: [LIT-01](questions/LIT-01-existing-image-sparql-benchmarks.md)]. See [`related-work.md`](related-work.md).
 

@@ -1,0 +1,546 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{booktabs,tabularx,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[backend=biber,style=numeric,sorting=none,maxbibnames=3,doi=false,url=false,isbn=false,eprint=false,giveninits=true]{biblatex}
+\addbibresource{refs.bib}
+\setlist{nosep,leftmargin=1.2em,itemsep=1pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{0pt}{8pt}{2pt}
+\titlespacing*{\subsection}{0pt}{6pt}{1pt}
+\usepackage{xcolor}
+\renewcommand{\bibfont}{\scriptsize}
+
+% Status of a question
+\newcommand{\st}[2]{\colorbox{#1}{\footnotesize\strut #2}}
+\newcommand{\ready}{\st{green!20}{ready to confirm}}
+\newcommand{\leaning}{\st{yellow!35}{leaning}}
+\newcommand{\open}{\st{red!15}{open}}
+% Question block: ID(s), question, number of papers, status
+\newcommand{\qblock}[1][]{\def\qkey{#1}\qblockx}
+\newcommand{\qblockx}[4]{%
+  \ifx\qkey\empty
+  \subsection*{\underline{#1\quad #2}}%
+  \else\hypertarget{\qkey}{}
+  \subsection*{#1\quad #2}\fi%
+{\footnotesize #3 papers\quad}#4\par}
+\newcommand{\more}[2]{\hyperlink{#1}{\colorbox{blue!10}{\footnotesize\strut\textcolor{blue!60!black}{\underline{#2}\,$\rightarrow$}}}}
+\newcommand{\sitem}[5]{
+\item \textbf{#1}\par\vspace{1pt}
+  \begin{itemize}[leftmargin=1.1em,itemsep=1pt,label={\textbullet}]
+    \item #2
+    \item \textit{Lean:} #3
+    \item \textit{To discuss:} #4
+    \item \textit{Evidence:} #5
+\end{itemize}}
+\newcommand{\ev}{\textbf{Evidence.}}
+\newcommand{\lean}{\textbf{Current lean.}}
+\newcommand{\ask}{\textbf{To discuss.}}
+
+\begin{document}
+
+\begin{center}
+  {\large\bfseries Open questions and the evidence so far: supervisor meeting
+  2026-11-24}\\[2pt]
+  % {\small Companion to the literature summary. Each block
+  %   combines what the papers say about one thesis question (or a group of
+  %   closely related ones), then gives the current lean and what to discuss.
+  %   Dataset questions come first (deadline: dataset frozen 2027-01-22), then
+  %   agent, evaluation and framing. Within each part, questions with the most
+  %   evidence come first. ``Papers'' counts the reviewed papers cited in the
+  %   block. Numbers are from the papers (section/table in brackets).
+  %   \ready\ enough evidence to decide now,
+  %   \leaning\ a preferred option exists but is not decided,
+  % \open\ no preferred option yet.}
+\end{center}
+
+\section*{Summary for the meeting}
+{\small
+  \begin{enumerate}[leftmargin=1.5em,itemsep=7pt]
+      \sitem{Is there a gap for a new dataset?}
+      {Wikidata is widely used to \emph{build} visual QA data, but no
+        benchmark releases image + question + executable SPARQL, and
+      none evaluates an agent that queries the graph.}
+      {The gap holds, so the dataset can be presented as a contribution.}
+      {Is that enough, given that the research questions are only
+      about the agent?}
+      {\more{lit}{Existing benchmarks}}
+      \sitem{How is difficulty defined?}
+      {Hops, query complexity, image role (subject only, a related
+        entity, or a busy scene, which lowers retrieval a lot) and
+      entity popularity all affect accuracy.}
+      {Levels set a priori from hops, query complexity and image
+        role; popularity and question type logged as non-exclusive
+        labels; hop cap of 3 (4 only for a few hard items); checked on
+      a pilot run before the freeze.}
+      {A priori levels, from pilot results, or both?}
+      {\more{diff}{Difficulty} \more{types}{Types} \more{image}{Image
+      role} \more{hops}{Hops}}
+      \sitem{How are items curated and accepted?}
+      {Questions are suggested by an LLM and verified by hand
+      (precedents exist). Unreviewed data is often ambiguous or wrong.}
+      {Accept an item only if the answer is unique and supported, the
+        entity is not named, the image is needed and the gold query
+        runs. The gold query returns only the answer column as
+      identifiers; its result is frozen with a date.}
+      {Keep yes/no questions or rephrase them as SELECT? One or
+      several gold queries per item?}
+      {\more{cur}{Curation} \more{gold}{Gold queries}}
+      \sitem{Which distractors go into the shared image index, and how many?}
+      {Most benchmarks use all other entities; similar distractors
+      and a larger index clearly hurt retrieval.}
+      {Same-class distractors (same \texttt{instance of}), optionally
+        plus text-similar neighbours. No preference on the count yet;
+      it could be an experiment axis.}
+      {Same class only, or mixed?}
+      {\more{dist}{Distractors}}
+      \sitem{How large should the dataset be?}
+      {Curated SPARQL benchmarks have roughly 100 to 500 questions.}
+      {Target about 300, curated manually before the freeze on
+        2027-01-22. Also depends on how many examples could we adapt
+      and reuse from the VQA datasets.}
+      {Is that realistic? Is reporting diversity worthwhile?}
+      {\more{size}{Dataset size}}
+      \sitem{Which agent and tools?}
+      {Search tools matter most. GRASP is open and strong, so it is a
+      possible external baseline once given an image tool.}
+      {Own agent with the Wikidata search and query tools of SPINACH,
+        the constrained searches of GRASP, and the image-index search
+        as one more tool. A crop tool is liked (improves grounding,
+      possible ablation) but not decided.}
+      {Is a crop tool in scope? Is GRASP with an image tool needed,
+        or are the internal configurations plus a direct image +
+      question VLM answer enough?}
+      {\more{tools}{Tools} \more{base}{Baselines}}
+      \sitem{Configurations, metrics and ablations}
+      {Telling the model the entity helps in every paper read.
+      Row-wise F1 / exact match is the de-facto metric for SPARQL results.}
+      {Five configurations: oracle with the entity name, oracle with
+        its QID, vision only, index only, both. Primary metric row-wise
+        F1 and exact match; secondary grounding accuracy, cost,
+        iterations. Ablations (distractor count, tool removal, crop
+      variants, error analysis) limited by model capacity.}
+      {Add a question-only control? Is a label-based metric needed to
+      compare with the visual papers?}
+      {\more{cfg}{Configurations} \more{metrics}{Metrics}
+      \more{ablat}{Ablations}}
+      \sitem{Research questions and hypotheses}
+      {Oracle gaps support the hypothesis that most of the gap is
+        grounding. That the index beats vision for less known entities
+      matches the recognition literature, but not the answer-accuracy results.}
+      {State the hypothesis on grounding accuracy.}
+      {Is that the right measure?}
+      {\more{rq}{Research questions}}
+  \end{enumerate}
+}
+\newpage
+
+\section{Dataset and image index}
+
+\qblock[lit]{LIT-01}{Does an image + question + gold-SPARQL benchmark
+already exist?}{11}{\ready}
+\ev
+\begin{itemize}
+  \item Wikidata is often used to \emph{build} visual QA data, but the SPARQL
+    is never released. KVQA withholds its queries on purpose
+    \cite[S3]{shah2019kvqa}; M$^3$-VQA uses SPARQL only while building
+    questions and releases neither SPARQL nor QIDs \cite[\S\,4.1]{ma2026m3};
+    ReasonVQA releases a QID route and the last property, no query
+    \cite[App.~1.2]{tran2025reasonvqa}; InfoSeek turns single Wikidata triples
+    into templates \cite[\S\,3.2]{chen2023can}.
+  \item The other visual benchmarks use Wikipedia text as the knowledge base
+    (Encyclopedic-VQA, RETINA, the KB-VQA audit)
+    \cite{mensink2023encyclopedic,lee2025breaking,ma2026identifying}, or stop
+    at entity recognition (OVEN, KnowCoL) \cite{hu2023open,zhou2025seeing}.
+  \item None evaluates an agent that queries a KG; the only agent
+    (M$^3$-VQA) retrieves Wikipedia text and images \cite[\S\,5.4]{ma2026m3}.
+    Text-only Wikidata benchmarks have gold SPARQL but no images
+    \cite{loustaunau2025qawiki,walter2026grasp}.
+\end{itemize}
+\lean\ The gap holds: (image, entity-free question, executable gold SPARQL)
++ a shared image index with distractors + an agentic text-to-SPARQL
+evaluation. Still unchecked: WikiVQABench (2026, multiple choice grounded in
+Wikidata triples) and ViQuAE.\\
+\ask\ Is this gap enough to present the dataset as a contribution
+(D-017), given that the RQs are only about the agent?
+
+\qblock[diff]{DS-13}{How is difficulty defined and measured?}{9}{\open}
+\ev\ Every axis below lowers accuracy in at least one paper:
+\begin{itemize}
+  \item \emph{Hops.} M$^3$-VQA accuracy falls with hops and entities
+    (\S\,5.5) \cite{ma2026m3}; ReasonVQA: 3-hop clearly harder, 1-hop barely
+    easier than 2-hop (\S\,4.4) \cite{tran2025reasonvqa}; E-VQA two-hop 22.8
+    vs.\ single-hop 48.8 (\S\,5.6) \cite{mensink2023encyclopedic}.
+  \item \emph{Query complexity.} KGVoyager counts triple patterns and
+    special constructs; its lead over GRASP shrinks at 7+ triple patterns
+    (App.~C) \cite{wisam2026kgvoyager}.
+  \item \emph{Grounding.} Image shows a related entity: Recall@5 51.7 / 64.9
+    $\to$ 20.8 (RETINA, Table 1) \cite{lee2025breaking}; one extra entity in
+    the image: R@1 43.5 $\to$ 14.7 / 20.4 (Table 2) \cite{ma2026identifying};
+    more objects in the image: 41.6 $\to$ 37.1 (Table 3)
+    \cite{jian2024large}; distractors, see IX-01.
+  \item \emph{Popularity} changes which approach wins. For recognition, OVEN:
+    PaLI wins on head entities ($>$5K monthly views), CLIP2CLIP is on par or
+    better on tail ones ($<$2.5K) (Fig.~6) \cite{hu2023open}. For answer
+    accuracy, InfoSeek points the other way, but its pipeline also needs a
+    text QA model to know facts about the entity (Fig.~7) \cite{chen2023can}.
+  \item \emph{Answer type.} Time and numerical answers are hardest in InfoSeek
+    (Table 6) \cite{chen2023can}, but it's based on text passages
+    rather than properties in Wikidata.
+\end{itemize}
+\lean\ Define difficulty a priori from properties of the question
+(hops, query complexity, image role), log popularity as a label, and use
+the pilot (2026-12-07 to 12-18), including an image-only run without the
+question text, to check the spread before the freeze.\\
+\ask\ A priori levels, a posteriori from pilot results, or both? Which
+two or three axes should define easy / medium / hard?
+
+\qblock[cur]{DS-09, DS-12}{How are questions curated, and what are the
+acceptance criteria?}{8}{\ready}
+\ev
+\begin{itemize}
+  \item LLM-suggested, human-verified construction has precedents: SPINACH
+    (GPT-4o proposes, experts verify by running intermediate queries,
+    App.~C.3) \cite{liu2024spinach} and QAWiki (LLM phrasing suggestions
+    reviewed by hand, plus 14 quality-control queries, \S\,3.7)
+    \cite{loustaunau2025qawiki}. This supports D-016.
+  \item Unreviewed data is often wrong or ambiguous: 22\,\% of InfoSeek
+    answers are not supported by the evidence, 47\,\% / 59\,\% of InfoSeek /
+    E-VQA questions are ambiguous \cite[\S\,3.1--3.2]{ma2026identifying};
+    OVEN finds 8.4\,\% wrong entity links \cite[App.~10.2]{hu2023open}; RETINA
+    keeps only 29.2\,\% of 6K generated questions after curation, mostly
+    because several answers were valid \cite[App.~A.3]{lee2025breaking}.
+  \item The review checks in these papers reduce to the same few:
+    \emph{answer supported} (InfoSeek consistency filter, the audit),
+    \emph{unique answer} (the audit, RETINA's qualifying entity, OVEN's
+    rewriting), \emph{no leakage} (demonstrative instead of the name,
+    BM25 check, removal of questions solvable without the image; RETINA),
+    and \emph{no quality issue} (ambiguous, subjective, incomplete, ties;
+    QAWiki \S\,3.5)
+    \cite{chen2023can,ma2026identifying,lee2025breaking,hu2023open,loustaunau2025qawiki}.
+  \item Query images: RETINA keeps query and document images in separate
+    pools with a perceptual-hash check (hash size 8, distance $\le 10$,
+    App.~A) \cite{lee2025breaking}; D-005 already requires a different
+    Commons photo than the index image.
+  \item Template pipelines (InfoSeek, ReasonVQA, M$^3$-VQA) give scale but
+    no released gold query. ReasonVQA items could seed ideas (QID routes,
+    landmarks only, AGPL) \cite{tran2025reasonvqa}; paraphrasing as in KVQA
+    costs 17 points (49.5 $\to$ 32.0, Table 4) \cite{shah2019kvqa}.
+\end{itemize}
+\lean\ Accept an item only if: one correct, unambiguous answer; no
+quality-tag issue (exclude instead of tagging, unlike QAWiki); answer stable
+in the snapshot; entity not named and no other leakage; the image is needed;
+the gold SPARQL runs and its result supports the answer; natural phrasing;
+image licence allows reuse. BM25 and perceptual-hash checks automated, the
+rest manual.\\
+\ask\ Confirm the list. Can ReasonVQA / RETINA test items be used as
+seeds for ideas (each still needs our own gold query)?
+
+\qblock[dist]{IX-01, IX-02, LIT-04}{Which distractors go into the index,
+and how many?}{8}{\leaning}
+\ev
+\begin{itemize}
+  \item Almost nobody selects distractors: KVQA, OVEN and InfoSeek use
+    every other entity of the KB (InfoSeek adds frequent Wikipedia entities)
+    \cite{shah2019kvqa,hu2023open,chen2023can}; M$^3$-VQA samples 5 of the
+    20 nearest neighbours by \emph{text} summary (App.~D.3) \cite{ma2026m3};
+    ReasonVQA only has random multiple-choice answers \cite{tran2025reasonvqa}.
+  \item Visually similar distractors hurt: in RETINA, documents whose
+    main entity matches
+    the image are retrieved more often than the gold one (Fig.~5)
+    \cite{lee2025breaking}; in PMSR, even with the oracle text, 10 retrieved
+    image-text pairs lower accuracy 86.6 $\to$ 78.7\,\%, 20 pairs to
+    64.3\,\% (Table A8) \cite{choi2025progressive}; in the POC the egg chair
+    was not in the top 5 among 25 same-class entities.
+  \item Size matters: OVEN CLIP2CLIP falls roughly linearly in log(candidates)
+    from 20K to 6M (Fig.~5) \cite{hu2023open}; KVQA loses over 10 points from
+    18K to 69K identities \cite{shah2019kvqa}.
+  \item The KB-VQA audit puts the distractor into the query image, so it is no
+    evidence for the index \cite{ma2026identifying}.
+\end{itemize}
+\lean\ Same-class distractors (\texttt{instance of}) in the one shared
+index (D-006); text-similar neighbours or a frequent-entity pool as
+additions. No preference on the count yet.\\
+\ask\ Same class only, or mixed? Should the count be varied as an
+experiment axis (RQ3)?
+
+\qblock[types]{DS-01, DS-14, LIT-02}{Which question types, and which labels
+per item?}{7}{\leaning}
+\ev
+\begin{itemize}
+  \item The papers classify along different axes: answer type (InfoSeek
+      time / numerical / string; QAWiki entity, entity set, numeric, temporal,
+    boolean, other) \cite{chen2023can,loustaunau2025qawiki}; structure (KVQA's
+      ten non-exclusive categories such as Boolean, comparison, counting,
+    multi-entity; M$^3$-VQA parallel vs.\ sequential)
+    \cite{shah2019kvqa,ma2026m3}; hops and two-hop chaining through a bridge
+    entity \cite{tran2025reasonvqa,mensink2023encyclopedic}; knowledge domain
+    by property (ReasonVQA, 20 domains).
+  \item Non-exclusive tags allow results per category: KVQA oracle accuracy
+    ranges from Boolean 75.1 to subtraction 40.5 (Table 5) \cite{shah2019kvqa}.
+    Template datasets (ReasonVQA) have no comparison, count or Boolean
+    questions.
+  \item Popularity (page views) is split on in InfoSeek and OVEN
+    \cite{chen2023can,hu2023open}.
+\end{itemize}
+\lean\ Several independent label axes per item: hop count, structural
+tags (starting from KVQA's categories), answer type (QAWiki), and as
+candidates popularity, image role and class of the depicted entity.
+QAWiki's property-mention types: too costly. KGQA taxonomies (Mintaka,
+LC-QuAD 2.0, ComplexWebQuestions) not read yet.\\
+\ask\ Non-exclusive tags or one type per question? Quotas per type? Comparison
+questions need a second entity named in the text (multi-image is a stretch
+goal); acceptable?
+
+\qblock{IX-03, IX-04}{Which embedding model, and what does the index
+store?}{6}{\leaning}
+\ev
+\begin{itemize}
+  \item Every paper represents an entity with image \emph{and} text:
+    M$^3$-VQA sums CLIP embeddings of summary and image, better than either
+    alone (App.~F.4) \cite{ma2026m3}; OVEN name + first infobox image
+    \cite{hu2023open}; KnowCoL description + mean of lead images
+    \cite{zhou2025seeing}; PMSR image + text beats image only, R@5 43.1 vs.\
+    36.2 (Table A1) \cite{choi2025progressive}.
+  \item A frozen CLIP index without training is used by SAGE-VQA
+    \cite[App.~A.7]{shen2026sage}; LLM-RA trains its retriever
+    \cite{jian2024large}. Larger embedding models help a little (PMSR App.~J).
+\end{itemize}
+\lean\ CLIP ViT-B/32 as in the POC; payload QID only (the agent looks up
+the rest with SPARQL); other models only if time allows.\\
+\ask\ The literature mixes in text; keep image-only retrieval (cleaner
+grounding test) or add a text variant as an ablation?
+
+\qblock[image]{DS-05, DS-07}{What role does the image play?}{5}{\leaning}
+\ev
+\begin{itemize}
+  \item Related-entity images (RETINA) make retrieval much harder (Table 1)
+    \cite{lee2025breaking}; for Wikidata the related entity would be a graph
+    neighbour of the subject, and the gold query follows from the graph.
+  \item Busier images are harder: M$^3$-VQA has several entities per image
+    \cite{ma2026m3}; ReasonVQA refers to one object among others via
+    scene-graph context and these questions score lower (\S\,4.4)
+    \cite{tran2025reasonvqa}; LLM-RA recall falls with object count
+    \cite{jian2024large}; the audit composes a second entity into the image
+    \cite{ma2026identifying}.
+\end{itemize}
+\lean\ Default: the image shows the subject. RETINA-style related-entity
+images as an option for harder items (increasingly likely); prefer real
+multi-entity images over automatic composites.\\
+\ask\ Related-entity images in the first version or as an extension? Is
+the ``object in the person's right hand'' idea still wanted?
+
+\qblock{DS-04}{Which endpoint and snapshot?}{5}{\open}
+\ev
+\begin{itemize}
+  \item Live Query Service: SPINACH (60\,s limit) and QAWiki, which lists
+    changing results as a limitation (\S\,4.4)
+    \cite{liu2024spinach,loustaunau2025qawiki}.
+  \item Fixed version: KVQA uses a 2018 dump \cite{shah2019kvqa}; WikiKGQA
+    2026 fixes one Wikidata version, and the GRASP authors load it into
+    their own QLever for control over load and limits (\S\,2--3)
+    \cite{walter2026grasp}. GRASP uses the public QLever endpoints and builds
+    its own search index (6\,GB) \cite{walter2025grasp}.
+\end{itemize}
+\lean\ No lean on the endpoint; gold results are stored with a date in any
+case. For entity search, the Wikidata search API (as SPINACH) is probably
+enough.\\
+\ask\ Is a dated gold result enough, or should agent runs also hit a fixed
+snapshot (own QLever on a dump)?
+
+\qblock[gold]{DS-08}{How are gold queries and gold results defined and
+verified?}{4}{\leaning}
+\ev
+\begin{itemize}
+  \item Answer form is a big error source: 18\,\% of KGVoyager's complete
+    failures are representation errors (extra label columns, SELECT instead
+    of ASK, label instead of IRI; App.~F) \cite{wisam2026kgvoyager}.
+  \item The standard F1 ignores extra predicted columns
+    \cite[\S\,5.1]{liu2024spinach}, so the gold query should project only the
+    answer column(s), as identifiers (QAWiki, \S\,4.1)
+    \cite{loustaunau2025qawiki}. Scoring only results can credit a wrong ASK
+    query (QAWiki \S\,4.4).
+  \item Yes/no questions need an ASK query, which returns a single true or
+    false. A wrong ASK query that happens to return the right value gets full
+    credit, and with a boolean answer a guess matches 50\,\% of the time, so
+    the score says little about whether the image was grounded correctly.
+    A SELECT query is much harder to get right by accident.
+  \item Verification: SPINACH keeps gold queries that are non-empty and under
+    10\,MB \cite{liu2024spinach}; the audit's check that the answer follows
+    from the evidence means running the gold query on the snapshot for us
+    \cite{ma2026identifying}.
+  \item QAWiki writes queries as generally as possible and allows several
+    gold queries per question (\S\,3.4).
+\end{itemize}
+\lean\ Gold query hard-codes the depicted entity (\texttt{BIND(wd:Q\ldots)});
+answer columns only, as IRIs; result frozen with a date; items with ties or
+incomplete data excluded. Unsure about several gold queries per item.\\
+\ask\ Keep yes/no (ASK) questions or rephrase them as SELECT? One or
+several gold queries?
+
+\qblock[size]{DS-10}{How large should the dataset be?}{4}{\open}
+\ev\ Curated KGQA sets are small: SPINACH 155 dev + 165 test, where the dev
+set separates systems differing by at least 9.0\,\% EM (App.~C.2)
+\cite{liu2024spinach}; KGVoyager's benchmarks 88--108 questions
+\cite{wisam2026kgvoyager}; QAWiki 526 \cite{loustaunau2025qawiki}.
+Diversity can be reported for a small set as mean pairwise embedding distance
+(E-VQA, Table 3) \cite{mensink2023encyclopedic}.\\
+\ask\ Is SPINACH scale (about 300) a sensible target with manual curation
+by 2027-01-22? Report diversity?
+
+\qblock[hops]{DS-03}{What is the maximum hop depth?}{3}{\open}
+\ev\ ReasonVQA caps at 3 hops because longer generated questions became
+ungrammatical, and only 5.4K of 4.2M are 3-hop \cite{tran2025reasonvqa};
+M$^3$-VQA goes to 4+ (32.8\,\% of items) \cite{ma2026m3}; E-VQA stops at 2
+\cite{mensink2023encyclopedic}. The POC has 2--3 hops, and recognising the
+entity is an extra step before the first hop.\\
+\ask\ Cap at 3, or allow a few 4-hop items for the hard end?
+
+\section{Agent, evaluation and framing}
+
+\qblock[tools]{AG-02}{Which tools does the agent get?}{9}{\leaning}
+\ev
+\begin{itemize}
+  \item Search tools matter most: SPINACH dev F1 46.4 falls to 25.3 without
+    search, 29.4 without property examples, 36.4 without the entity view
+    (Table 4) \cite{liu2024spinach}; in GRASP execute-only is worst and
+    constrained searches (properties of an entity, objects of a property)
+    beat more flexible ones (Table 6) \cite{walter2025grasp}; GRISP loses 3.7
+    F1 without this kind of KG guidance (Table 5) \cite{walter2026grisp};
+    KGVoyager's hybrid search beats keyword-only by 1.1--26.5 F1 and drops
+    low-scoring results to limit context length (Table 4)
+    \cite{wisam2026kgvoyager}.
+  \item Tool output is capped: first and last 5 rows, top 10 search results
+    \cite{liu2024spinach,walter2025grasp}.
+  \item Image side: cropping the key entity before retrieval raises InfoSeek
+    Recall@5 39.8 $\to$ 47.3 (Table 4) \cite{jian2024large}; M$^3$-VQA's
+    agent detects and crops \cite{ma2026m3}; SAGE-VQA checks each crop with
+    the VLM first, but never measures the check alone \cite{shen2026sage}.
+    PMSR's retrieve--condense--requery loop is an optional grounding mode
+    \cite{choi2025progressive}.
+  \item Exploration notes and a class shape index help GRASP unevenly
+    ($-$2.7 to +5 F1) \cite{walter2026grasp}.
+\end{itemize}
+\lean\ SPINACH's Wikidata tools plus GRASP's constrained searches, and the
+image-index search as one more tool in the same loop; high-level zero-shot
+prompt. Crop tool (one merged check of crop and whole image) liked, not
+decided; it needs image input (only Gemma 4 E4B on CampusAI).\\
+\ask\ Is a crop tool in scope? Does the image tool take a handle or pixels?
+
+\qblock[metrics]{LIT-03, EV-01}{Which metrics?}{9}{\ready}
+\ev
+\begin{itemize}
+  \item One de-facto standard: SPINACH's row-wise F1 (optimal row matching,
+    extra predicted columns not penalised, EM iff F1 = 1)
+    \cite[\S\,5.1]{liu2024spinach}, reused by GRASP, KGVoyager, QAWiki and
+    GRISP
+    \cite{walter2025grasp,wisam2026kgvoyager,loustaunau2025qawiki,walter2026grisp}.
+  \item Known weaknesses: values in the wrong column still count, wrong ASK
+    queries can be credited \cite{loustaunau2025qawiki}; ambiguous questions
+    and different LIMITs score unfairly low \cite{walter2025grasp}.
+  \item Alternatives: QALD-F1 (WikiKGQA) gives abstaining P = 1 and scores
+    higher \cite{walter2026grasp}; the visual papers score answer text (set
+    IoU with aliases, exact / substring / semantic match, BEM)
+    \cite{ma2026m3,tran2025reasonvqa,mensink2023encyclopedic}.
+  \item Secondary measures: cost, iterations, time, tool calls
+    \cite{wisam2026kgvoyager}; runtime \cite{walter2026grisp}.
+\end{itemize}
+\lean\ Primary: row-wise F1 and EM. Secondary: grounding accuracy (gold
+QID in the index top-$k$; gold QID in the final query), cost, iterations,
+tool use. QALD-F1 not planned.\\
+\ask\ Is a label-based answer metric needed for comparison with the
+visual papers?
+
+\qblock[cfg]{AG-05}{Which agent configurations?}{8}{\ready}
+\ev\ Telling the model the entity helps in every paper: InfoSeek
+$\sim$20 $\to$ $\sim$50 \cite{chen2023can}, M$^3$-VQA 24.5 $\to$ 34.7
+\cite{ma2026m3}, KVQA 49.5 $\to$ 59.2 \cite{shah2019kvqa}, E-VQA 19.7 $\to$
+31.0 \cite{mensink2023encyclopedic}, and on text-only Wikidata QA, giving
+the linked QIDs lifts F1 0.164 $\to$ 0.406 \cite{loustaunau2025qawiki}.
+Image + question without tools is ReasonVQA's whole setting (GPT-4o 62.8)
+\cite{tran2025reasonvqa}. Crop variants fit better as ablations
+\cite{jian2024large,shen2026sage}.\\
+\lean\ Five configurations: oracle with the name, oracle with the QID
+(decided after QAWiki), vision only, index only, both. Image-only check
+(no question text) in the pilot. An oracle that hands over triples is
+unlikely.\\
+\ask\ Also a question-only control (no image), as in M$^3$-VQA (15.6 vs.\
+24.5) and InfoSeek?
+
+\qblock[ablat]{EV-03}{Which ablations?}{7}{\open}
+\ev\ Templates: remove one tool at a time (SPINACH Table 4, KGVoyager
+Table 4) \cite{liu2024spinach,wisam2026kgvoyager}; function sets, model
+size, a final feedback step (GRASP \S\,4.3) \cite{walter2025grasp}; switch
+components off (PMSR Table 6) \cite{choi2025progressive}; whole image vs.\
+crops vs.\ checked crops, only if a crop tool exists
+\cite{jian2024large,shen2026sage}; hand-labelled error analysis of 20
+(SPINACH) or 100 (OVEN) cases \cite{hu2023open}. KGVoyager runs each setting
+3 times and some effects are within run-to-run noise.\\
+\ask\ With limited CampusAI capacity, which two or three: distractor
+count, tool removal, crop variants, error analysis? Repeated runs needed?
+
+\qblock[base]{AG-01, EV-02}{Own agent or GRASP; which baselines?}{6}{\leaning}
+\ev\ GRASP is open (Apache-2.0), wins WikiKGQA 2026 (85.0) and beats the
+fine-tuned GRISP on QALD-7, QALD-10 and SPINACH
+\cite{walter2025grasp,walter2026grasp,walter2026grisp}. GRISP needs
+training pairs, so it is no baseline here (no train split, D-008).
+KGVoyager does not port to Wikidata (no \texttt{rdf:type})
+\cite{wisam2026kgvoyager}. A Claude Code agent matches GRASP, but paid APIs
+are out of scope (D-010). PMSR is a fixed workflow, not ReAct
+\cite{choi2025progressive}. A direct image + question VLM answer is a
+ready-made baseline (ReasonVQA) \cite{tran2025reasonvqa}.\\
+\lean\ Own agent, with GRASP and KGVoyager tool specifications as
+inspiration; GRASP (plus an image tool) as a possible external baseline.\\
+\ask\ Is GRASP with an image tool needed, or are the internal
+configurations plus a VLM direct answer enough?
+
+\qblock[rq]{FR-01}{Research questions and hypotheses}{5}{\leaning}
+\ev\ The oracle gaps above support the first hypothesis (the agent
+  falls clearly below the oracle,
+  and most of the gap is failing to identify the entity rather than writing
+wrong SPARQL) \cite{loustaunau2025qawiki,ma2026m3}. The second hypothesis
+(the image index beats the model's own vision for less known entities, vision
+beats it for well-known ones, the combination is best) matches OVEN's
+recognition result
+\cite{hu2023open}; InfoSeek's opposite result is for answer accuracy with a
+Wikipedia-text pipeline \cite{chen2023can}. The GRASP authors name Wikidata
+in LLM training data as a threat to validity (\S\,5) \cite{walter2026grasp}.\\
+\lean\ State the index-versus-vision hypothesis on grounding accuracy
+(OVEN), and mention InfoSeek as a
+caveat for final answers.\\
+\ask\ Is grounding accuracy the right measure for the
+index-versus-vision hypothesis?
+
+\qblock{AG-04}{Which CampusAI model?}{4}{\leaning}
+\ev\ GRASP with open models: Qwen2.5-72B 68.7 vs.\ GPT-4.1 75.3; Qwen3-32B
+61.3; a sharp drop below about 14B / 8B (Tables 5, 7) \cite{walter2025grasp}.
+The backbone moves GRASP by about 9 F1 points \cite{walter2026grasp}. Smaller
+models tend to give up in long contexts (50 of 56 failures, App.~F)
+\cite{wisam2026kgvoyager}. A crop check needs an extra image call per crop
+\cite{shen2026sage}.\\
+\lean\ Qwen3.8-27B (tools, 224K context) is the obvious agent candidate;
+Gemma 4 E4B is the only model with image input; cap tool output.
+CampusAI contact not asked yet (rate limits,
+pinned weights).
+
+\section*{Not covered in the summary}
+Underlined titles above (embedding model and index content, endpoint and
+snapshot, CampusAI model) have evidence but are left out of the summary. The
+following have little or no literature evidence yet:
+\begin{itemize}
+  \item DS-02: which part of Wikidata
+  \item DS-06: multi-image questions (stretch)
+  \item DS-11: dev/test split
+  \item LIT-05: visual knowledge graphs (only ReasonVQA's scene graphs so far)
+  \item AG-03: agent framework
+  \item RP-01 to RP-06: repository
+\end{itemize}
+
+\printbibliography
+\end{document}
